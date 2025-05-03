@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 
 namespace SoundManager
 {
-    public class SoundsManager : MonoSingleton<SoundsManager>
+    public class SoundsManager : MonoBehaviour
     {
         [SerializeField] private SoundSO SO;
         public AudioSource musicSource;
@@ -14,9 +14,8 @@ namespace SoundManager
         private float musicVolume;
         private float sfxVolume;
 
-        protected override void Awake()
+        protected void Awake()
         {
-            base.Awake();
             DontDestroyOnLoad(this);
 
             SetMusicVolume(PlayerPrefs.GetFloat("Music Volume", 1));
