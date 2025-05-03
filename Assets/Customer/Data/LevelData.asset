@@ -13,6 +13,14 @@ MonoBehaviour:
   m_Name: LevelData
   m_EditorClassIdentifier: 
   Levels:
+  - LevelId: 1
+    Orders:
+    - Customer: 0
+      Foods: 0300000003000000
+      Time: 30
+    - Customer: 1
+      Foods: 0300000003000000
+      Time: 30
   - LevelId: 3
     Orders:
     - Customer: 0
@@ -22,14 +30,6 @@ MonoBehaviour:
       Foods: 0300000003000000
       Time: 30
     - Customer: 1
-      Foods: 0300000003000000
-      Time: 30
-    - Customer: 1
-      Foods: 0300000003000000
-      Time: 30
-  - LevelId: 1
-    Orders:
-    - Customer: 0
       Foods: 0300000003000000
       Time: 30
     - Customer: 1
