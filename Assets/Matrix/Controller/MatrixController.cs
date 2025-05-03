@@ -197,7 +197,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                 {
                     if (currentView.isCooked)
                     {
-                        Debug.Log("Cut ra");
+                        //Debug.Log("Cut ra");
                         QueueController.Instance.AddQueue(currentView.FoodType);
                         Destroy(currentView.gameObject);
                         return;
@@ -205,7 +205,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                 }
                 else if (ingredientGrid[p.x, p.y].index != 0)
                 {
-                    Debug.Log("Touch");
+                    //Debug.Log("Touch");
                     currentView.SetCook();
                 }
 
@@ -216,7 +216,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                 {
                     if (currentView.isCooked)
                     {
-                        Debug.Log("Cut ra");
+                        //Debug.Log("Cut ra");
                         QueueController.Instance.AddQueue(currentView.FoodType);
                         Destroy(currentView.gameObject);
                         return;
@@ -224,7 +224,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                 }
                 else if (ingredientGrid[p.x, p.y].index != 0)
                 {
-                    Debug.Log("Touch");
+                    //Debug.Log("Touch");
                     currentView.SetCook();
                 }
 
@@ -235,7 +235,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                 {
                     if (currentView.isCooked)
                     {
-                        Debug.Log("Cut ra");
+                        //Debug.Log("Cut ra");
                         QueueController.Instance.AddQueue(currentView.FoodType);
                         Destroy(currentView.gameObject);
                         return;
@@ -243,7 +243,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                 }
                 else if (ingredientGrid[p.x, p.y].index != 0)
                 {
-                    Debug.Log("Touch");
+                    //Debug.Log("Touch");
                     currentView.SetCook();
                 }
 
@@ -254,7 +254,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                 {
                     if (currentView.isCooked)
                     {
-                        Debug.Log("Cut ra");
+                        //Debug.Log("Cut ra");
                         QueueController.Instance.AddQueue(currentView.FoodType);
                         Destroy(currentView.gameObject);
                         return;
@@ -262,7 +262,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                 }
                 else if (ingredientGrid[p.x, p.y].index != 0)
                 {
-                    Debug.Log("Touch");
+                    //Debug.Log("Touch");
                     currentView.SetCook();
                 }
 
