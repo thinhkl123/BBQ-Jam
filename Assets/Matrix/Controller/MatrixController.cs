@@ -76,7 +76,6 @@ public class MatrixController : MonoSingleton<MatrixController>
         //this.ingredientGrid[4, 1].index = 7;
         //this.ingredientGrid[4, 1].directions.Add(Direction.Up);
         //this.ingredientGrid[4, 1].directions.Add(Direction.Down);
-
         //this.ingredientGrid[0, 4].index = 7;
         //this.ingredientGrid[0, 4].directions.Add(Direction.Up);
         //this.ingredientGrid[0, 4].directions.Add(Direction.Down);
