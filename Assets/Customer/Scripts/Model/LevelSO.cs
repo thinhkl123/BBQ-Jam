@@ -12,9 +12,10 @@ namespace LevelManager
 
     public enum FoodType
     {
-        Sausage = 0,
+        None = 0,
         Mushroom = 1,
         Bacon = 2,
+        Sausage = 3,
     }
 
     [Serializable]
