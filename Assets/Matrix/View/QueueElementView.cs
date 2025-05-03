@@ -21,4 +21,9 @@ public class QueueElementView : MonoBehaviour
         this.SpriteRenderer.sprite = DataManager.Instance.FoodData.GetIcon(foodType);
     }
 
+    public void SetNull()
+    {
+        this.FoodType = FoodType.None;
+        this.SpriteRenderer.enabled = false;
+    }
 }

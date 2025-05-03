@@ -30,7 +30,7 @@ public class StoveCreater : MonoBehaviour
                 Vector3 rot = new Vector3(0, -90f, 0);
                 if (j == 0)
                 {
-                    posInit = new Vector3(0, 0, i * Distance.y);
+                    posInit = new Vector3(0, 0, -i * Distance.y);
                     rot = new Vector3(0, 90f, 0);
                 }
                 else if (j == 1)

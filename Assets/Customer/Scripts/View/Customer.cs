@@ -70,7 +70,7 @@ public class Customer : MonoBehaviour
         .OnComplete(() =>
         {
             this.animator.SetBool("Walk", false);
-            this.transform.rotation = Quaternion.Euler(Vector3.zero);
+            this.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0));
             TimerUI.SetActive(true);
 
             isOrdering = true;

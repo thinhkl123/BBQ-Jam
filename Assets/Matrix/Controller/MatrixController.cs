@@ -9,7 +9,6 @@ public class MatrixController : MonoSingleton<MatrixController>
     public IngredientView currentView;
 
     public IngredientModel[,] ingredientGrid;
-    public IngredientView ingredientGridPrefab;
 
     private Vector3 startPos, endPos;
     public Direction Dir;
@@ -37,24 +36,49 @@ public class MatrixController : MonoSingleton<MatrixController>
             }
         }
 
-        this.ingredientGrid[0, 0].index = 1;
-        this.ingredientGrid[0, 0].directions.Add(Direction.Left);
-        this.ingredientGrid[0, 0].directions.Add(Direction.Right);
-        this.ingredientGrid[0, 1].index = 1;
-        this.ingredientGrid[0, 1].directions.Add(Direction.Left);
-        this.ingredientGrid[0, 1].directions.Add(Direction.Right);
+        this.ingredientGrid[5, 0].index = 1;
+        this.ingredientGrid[5, 0].directions.Add(Direction.Left);
+        this.ingredientGrid[5, 0].directions.Add(Direction.Right);
+        this.ingredientGrid[5, 1].index = 1;
+        this.ingredientGrid[5, 1].directions.Add(Direction.Left);
+        this.ingredientGrid[5, 1].directions.Add(Direction.Right);
 
-        this.ingredientGrid[1, 1].index = 2;
-        this.ingredientGrid[1, 1].directions.Add(Direction.Up);
-        this.ingredientGrid[1, 1].directions.Add(Direction.Down);
-        this.ingredientGrid[2, 1].index = 2;
-        this.ingredientGrid[2, 1].directions.Add(Direction.Up);
-        this.ingredientGrid[2, 1].directions.Add(Direction.Down);
+        this.ingredientGrid[0, 0].index = 2;
+        this.ingredientGrid[0, 0].directions.Add(Direction.Up);
+        this.ingredientGrid[0, 0].directions.Add(Direction.Down);
+        this.ingredientGrid[1, 0].index = 2;
+        this.ingredientGrid[1, 0].directions.Add(Direction.Up);
+        this.ingredientGrid[1, 0].directions.Add(Direction.Down);
 
-        this.ingredientGrid[2, 3].index = 3;
-        this.ingredientGrid[2, 3].directions.Add(Direction.Left);
+        this.ingredientGrid[0, 5].index = 3;
+        this.ingredientGrid[0, 5].directions.Add(Direction.Up);
+        this.ingredientGrid[0, 5].directions.Add(Direction.Down);
+        this.ingredientGrid[1, 5].index = 3;
+        this.ingredientGrid[1, 5].directions.Add(Direction.Up);
+        this.ingredientGrid[1, 5].directions.Add(Direction.Down);
 
-        this.ingredientGrid[2, 3].directions.Add(Direction.Right);
+        this.ingredientGrid[4, 5].index = 4;
+        this.ingredientGrid[4, 5].directions.Add(Direction.Up);
+        this.ingredientGrid[4, 5].directions.Add(Direction.Down);
+        this.ingredientGrid[5, 5].index = 4;
+        this.ingredientGrid[5, 5].directions.Add(Direction.Up);
+        this.ingredientGrid[5, 5].directions.Add(Direction.Down);
+
+        this.ingredientGrid[3, 2].index = 5;
+        this.ingredientGrid[3, 2].directions.Add(Direction.Left);
+        this.ingredientGrid[3, 2].directions.Add(Direction.Right);
+
+        this.ingredientGrid[2, 5].index = 6;
+        this.ingredientGrid[2, 5].directions.Add(Direction.Left);
+        this.ingredientGrid[2, 5].directions.Add(Direction.Right);
+
+        this.ingredientGrid[4, 1].index = 7;
+        this.ingredientGrid[4, 1].directions.Add(Direction.Up);
+        this.ingredientGrid[4, 1].directions.Add(Direction.Down);
+
+        this.ingredientGrid[0, 4].index = 7;
+        this.ingredientGrid[0, 4].directions.Add(Direction.Up);
+        this.ingredientGrid[0, 4].directions.Add(Direction.Down);
     }
 
     private void Update()
@@ -67,12 +91,12 @@ public class MatrixController : MonoSingleton<MatrixController>
 
         if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log(dir + " " + currentView.name);
-            Move(dir, currentView.poses);
+            Debug.Log(this.Dir + " " + currentView.name);
+            Move(Dir, currentView.poses);
         }
     }
 
-    public Direction GetDirection()
+    private Direction GetDirection()
     {
         Direction dir = Direction.None;
         if (Input.touchCount > 0)
@@ -83,7 +107,7 @@ public class MatrixController : MonoSingleton<MatrixController>
             {
                 startPos = theTouch.position;
             }
-            else if (theTouch.phase == TouchPhase.Ended)
+            else if (theTouch.phase == TouchPhase.Ended /*|| theTouch.phase == TouchPhase.Moved*/)
             {
                 endPos = theTouch.position;
 

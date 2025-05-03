@@ -11,6 +11,7 @@ public class CustomerManager : MonoSingleton<CustomerManager>
     public Transform outTf;
 
     public Customer customerNext = null;
+    public Customer currentCus = null;
     public Order orderNext = null;
     private int currentId = 0;
 
@@ -49,6 +50,7 @@ public class CustomerManager : MonoSingleton<CustomerManager>
 
         if (isFirst)
         {
+            currentCus = customerGO;
             StartCoroutine(StartOrderCoroutine(customerGO, order));
         } 
         else
@@ -88,9 +90,17 @@ public class CustomerManager : MonoSingleton<CustomerManager>
 
     public void CompleteOrder()
     {
+        currentCus.MoveOut(outTf.position);
+        currentCus = customerNext;
+
         if (customerNext != null && orderNext != null)
         {
             StartOrder(customerNext, orderNext);
         }
+    }
+
+    public List<FoodType> GetCurrentOrder()
+    {
+        return DataManager.Instance.LevelData.Levels[0].Orders[currentId-1].Foods;
     }
 }
