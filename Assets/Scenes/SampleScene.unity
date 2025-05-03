@@ -715,7 +715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208ffffba6a159f4ea7f94b3506243d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Size: {x: 8, y: 6}
+  Size: {x: 4, y: 6}
   stovePrefab: {fileID: 4589716710238282922, guid: 93af8b85a17635f40a5b76ed82a86c18, type: 3}
   Distance: {x: 1.067, y: 0.864}
   second: {x: 0.998, y: -0.087}
