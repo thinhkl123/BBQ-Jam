@@ -16,8 +16,11 @@ public class Customer : MonoBehaviour
     [SerializeField] private GameObject OrderUI;
     [SerializeField] private GameObject TimerUI;
     [SerializeField] private List<Image> icons;
+    [SerializeField] private Image timeBar;
 
     public bool isOrdering = false;
+    public float MaxTime;
+    private float currentTime;
 
     private void Awake()
     {
@@ -37,6 +40,9 @@ public class Customer : MonoBehaviour
         {
             return;
         }
+
+        currentTime -= Time.deltaTime;
+        timeBar.fillAmount = currentTime/MaxTime;
 
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -68,6 +74,7 @@ public class Customer : MonoBehaviour
             TimerUI.SetActive(true);
 
             isOrdering = true;
+            currentTime = MaxTime;
 
             CustomerManager.Instance.SpawnContinue();
         });

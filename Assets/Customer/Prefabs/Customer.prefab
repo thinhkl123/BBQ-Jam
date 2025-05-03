@@ -56,6 +56,9 @@ MonoBehaviour:
   - {fileID: 6176468919420357533}
   - {fileID: 4758862361063305052}
   - {fileID: 1697848374633388782}
+  timeBar: {fileID: 689269225285364387}
+  isOrdering: 0
+  MaxTime: 0
 --- !u!1 &3504455547938130580
 GameObject:
   m_ObjectHideFlags: 0
