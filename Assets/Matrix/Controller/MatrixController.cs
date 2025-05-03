@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class MatrixController : MonoSingleton<MatrixController>
 {
@@ -91,7 +92,7 @@ public class MatrixController : MonoSingleton<MatrixController>
 
         if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log(this.Dir + " " + currentView.name);
+            //Debug.Log(this.Dir + " " + currentView.name);
             Move(Dir, currentView.poses);
         }
     }
@@ -198,8 +199,9 @@ public class MatrixController : MonoSingleton<MatrixController>
                     if (currentView.isCooked)
                     {
                         //Debug.Log("Cut ra");
+                        currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
                         QueueController.Instance.AddQueue(currentView.FoodType);
-                        Destroy(currentView.gameObject);
+                        //Destroy(currentView.gameObject);
                         return;
                     }
                 }
@@ -217,8 +219,9 @@ public class MatrixController : MonoSingleton<MatrixController>
                     if (currentView.isCooked)
                     {
                         //Debug.Log("Cut ra");
+                        currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
                         QueueController.Instance.AddQueue(currentView.FoodType);
-                        Destroy(currentView.gameObject);
+                        //Destroy(currentView.gameObject);
                         return;
                     }
                 }
@@ -236,8 +239,9 @@ public class MatrixController : MonoSingleton<MatrixController>
                     if (currentView.isCooked)
                     {
                         //Debug.Log("Cut ra");
+                        currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
                         QueueController.Instance.AddQueue(currentView.FoodType);
-                        Destroy(currentView.gameObject);
+                        //Destroy(currentView.gameObject);
                         return;
                     }
                 }
@@ -255,8 +259,9 @@ public class MatrixController : MonoSingleton<MatrixController>
                     if (currentView.isCooked)
                     {
                         //Debug.Log("Cut ra");
+                        currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
                         QueueController.Instance.AddQueue(currentView.FoodType);
-                        Destroy(currentView.gameObject);
+                        //Destroy(currentView.gameObject);
                         return;
                     }
                 }
@@ -304,5 +309,21 @@ public class MatrixController : MonoSingleton<MatrixController>
         Vector3 pos2 = GetPosContainer(positions[1]);
 
         return (pos1 + pos2) / 2;
+    }
+
+    public void SetFire(List<Vector2Int> poses)
+    {
+        for (int i = 0; i < poses.Count; i++)
+        {
+            GridContainer.GetChild(poses[i].x * MatrixSize.y + poses[i].y).GetComponent<Stove>().SetFire();
+        }
+    }
+
+    public void UnFire(List<Vector2Int> poses)
+    {
+        for (int i = 0; i < poses.Count; i++)
+        {
+            GridContainer.GetChild(poses[i].x * MatrixSize.y + poses[i].y).GetComponent<Stove>().UnFire();
+        }
     }
 }

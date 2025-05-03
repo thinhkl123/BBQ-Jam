@@ -1,3 +1,4 @@
+﻿using DG.Tweening;
 using LevelManager;
 using System.Collections;
 using System.Collections.Generic;
@@ -90,13 +91,19 @@ public class CustomerManager : MonoSingleton<CustomerManager>
 
     public void CompleteOrder()
     {
-        currentCus.MoveOut(outTf.position);
-        currentCus = customerNext;
+        DG.Tweening.Sequence sequence = DOTween.Sequence();
 
-        if (customerNext != null && orderNext != null)
+        sequence.AppendInterval(1f); // chờ 1s
+        sequence.AppendCallback(() =>
         {
-            StartOrder(customerNext, orderNext);
-        }
+            currentCus.MoveOut(outTf.position);
+            currentCus = customerNext;
+
+            if (customerNext != null && orderNext != null)
+            {
+                StartOrder(customerNext, orderNext);
+            }
+        });
     }
 
     public List<FoodType> GetCurrentOrder()

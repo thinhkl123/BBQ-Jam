@@ -1,3 +1,4 @@
+using DG.Tweening;
 using LevelManager;
 using System.Collections;
 using System.Collections.Generic;
@@ -77,4 +78,17 @@ public class QueueController : MonoSingleton<QueueController>
 
         CustomerManager.Instance.CompleteOrder();
     } 
+
+    public Vector3 GetAvailablePos()
+    {
+        for (int i = 0; i < queueElements.Count; i++)
+        {
+            if (queueElements[i].FoodType == FoodType.None)
+            {
+                return queueElements[i].transform.position;
+            }
+        }
+
+        return Vector3.zero;
+    }
 }

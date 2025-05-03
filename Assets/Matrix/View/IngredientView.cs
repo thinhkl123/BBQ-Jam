@@ -45,13 +45,17 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         float delay = 0.5f;          // thời gian chờ trước khi bắt đầu
         float shrinkDuration = 0.2f;
         float growDuration = 0.2f;
-        Vector3 spawnScale = Vector3.one * 0.5f; // scale khi xuất hiện lại
+        Vector3 spawnScale = Vector3.one * 0.4f; // scale khi xuất hiện lại
 
         Vector3 originalScale = this.transform.localScale;
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
         sequence.AppendInterval(delay); // chờ 1s
+        sequence.AppendCallback(() =>
+        {
+            MatrixController.Instance.SetFire(poses);
+        });
         sequence.Append(this.transform.DOScale(Vector3.zero, shrinkDuration).SetEase(Ease.InBack)); // thu nhỏ và biến mất
         sequence.AppendCallback(() =>
         {
@@ -66,5 +70,21 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         // Hiện lại và scale to hơn
         sequence.Append(this.transform.DOScale(spawnScale, growDuration).SetEase(Ease.OutBack));
         sequence.Append(this.transform.DOScale(originalScale, 0.2f)); // trở về kích thước gốc nếu muốn
+        sequence.AppendInterval(0.4f); 
+        sequence.AppendCallback(() =>
+        {
+            MatrixController.Instance.UnFire(poses);
+        });
+    }
+
+    public void MoveOut(Vector3 t1, Vector3 t2)
+    {
+        DG.Tweening.Sequence sequence = DOTween.Sequence();
+        sequence.Append(this.transform.DOMove(new Vector3(t1.x, this.transform.position.y, t1.z), 0.5f).SetEase(Ease.OutBack));
+        sequence.Append(this.transform.DOMove(new Vector3(t2.x, this.transform.position.y, t2.z), 0.5f).SetEase(Ease.Linear));
+        sequence.AppendCallback(() =>
+        {
+            Destroy(this.gameObject);
+        });
     }
 }
