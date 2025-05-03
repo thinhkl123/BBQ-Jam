@@ -36,6 +36,7 @@ public class CustomerManager : MonoSingleton<CustomerManager>
     private void SpawnCustomer(Order order, bool isFirst = false)
     {
         Customer customerGO = Instantiate(CustomerPrefab);
+        customerGO.MaxTime = order.Time;
         customerGO.SetTransformAtFirst(spawnTf.position, new Vector3 (0, 90f, 0));
 
         List<Sprite> sprites = new List<Sprite>();
