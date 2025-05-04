@@ -19,6 +19,7 @@ public class CustomerManager : MonoSingleton<CustomerManager>
     private void Start()
     {
         currentId = -1;
+        //Invoke(nameof(SpawnCustomer), 4f);
         SpawnCustomer();
     }
 

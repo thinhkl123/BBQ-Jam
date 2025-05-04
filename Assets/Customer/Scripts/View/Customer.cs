@@ -60,6 +60,8 @@ public class Customer : MonoBehaviour
     {
         this.transform.position = pos;
         this.transform.rotation = Quaternion.Euler(rot);
+        //Visual.transform.rotation = Quaternion.Euler(new Vector3(50f, 0f, 0));
+        Visual.transform.rotation = Quaternion.Euler(new Vector3(310.063354f, 176.161789f, 2.93932462f));
         Invoke(nameof(ShowOrder), 1.5f);
     }
 
@@ -76,6 +78,8 @@ public class Customer : MonoBehaviour
         {
             this.animator.SetBool("Walk", false);
             this.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0));
+            //Visual.transform.rotation = Quaternion.Euler(new Vector3(50f, 0f, 0));
+            Visual.transform.rotation = Quaternion.Euler(new Vector3(310.063354f, 176.161789f, 2.93932462f));
             TimerUI.SetActive(true);
 
             isOrdering = true;

@@ -23,12 +23,14 @@ public class LostManager : MonoSingleton<LostManager>
 
     private void RetryLevel()
     {
-        //LoadingManager.instance.LoadScene("Main");
+        HideUI();
+        GameManager.Instance.PlayGame();
     }
 
     private void BackHome()
     {
-        //LoadingManager.instance.LoadScene("Home");
+        HideUI();
+        LoadingManager.instance.LoadScene("Home");
     }
 
     public void ShowResult()
