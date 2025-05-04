@@ -55,7 +55,7 @@ public class QueueController : MonoSingleton<QueueController>
 
     }
 
-    private bool CheckOrder()
+    public bool CheckOrder()
     {
         List<FoodType> foodTypes2 = new List<FoodType>();
         for (int i = 0; i < queueElements.Count; i++)
@@ -68,7 +68,7 @@ public class QueueController : MonoSingleton<QueueController>
 
         //foreach (var foodType in foodTypes2) Debug.Log(foodType.ToString()); Debug.Log("End");
 
-        List<FoodType> orders = CustomerManager.Instance.GetCurrentOrder();
+        List<FoodType> orders = new List<FoodType>(CustomerManager.Instance.GetCurrentOrder());
 
         for (int i = 0; i < orders.Count; i++)
         {
@@ -88,6 +88,7 @@ public class QueueController : MonoSingleton<QueueController>
         {
             if (orders.Contains(queueElements[i].FoodType))
             {
+                orders.Remove(queueElements[i].FoodType);
                 queueElements[i].SetNull();
             }
         }

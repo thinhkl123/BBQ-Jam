@@ -19,7 +19,7 @@ public class SettingUI : UIController
 
     public void SetSlider(float musicValue, float sfxValue)
     {
-        Debug.Log(musicValue + " " + sfxValue);
+        //Debug.Log(musicValue + " " + sfxValue);
         musicSlider.value = musicValue;
         sfxSlider.value = sfxValue;
     }

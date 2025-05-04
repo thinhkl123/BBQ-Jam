@@ -1,3 +1,4 @@
+using Atom;
 using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,7 @@ public class Customer : MonoBehaviour
 
     private void Start()
     {
+        isOrdering = false;
         OrderUI.SetActive(false);
         TimerUI.SetActive(false);
         spawnVFX.Play();
@@ -44,8 +46,10 @@ public class Customer : MonoBehaviour
         currentTime -= Time.deltaTime;
         timeBar.fillAmount = currentTime/MaxTime;
 
-        if (currentTime < 0)
+        if (currentTime < 0 && !GameManager.Instance.isLost)
         {
+            this.isOrdering = false;
+            GameManager.Instance.isLost = true;
             GameManager.Instance.LoseGame();
         }
 
@@ -82,9 +86,12 @@ public class Customer : MonoBehaviour
             Visual.transform.rotation = Quaternion.Euler(new Vector3(310.063354f, 176.161789f, 2.93932462f));
             TimerUI.SetActive(true);
 
+            currentTime = MaxTime;
             isOrdering = true;
 
             CustomerManager.Instance.SpawnContinue();
+
+            QueueController.Instance.CheckOrder();
         });
     }
 

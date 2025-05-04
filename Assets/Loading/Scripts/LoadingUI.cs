@@ -22,6 +22,7 @@ public class LoadingUI : MonoBehaviour
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / .9f);
+            //Debug.Log(progress);
             loadingSlider.value = progress * 100f;
             loadingText.text = $"Loading...{progress*100}%";
             yield return null;

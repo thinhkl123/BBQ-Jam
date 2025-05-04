@@ -33,11 +33,6 @@ public class LostManager : MonoSingleton<LostManager>
         LoadingManager.instance.LoadScene("Home");
     }
 
-    public void ShowResult()
-    {
-        Invoke(nameof(ShowUI), 0.5f);
-    }
-
     public void ShowUI()
     {
         //SoundsManager.Instance.PlaySFX(SoundType.Lose);

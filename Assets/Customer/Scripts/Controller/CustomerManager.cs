@@ -41,7 +41,6 @@ public class CustomerManager : MonoSingleton<CustomerManager>
     {
         Customer customerGO = Instantiate(CustomerPrefab);
         customerGO.MaxTime = order.Time;
-        customerGO.currentTime = order.Time;
         customerGO.SetTransformAtFirst(spawnTf.position, new Vector3 (0, 90f, 0));
 
         List<Sprite> sprites = new List<Sprite>();
@@ -69,6 +68,7 @@ public class CustomerManager : MonoSingleton<CustomerManager>
     {
         yield return new WaitForSeconds(1.5f);
 
+        customerGO.currentTime = order.Time;
         customerGO.isOrdering = true;
         customerGO.MoveTo(orderTf.position);
     }

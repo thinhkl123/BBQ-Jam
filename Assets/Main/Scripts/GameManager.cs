@@ -9,6 +9,7 @@ public class GameManager : MonoSingleton<GameManager>
 {
     public int MaxLevel = 10;
     public int currentLevel;
+    public bool isLost;
 
     protected override void Awake()
     {
@@ -43,6 +44,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void ShowUILose()
     {
+        Debug.Log("Lose");
         AppManager.Instance.PauseGame(true);
         SoundsManager.Instance.PlaySFX(SoundType.Lose);
         LostManager.Instance.ShowUI();
@@ -51,6 +53,7 @@ public class GameManager : MonoSingleton<GameManager>
     public void PlayGame()
     {
         AppManager.Instance.PauseGame(false);
+        isLost = false;
         LoadingManager.instance.LoadScene("Level " + DataManager.Instance.LevelData.Levels[currentLevel - 1].LevelId.ToString());
 
     }
