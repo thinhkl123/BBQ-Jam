@@ -330,6 +330,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1367658113505737865, guid: 22d103f02ba8a084c8563cdcca0934dd, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 871119f4d31b85347ad8f8f19d7dc5ff, type: 3}
+    - target: {fileID: 1367658113505737865, guid: 22d103f02ba8a084c8563cdcca0934dd, type: 3}
       propertyPath: FoodType
       value: 2
       objectReference: {fileID: 0}
@@ -1511,6 +1515,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1367658113505737865, guid: 22d103f02ba8a084c8563cdcca0934dd, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 871119f4d31b85347ad8f8f19d7dc5ff, type: 3}
+    - target: {fileID: 1367658113505737865, guid: 22d103f02ba8a084c8563cdcca0934dd, type: 3}
       propertyPath: FoodType
       value: 2
       objectReference: {fileID: 0}
@@ -1669,6 +1677,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 7b947c87dc392ef469da6ac21c29ef06, type: 3}
+    - target: {fileID: 7594095134605344899, guid: b1c9a4a2eda775c42989233d24205d49, type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 05d4aded0cef53644953e995e332b1f5, type: 3}
     - target: {fileID: 7594095134605344899, guid: b1c9a4a2eda775c42989233d24205d49, type: 3}
       propertyPath: poses.Array.size
       value: 1

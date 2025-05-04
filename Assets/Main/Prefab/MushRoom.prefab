@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poses: []
   isCooked: 0
-  sprite: {fileID: 21300000, guid: ea22b742ab20cc14183fc58f1092d972, type: 3}
+  sprite: {fileID: 21300000, guid: 05d4aded0cef53644953e995e332b1f5, type: 3}
   cookedPrefab: {fileID: 0}
   FoodType: 1
 --- !u!65 &5435325206057833402
