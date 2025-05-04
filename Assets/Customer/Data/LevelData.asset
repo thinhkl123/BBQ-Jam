@@ -17,6 +17,10 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0200000003000000
+  - LevelId: 1
+    Orders:
+    - Customer: 0
+      Foods: 0300000003000000
       Time: 30
     - Customer: 1
       Foods: 0300000003000000
@@ -42,14 +46,6 @@ MonoBehaviour:
       Foods: 0300000003000000
       Time: 30
     - Customer: 1
-      Foods: 0300000003000000
-      Time: 30
-    - Customer: 1
-      Foods: 0300000003000000
-      Time: 30
-  - LevelId: 1
-    Orders:
-    - Customer: 0
       Foods: 0300000003000000
       Time: 30
     - Customer: 1
