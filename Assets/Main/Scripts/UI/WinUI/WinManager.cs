@@ -24,12 +24,18 @@ public class WinManager : MonoSingleton<WinManager>
 
     private void NextLevel()
     {
-        //LoadingManager.instance.LoadScene("Main");
+        HideUI();
+        if (GameManager.Instance.currentLevel+ 1 <= GameManager.Instance.MaxLevel)
+        {
+            GameManager.Instance.currentLevel++;
+            GameManager.Instance.PlayGame();
+        }
     }
 
     private void BackHome()
     {
-        //LoadingManager.instance.LoadScene("Home");
+        HideUI();
+        LoadingManager.instance.LoadScene("Home");
     }
 
 

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
+    public int MaxLevel = 10;
     public int currentLevel;
 
     protected override void Awake()
@@ -40,5 +41,11 @@ public class GameManager : MonoSingleton<GameManager>
     private void ShowUILose()
     {
         LostManager.Instance.ShowUI();
+    }
+
+    public void PlayGame()
+    {
+        LoadingManager.instance.LoadScene("Level " + DataManager.Instance.LevelData.Levels[currentLevel - 1].LevelId.ToString());
+
     }
 }

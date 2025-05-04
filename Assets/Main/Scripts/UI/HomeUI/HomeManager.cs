@@ -71,7 +71,8 @@ public class HomeManager : MonoSingleton<HomeManager>
     private void PlayGame()
     {
         HideUI();
-        LoadingManager.instance.LoadScene("Level " + DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel-1].LevelId.ToString());
+        GameManager.Instance.PlayGame();
+        //LoadingManager.instance.LoadScene("Level " + DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel-1].LevelId.ToString());
     }
 
     public void ShowUI()
