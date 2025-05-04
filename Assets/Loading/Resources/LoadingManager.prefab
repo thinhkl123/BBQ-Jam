@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 3971709625315916557}
   - component: {fileID: 3558559905120038399}
   - component: {fileID: 8448132293771786806}
-  - component: {fileID: 313375022500794061}
   m_Layer: 5
   m_Name: MainCanvas
   m_TagString: Untagged
@@ -240,21 +239,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &313375022500794061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2404781731351852845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d35a57a20bd5e4765b396a80918e419a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NoSafeArea: 1
-  DesignRatio: {x: 1080, y: 1920}
-  useEditorSafeArea: 0
 --- !u!1 &8557436081279449333
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +385,14 @@ PrefabInstance:
     - target: {fileID: 6088590205941519567, guid: 90a10152ee6d1f44b80644b646cbbdd7, type: 3}
       propertyPath: m_Name
       value: LoadingUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6518059832994193682, guid: 90a10152ee6d1f44b80644b646cbbdd7, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6518059832994193682, guid: 90a10152ee6d1f44b80644b646cbbdd7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

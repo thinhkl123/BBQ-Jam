@@ -13,30 +13,28 @@ MonoBehaviour:
   m_Name: LevelData
   m_EditorClassIdentifier: 
   Levels:
-  - LevelId: 12
-    Orders:
-    - Customer: 0
-      Foods: 0200000003000000
   - LevelId: 1
     Orders:
     - Customer: 0
       Foods: 0300000003000000
       Time: 30
-    - Customer: 1
+    - Customer: 0
       Foods: 0300000003000000
       Time: 30
-    - Customer: 1
-      Foods: 0300000001000000
-      Time: 30
-    - Customer: 1
-      Foods: 0200000001000000
-      Time: 30
-    - Customer: 1
-      Foods: 0200000003000000
-      Time: 30
-    - Customer: 1
-      Foods: 0100000003000000
-      Time: 30
+  - LevelId: 2
+     Orders:
+     - Customer: 0
+       Foods: 0300000003000000
+       Time: 30
+     - Customer: 1
+       Foods: 03000000
+       Time: 30
+     - Customer: 1
+       Foods: 0300000003000000
+       Time: 30
+     - Customer: 1
+       Foods: 03000000
+       Time: 30
   - LevelId: 3
     Orders:
     - Customer: 0
@@ -64,4 +62,24 @@ MonoBehaviour:
       Time: 30
     - Customer: 1
       Foods: 0100000001000000
+      Time: 30
+  - LevelId: 12
+    Orders:
+    - Customer: 0
+      Foods: 0300000003000000
+      Time: 30
+    - Customer: 1
+      Foods: 0300000003000000
+      Time: 30
+    - Customer: 1
+      Foods: 0300000001000000
+      Time: 30
+    - Customer: 1
+      Foods: 0200000001000000
+      Time: 30
+    - Customer: 1
+      Foods: 0200000003000000
+      Time: 30
+    - Customer: 1
+      Foods: 0100000003000000
       Time: 30
