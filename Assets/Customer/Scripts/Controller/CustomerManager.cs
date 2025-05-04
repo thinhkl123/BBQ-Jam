@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using LevelManager;
+using SoundManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -98,6 +99,8 @@ public class CustomerManager : MonoSingleton<CustomerManager>
         sequence.AppendInterval(1f); // chờ 1s
         sequence.AppendCallback(() =>
         {
+            SoundsManager.Instance.PlaySFX(SoundType.OrderComplete);
+
             currentCus.MoveOut(outTf.position);
             currentCus = customerNext;
 

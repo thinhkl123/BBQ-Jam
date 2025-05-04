@@ -20,10 +20,13 @@ public class HomeManager : MonoSingleton<HomeManager>
             CreateObject("LoadingManager", "LoadingManager");
             CreateObject("Controllers/UIManager", "UIManager");
             CreateObject("Controllers/DataManager", "DataManager");
+            CreateObject("SoundsManager", "SoundsManager");
             DontDestroyOnLoad(CreateObject("Controllers/WinManager", "WinManaer"));
             DontDestroyOnLoad(CreateObject("Controllers/LostManager", "LostManager"));
             DontDestroyOnLoad(CreateObject("Controllers/PauseManager", "PauseManager"));
+            DontDestroyOnLoad(CreateObject("Controllers/SettingManager", "SettingManager"));
 
+            SettingManager.Instance.Setup();
             WinManager.Instance.Setup();
             LostManager.Instance.Setup();
             PauseManager.Instance.Setup();
@@ -34,6 +37,8 @@ public class HomeManager : MonoSingleton<HomeManager>
         CreateObjects();
 
         Setup();
+
+        SoundsManager.Instance.PlayMusic(SoundType.GameMusic);
     }
 
     private void CreateObjects()

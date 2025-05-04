@@ -17,7 +17,7 @@ public class SettingManager : MonoSingleton<SettingManager>
         _settingUI = AppManager.Instance.ShowSafeTopUI<SettingUI>("UI/SettingUI");
 
         _settingUI.OnCloseBtn = HideUI;
-        //_settingUI.SetSlider(SoundsManager.Instance.GetMusicVolume(), SoundsManager.Instance.GetSFXVolume());
+        _settingUI.SetSlider(SoundsManager.Instance.GetMusicVolume(), SoundsManager.Instance.GetSFXVolume());
         _settingUI.OnMusicSlider = ChangeMusicVolume;
         _settingUI.OnSFXSlider = ChangeSFXVolume;
 
@@ -26,12 +26,12 @@ public class SettingManager : MonoSingleton<SettingManager>
 
     public void ChangeMusicVolume(float value)
     {
-        //SoundsManager.Instance.SetMusicVolume(value);
+        SoundsManager.Instance.SetMusicVolume(value);
     }
 
     public void ChangeSFXVolume(float value)
     {
-        //SoundsManager.Instance.SetSFXVolume(value);
+        SoundsManager.Instance.SetSFXVolume(value);
     }
 
     public void ShowUI()

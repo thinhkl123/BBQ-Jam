@@ -1,4 +1,5 @@
 using Atom;
+using SoundManager;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void ShowUIWin()
     {
+        SoundsManager.Instance.PlaySFX(SoundType.Win);
         AppManager.Instance.PauseGame(false);
         WinManager.Instance.ShowUI();
     }
@@ -41,6 +43,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void ShowUILose()
     {
+        SoundsManager.Instance.PlaySFX(SoundType.Lose);
         AppManager.Instance.PauseGame(false);
         LostManager.Instance.ShowUI();
     }
