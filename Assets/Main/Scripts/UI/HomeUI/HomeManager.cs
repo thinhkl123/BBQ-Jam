@@ -22,9 +22,11 @@ public class HomeManager : MonoSingleton<HomeManager>
             CreateObject("Controllers/DataManager", "DataManager");
             DontDestroyOnLoad(CreateObject("Controllers/WinManager", "WinManaer"));
             DontDestroyOnLoad(CreateObject("Controllers/LostManager", "LostManager"));
+            DontDestroyOnLoad(CreateObject("Controllers/PauseManager", "PauseManager"));
 
             WinManager.Instance.Setup();
             LostManager.Instance.Setup();
+            PauseManager.Instance.Setup();
         }
 
         GameModeContainer.Instance.InitGame();
