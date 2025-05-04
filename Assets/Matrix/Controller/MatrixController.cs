@@ -126,12 +126,12 @@ public class MatrixController : MonoSingleton<MatrixController>
                 this.ingredientGrid[1, 0].directions.Add(Direction.Up);
                 this.ingredientGrid[1, 0].directions.Add(Direction.Down);
 
-                this.ingredientGrid[4, 0].index = 3;
-                this.ingredientGrid[4, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 0].directions.Add(Direction.Right);
-                this.ingredientGrid[4, 1].index = 3;
-                this.ingredientGrid[4, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 1].directions.Add(Direction.Right);
+                this.ingredientGrid[0, 2].index = 2;
+                this.ingredientGrid[0, 2].directions.Add(Direction.Up);
+                this.ingredientGrid[0, 2].directions.Add(Direction.Down);
+                this.ingredientGrid[1, 2].index = 2;
+                this.ingredientGrid[1, 2].directions.Add(Direction.Up);
+                this.ingredientGrid[1, 2].directions.Add(Direction.Down);
 
                 this.ingredientGrid[0, 4].index = 3;
                 this.ingredientGrid[0, 4].directions.Add(Direction.Up);
@@ -170,7 +170,7 @@ public class MatrixController : MonoSingleton<MatrixController>
 
                 this.ingredientGrid[5, 3].index = 8;
                 this.ingredientGrid[5, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 3].directions.Add(Direction.Right);
+                this.ingredientGrid[5, 3].directions.Add(Direction.Right); 
                 this.ingredientGrid[5, 4].index = 8;
                 this.ingredientGrid[5, 4].directions.Add(Direction.Left);
                 this.ingredientGrid[5, 4].directions.Add(Direction.Right);
