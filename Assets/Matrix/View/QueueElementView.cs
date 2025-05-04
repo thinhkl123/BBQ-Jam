@@ -26,7 +26,7 @@ public class QueueElementView : MonoBehaviour
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
         sequence.AppendInterval(1f); // chờ 1s
-        sequence.Append(SpriteRenderer.transform.DOScale(Vector3.one, 0.2f)); // trở về kích thước gốc nếu muốn
+        sequence.Append(SpriteRenderer.transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 0.2f)); // trở về kích thước gốc nếu muốn
     }
 
     public void SetNull()
