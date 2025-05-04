@@ -27,11 +27,11 @@ public class CustomerManager : MonoSingleton<CustomerManager>
         currentId++;
         if (currentId == 0)
         {
-            SpawnCustomer(DataManager.Instance.LevelData.Levels[0].Orders[currentId], true);
+            SpawnCustomer(DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel-1].Orders[currentId], true);
         }
-        else if (currentId < DataManager.Instance.LevelData.Levels[0].Orders.Count)
+        else if (currentId < DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel - 1].Orders.Count)
         {
-            SpawnCustomer(DataManager.Instance.LevelData.Levels[0].Orders[currentId]);
+            SpawnCustomer(DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel - 1].Orders[currentId]);
         }
     }
 
@@ -39,6 +39,7 @@ public class CustomerManager : MonoSingleton<CustomerManager>
     {
         Customer customerGO = Instantiate(CustomerPrefab);
         customerGO.MaxTime = order.Time;
+        customerGO.currentTime = order.Time;
         customerGO.SetTransformAtFirst(spawnTf.position, new Vector3 (0, 90f, 0));
 
         List<Sprite> sprites = new List<Sprite>();
@@ -103,11 +104,15 @@ public class CustomerManager : MonoSingleton<CustomerManager>
             {
                 StartOrder(customerNext, orderNext);
             }
+            else
+            {
+                GameManager.Instance.WinGame();
+            }
         });
     }
 
     public List<FoodType> GetCurrentOrder()
     {
-        return DataManager.Instance.LevelData.Levels[0].Orders[currentId-1].Foods;
+        return DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel - 1].Orders[currentId-1].Foods;
     }
 }

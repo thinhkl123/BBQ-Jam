@@ -20,6 +20,11 @@ public class HomeManager : MonoSingleton<HomeManager>
             CreateObject("LoadingManager", "LoadingManager");
             CreateObject("Controllers/UIManager", "UIManager");
             CreateObject("Controllers/DataManager", "DataManager");
+            DontDestroyOnLoad(CreateObject("Controllers/WinManager", "WinManaer"));
+            DontDestroyOnLoad(CreateObject("Controllers/LostManager", "LostManager"));
+
+            WinManager.Instance.Setup();
+            LostManager.Instance.Setup();
         }
 
         GameModeContainer.Instance.InitGame();
@@ -66,7 +71,7 @@ public class HomeManager : MonoSingleton<HomeManager>
     private void PlayGame()
     {
         HideUI();
-        LoadingManager.instance.LoadScene("Level " + DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel].LevelId.ToString());
+        LoadingManager.instance.LoadScene("Level " + DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel-1].LevelId.ToString());
     }
 
     public void ShowUI()

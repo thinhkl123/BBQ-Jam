@@ -38,7 +38,7 @@ public class MatrixController : MonoSingleton<MatrixController>
             }
         }
 
-        switch (DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel].LevelId)
+        switch (DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel-1].LevelId)
         {
             case 1:
                 this.ingredientGrid[0, 0].index = 1;
@@ -126,12 +126,12 @@ public class MatrixController : MonoSingleton<MatrixController>
                 this.ingredientGrid[1, 0].directions.Add(Direction.Up);
                 this.ingredientGrid[1, 0].directions.Add(Direction.Down);
 
-                this.ingredientGrid[0, 2].index = 2;
-                this.ingredientGrid[0, 2].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 2].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 2].index = 2;
-                this.ingredientGrid[1, 2].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 2].directions.Add(Direction.Down);
+                this.ingredientGrid[4, 0].index = 3;
+                this.ingredientGrid[4, 0].directions.Add(Direction.Left);
+                this.ingredientGrid[4, 0].directions.Add(Direction.Right);
+                this.ingredientGrid[4, 1].index = 3;
+                this.ingredientGrid[4, 1].directions.Add(Direction.Left);
+                this.ingredientGrid[4, 1].directions.Add(Direction.Right);
 
                 this.ingredientGrid[0, 4].index = 3;
                 this.ingredientGrid[0, 4].directions.Add(Direction.Up);
@@ -230,6 +230,70 @@ public class MatrixController : MonoSingleton<MatrixController>
                 break;
                 
             case 6:
+                // Level 6
+                this.ingredientGrid[1, 0].index = 1;
+                this.ingredientGrid[1, 0].directions.Add(Direction.Up);
+                this.ingredientGrid[1, 0].directions.Add(Direction.Down);
+                this.ingredientGrid[2, 0].index = 1;
+                this.ingredientGrid[2, 0].directions.Add(Direction.Up);
+                this.ingredientGrid[2, 0].directions.Add(Direction.Down);
+
+                this.ingredientGrid[4, 0].index = 2;
+                this.ingredientGrid[4, 0].directions.Add(Direction.Up);
+                this.ingredientGrid[4, 0].directions.Add(Direction.Down);
+                this.ingredientGrid[5, 0].index = 2;
+                this.ingredientGrid[5, 0].directions.Add(Direction.Up);
+                this.ingredientGrid[5, 0].directions.Add(Direction.Down);
+
+                this.ingredientGrid[6, 0].index = 3;
+                this.ingredientGrid[6, 0].directions.Add(Direction.Left);
+                this.ingredientGrid[6, 0].directions.Add(Direction.Right);
+                this.ingredientGrid[6, 1].index = 3;
+                this.ingredientGrid[6, 1].directions.Add(Direction.Left);
+                this.ingredientGrid[6, 1].directions.Add(Direction.Right);
+
+                this.ingredientGrid[0, 1].index = 4;
+                this.ingredientGrid[0, 1].directions.Add(Direction.Left);
+                this.ingredientGrid[0, 1].directions.Add(Direction.Right);
+                this.ingredientGrid[0, 2].index = 4;
+                this.ingredientGrid[0, 2].directions.Add(Direction.Left);
+                this.ingredientGrid[0, 2].directions.Add(Direction.Right);
+
+                this.ingredientGrid[3, 1].index = 5;
+                this.ingredientGrid[3, 1].directions.Add(Direction.Up);
+                this.ingredientGrid[3, 1].directions.Add(Direction.Down);
+                this.ingredientGrid[4, 1].index = 5;
+                this.ingredientGrid[4, 1].directions.Add(Direction.Up);
+                this.ingredientGrid[4, 1].directions.Add(Direction.Down);
+
+                this.ingredientGrid[0, 3].index = 6;
+                this.ingredientGrid[0, 3].directions.Add(Direction.Left);
+                this.ingredientGrid[0, 3].directions.Add(Direction.Right);
+                this.ingredientGrid[0, 4].index = 6;
+                this.ingredientGrid[0, 4].directions.Add(Direction.Left);
+                this.ingredientGrid[0, 4].directions.Add(Direction.Right);
+
+                this.ingredientGrid[7, 2].index = 7;
+                this.ingredientGrid[7, 2].directions.Add(Direction.Left);
+                this.ingredientGrid[7, 2].directions.Add(Direction.Right);
+
+                this.ingredientGrid[4, 4].index = 8;
+                this.ingredientGrid[4, 4].directions.Add(Direction.Up);
+                this.ingredientGrid[4, 4].directions.Add(Direction.Down);
+
+                this.ingredientGrid[6, 4].index = 9;
+                this.ingredientGrid[6, 4].directions.Add(Direction.Left);
+                this.ingredientGrid[6, 4].directions.Add(Direction.Right);
+                this.ingredientGrid[6, 5].index = 9;
+                this.ingredientGrid[6, 5].directions.Add(Direction.Left);
+                this.ingredientGrid[6, 5].directions.Add(Direction.Right);
+
+                this.ingredientGrid[1, 5].index = 10;
+                this.ingredientGrid[1, 5].directions.Add(Direction.Up);
+                this.ingredientGrid[1, 5].directions.Add(Direction.Down);
+                this.ingredientGrid[2, 5].index = 10;
+                this.ingredientGrid[2, 5].directions.Add(Direction.Up);
+                this.ingredientGrid[2, 5].directions.Add(Direction.Down);
 
                 break;
             
@@ -484,7 +548,8 @@ public class MatrixController : MonoSingleton<MatrixController>
         if (Input.GetMouseButtonUp(0))
         {
             //Debug.Log(this.Dir + " " + currentView.name);
-            Move(Dir, currentView.poses);
+            if (currentView != null)
+                Move(Dir, currentView.poses);
         }
     }
 
