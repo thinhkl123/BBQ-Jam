@@ -58,8 +58,15 @@ public class HomeManager : MonoSingleton<HomeManager>
         _homeUI = AppManager.Instance.ShowSafeTopUI<HomeUI>("UI/HomeUI");
 
         _homeUI.OnSettingBtn = SettingManager.Instance.ShowUI;
+        _homeUI.OnPlayBtn = PlayGame;
 
         _homeUI.SetupLevel();
+    }
+
+    private void PlayGame()
+    {
+        HideUI();
+        LoadingManager.instance.LoadScene("Level " + DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel].LevelId.ToString());
     }
 
     public void ShowUI()

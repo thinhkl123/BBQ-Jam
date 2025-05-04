@@ -523,7 +523,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                 else if (ingredientGrid[p.x, p.y].index != 0)
                 {
                     //Debug.Log("Touch");
-                    currentView.SetCook();
+                    if (!currentView.isCooked) currentView.SetCook();
                 }
 
                 break;
@@ -543,7 +543,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                 else if (ingredientGrid[p.x, p.y].index != 0)
                 {
                     //Debug.Log("Touch");
-                    currentView.SetCook();
+                    if (!currentView.isCooked) currentView.SetCook();
                 }
 
                 break;
@@ -563,7 +563,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                 else if (ingredientGrid[p.x, p.y].index != 0)
                 {
                     //Debug.Log("Touch");
-                    currentView.SetCook();
+                    if (!currentView.isCooked) currentView.SetCook();
                 }
 
                 break;
@@ -583,7 +583,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                 else if (ingredientGrid[p.x, p.y].index != 0)
                 {
                     //Debug.Log("Touch");
-                    currentView.SetCook();
+                    if (!currentView.isCooked) currentView.SetCook();
                 }
 
                 break;
