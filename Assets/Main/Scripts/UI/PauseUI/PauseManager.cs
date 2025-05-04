@@ -27,7 +27,7 @@ public class PauseManager : MonoSingleton<PauseManager>
 
     private void BackHome()
     {
-        //LoadingManager.instance.LoadScene("Home");
+        LoadingManager.instance.LoadScene("Home");
     }
 
     public void ShowUI()
