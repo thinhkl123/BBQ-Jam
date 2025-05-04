@@ -30,7 +30,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void ShowUIWin()
     {
-        AppManager.Instance.PauseGame(false);
+        AppManager.Instance.PauseGame(true);
         WinManager.Instance.ShowUI();
     }
 
@@ -41,13 +41,13 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void ShowUILose()
     {
-        AppManager.Instance.PauseGame(false);
+        AppManager.Instance.PauseGame(true);
         LostManager.Instance.ShowUI();
     }
 
     public void PlayGame()
     {
-        AppManager.Instance.PauseGame(true);
+        AppManager.Instance.PauseGame(false);
         LoadingManager.instance.LoadScene("Level " + DataManager.Instance.LevelData.Levels[currentLevel - 1].LevelId.ToString());
 
     }
