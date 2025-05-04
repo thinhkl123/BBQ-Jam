@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using LevelManager;
+using SoundManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,10 @@ public class QueueElementView : MonoBehaviour
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
         sequence.AppendInterval(1f); // chờ 1s
+        sequence.AppendCallback(() =>
+        {
+            SoundsManager.Instance.PlaySFX(SoundType.Pop);
+        });
         sequence.Append(SpriteRenderer.transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 0.2f)); // trở về kích thước gốc nếu muốn
     }
 

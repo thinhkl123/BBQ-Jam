@@ -101,8 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ignoredBackKey: 0
-  musicSlider: {fileID: 4147520967090247136}
-  sfxSlider: {fileID: 4147520967280791511}
+  musicSlider: {fileID: 4147520967280791511}
+  sfxSlider: {fileID: 4147520967090247136}
   closeBtn: {fileID: 4147520966471860228}
 --- !u!1 &4147520965770132174
 GameObject:
@@ -1458,7 +1458,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 618921862997202828}
         m_TargetAssemblyTypeName: SettingUI, Assembly-CSharp
-        m_MethodName: OnMusicSliderChanged
+        m_MethodName: OnSFXSliderChanged
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1672,7 +1672,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 618921862997202828}
         m_TargetAssemblyTypeName: SettingUI, Assembly-CSharp
-        m_MethodName: OnSFXSliderChanged
+        m_MethodName: OnMusicSliderChanged
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using LevelManager;
+using SoundManager;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -54,6 +55,8 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         sequence.AppendInterval(delay); // chờ 1s
         sequence.AppendCallback(() =>
         {
+            SoundsManager.Instance.PlaySFX(SoundType.Cooked);
+
             MatrixController.Instance.SetFire(poses);
         });
         sequence.Append(this.transform.DOScale(Vector3.zero, shrinkDuration).SetEase(Ease.InBack)); // thu nhỏ và biến mất
@@ -81,6 +84,10 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         DG.Tweening.Sequence sequence = DOTween.Sequence();
         sequence.Append(this.transform.DOMove(new Vector3(t1.x, this.transform.position.y, t1.z), 0.5f).SetEase(Ease.OutBack));
+        sequence.AppendCallback(() =>
+        {
+            SoundsManager.Instance.PlaySFX(SoundType.Woosh);
+        });
         sequence.Append(this.transform.DOMove(new Vector3(t2.x, this.transform.position.y, t2.z), 0.5f).SetEase(Ease.Linear));
         sequence.AppendCallback(() =>
         {
