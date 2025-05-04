@@ -17,6 +17,7 @@ public class HomeManager : MonoSingleton<HomeManager>
         if (!hasLoaded)
         {
             hasLoaded = true;
+            CreateObject("LoadingManager", "LoadingManager");
             CreateObject("Controllers/UIManager", "UIManager");
             CreateObject("Controllers/DataManager", "DataManager");
         }
@@ -31,6 +32,7 @@ public class HomeManager : MonoSingleton<HomeManager>
     private void CreateObjects()
     {
         CreateModule("Controllers/SettingManager", "SettingManager");
+
 
         SettingManager.Instance.Setup();
     }
