@@ -29,28 +29,44 @@ public class QueueController : MonoSingleton<QueueController>
             if (queueElements[i].FoodType == FoodType.None)
             {
                 queueElements[i].SetInfor(foodType);
-                CheckOrder();
-                
+                //CheckOrder();
+                if (!CheckOrder())
+                {
+                    for (int j = 0; j < queueElements.Count; j++)
+                    {
+                        if (queueElements[j].FoodType == FoodType.None)
+                        {
+                            return;
+                        }
+                    }
+
+                    GameManager.Instance.LoseGame();
+                }
+
+
+
+                //Debug.Log("Queue is full");
+
                 return;
             }
         }
 
-
-        Debug.Log("Queue is full");
+        
 
     }
 
-    private void CheckOrder()
+    private bool CheckOrder()
     {
-        List<FoodType> foodTypes = new List<FoodType>();
+        List<FoodType> foodTypes2 = new List<FoodType>();
         for (int i = 0; i < queueElements.Count; i++)
         {
             if (queueElements[i].FoodType != FoodType.None)
             {
-                foodTypes.Add(queueElements[i].FoodType);
+                foodTypes2.Add(queueElements[i].FoodType);
             }
         }
-        List<FoodType> foodTypes2 = new List<FoodType>(foodTypes);
+
+        //foreach (var foodType in foodTypes2) Debug.Log(foodType.ToString()); Debug.Log("End");
 
         List<FoodType> orders = CustomerManager.Instance.GetCurrentOrder();
 
@@ -62,7 +78,7 @@ public class QueueController : MonoSingleton<QueueController>
             }
             else
             {
-                return;
+                return false;
             }
         }
 
@@ -77,6 +93,8 @@ public class QueueController : MonoSingleton<QueueController>
         }
 
         CustomerManager.Instance.CompleteOrder();
+
+        return true;
     } 
 
     public Vector3 GetAvailablePos()

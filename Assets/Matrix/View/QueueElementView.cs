@@ -31,13 +31,14 @@ public class QueueElementView : MonoBehaviour
 
     public void SetNull()
     {
+        this.FoodType = FoodType.None;
+
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
         sequence.AppendInterval(1.2f); // chờ 1s
         sequence.Append(SpriteRenderer.transform.DOScale(Vector3.zero, 0.2f)); // trở về kích thước gốc nếu muốn
         sequence.AppendCallback(() =>
         {
-            this.FoodType = FoodType.None;
             this.SpriteRenderer.enabled = false;
         });
     }

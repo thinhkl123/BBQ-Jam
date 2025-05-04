@@ -38,7 +38,7 @@ public class MatrixController : MonoSingleton<MatrixController>
             }
         }
 
-        switch (DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel].LevelId)
+        switch (DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel-1].LevelId)
         {
             case 1:
                 this.ingredientGrid[0, 0].index = 1;
@@ -344,7 +344,8 @@ public class MatrixController : MonoSingleton<MatrixController>
         if (Input.GetMouseButtonUp(0))
         {
             //Debug.Log(this.Dir + " " + currentView.name);
-            Move(Dir, currentView.poses);
+            if (currentView != null)
+                Move(Dir, currentView.poses);
         }
     }
 

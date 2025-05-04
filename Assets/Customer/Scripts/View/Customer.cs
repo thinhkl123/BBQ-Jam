@@ -20,11 +20,11 @@ public class Customer : MonoBehaviour
 
     public bool isOrdering = false;
     public float MaxTime;
-    private float currentTime;
+    public float currentTime;
 
     private void Awake()
     {
-
+        isOrdering = false;
     }
 
     private void Start()
@@ -44,11 +44,16 @@ public class Customer : MonoBehaviour
         currentTime -= Time.deltaTime;
         timeBar.fillAmount = currentTime/MaxTime;
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (currentTime < 0)
         {
-            MoveOut(CustomerManager.Instance.outTf.position);
-            CustomerManager.Instance.CompleteOrder();
+            GameManager.Instance.LoseGame();
         }
+
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    MoveOut(CustomerManager.Instance.outTf.position);
+        //    CustomerManager.Instance.CompleteOrder();
+        //}
     }
 
     public void SetTransformAtFirst(Vector3 pos, Vector3 rot)
@@ -74,7 +79,6 @@ public class Customer : MonoBehaviour
             TimerUI.SetActive(true);
 
             isOrdering = true;
-            currentTime = MaxTime;
 
             CustomerManager.Instance.SpawnContinue();
         });
