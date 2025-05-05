@@ -83,7 +83,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public void MoveOut(Vector3 t1, Vector3 t2)
     {
         DG.Tweening.Sequence sequence = DOTween.Sequence();
-        sequence.Append(this.transform.DOMove(new Vector3(t1.x, this.transform.position.y, t1.z), 0.5f).SetEase(Ease.OutBack));
+        sequence.Append(this.transform.DOMove(new Vector3(t1.x, this.transform.position.y, t1.z), 0.5f).SetEase(Ease.Linear));
         sequence.AppendCallback(() =>
         {
             SoundsManager.Instance.PlaySFX(SoundType.Woosh);

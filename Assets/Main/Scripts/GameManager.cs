@@ -22,7 +22,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Start()
     {
-        
+        Application.targetFrameRate = 60;
     }
 
     public void WinGame()
