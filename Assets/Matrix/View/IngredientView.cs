@@ -11,7 +11,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public List<Vector2Int> poses;
     public bool isCooked;
     public Sprite sprite;
-    public GameObject cookedPrefab;
+    //public GameObject cookedPrefab;
     public FoodType FoodType;
 
     public void OnPointerUp(PointerEventData pointerEventData)
@@ -36,6 +36,16 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
             //this.transform.position = new Vector3(newPos.x, this.transform.position.y, newPos.z);
             this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.OutBounce);
+        }
+    }
+
+    public void SetInitCook()
+    {
+        isCooked = true;
+
+        if (sprite != null)
+        {
+            this.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
         }
     }
 

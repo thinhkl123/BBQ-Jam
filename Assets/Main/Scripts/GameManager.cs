@@ -54,7 +54,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         AppManager.Instance.PauseGame(false);
         isLost = false;
-        LoadingManager.instance.LoadScene("Level " + DataManager.Instance.LevelData.Levels[currentLevel - 1].LevelId.ToString());
-
+        //LoadingManager.instance.LoadScene("Level " + DataManager.Instance.LevelData.Levels[currentLevel - 1].LevelId.ToString());
+        LoadingManager.instance.LoadScene("Play");
     }
 }

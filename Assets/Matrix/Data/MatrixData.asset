@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c748137b596a04a4cb37af57ad5f39c6, type: 3}
+  m_Name: MatrixData
+  m_EditorClassIdentifier: 
+  MatrixConfigs:
+  - MatrixType: 1
+    MatrixSize: {x: 5, y: 5}
+    Prefab: {fileID: 6264008671373138223, guid: edc3a5ab5da2dc54f97c6c00380475f0, type: 3}
+    Position: {x: 0.5, y: 0, z: 3.75}
+  - MatrixType: 2
+    MatrixSize: {x: 5, y: 6}
+    Prefab: {fileID: 8174291639884604061, guid: dea5fcf002a6f024789b753db2644df3, type: 3}
+    Position: {x: 0.6, y: 0, z: 4.14}
+  - MatrixType: 3
+    MatrixSize: {x: 6, y: 6}
+    Prefab: {fileID: 1131513202897104352, guid: 8bed52dca7a3f5745a376523323383ea, type: 3}
+    Position: {x: 0, y: 0, z: 4.13}
+  - MatrixType: 4
+    MatrixSize: {x: 6, y: 8}
+    Prefab: {fileID: 2844849410034515053, guid: f35159dbf79891a40807861c6291b344, type: 3}
+    Position: {x: 0, y: 0, z: 4.14}

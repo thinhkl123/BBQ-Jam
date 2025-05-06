@@ -47,3 +47,5 @@ MonoBehaviour:
   LevelData: {fileID: 11400000, guid: 1db945e550a833240b9dc8cff4e4d934, type: 2}
   FoodData: {fileID: 11400000, guid: 1f067af2067f71b49a5bb6f2e7e7f854, type: 2}
   CustomerData: {fileID: 11400000, guid: a422281eb48978f4789e8d7534057c49, type: 2}
+  FoodLevelData: {fileID: 11400000, guid: 37e4eeeb893a4e04b96ea01efb978338, type: 2}
+  MatrixData: {fileID: 11400000, guid: 57498912ca099314f8b7b2fba06865e2, type: 2}

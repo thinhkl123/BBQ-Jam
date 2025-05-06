@@ -7,7 +7,7 @@ namespace SoundManager
 {
     public class SoundsManager : MonoSingleton<SoundsManager>
     {
-        [SerializeField] private SoundSO SO;
+        public SoundSO SO;
         public AudioSource musicSource;
         public AudioSource sfxSource;
 

@@ -2,6 +2,8 @@ using LevelManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FoodLevelData;
+using MatrixData;
 
 public class MatrixController : MonoSingleton<MatrixController>
 {
@@ -16,16 +18,658 @@ public class MatrixController : MonoSingleton<MatrixController>
 
     private Vector2Int offset;
 
-    public enum Direction
+    protected override void Awake()
     {
-        Left,
-        Right,
-        Up,
-        Down,
-        None
+        //this.ingredientGrid = new IngredientModel[8, 6];
+        //for (int i = 0; i < 8; i++)
+        //{
+        //    for (int j = 0; j < 6; j++)
+        //    {
+        //        this.ingredientGrid[i, j] = new IngredientModel();
+        //        this.ingredientGrid[i, j].Init();
+        //    }
+        //}
+
+
+
+        //switch (DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel-1].LevelId)
+        //{
+        //    case 1:
+        //        this.ingredientGrid[0, 0].index = 1;
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 0].index = 1;
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[4, 3].index = 2;
+        //        this.ingredientGrid[4, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[4, 3].directions.Add(Direction.Right);
+        //        this.ingredientGrid[4, 4].index = 2;
+        //        this.ingredientGrid[4, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[4, 4].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[4, 0].index = 3;
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Left);
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Right);
+        //        this.ingredientGrid[4, 1].index = 3;
+        //        this.ingredientGrid[4, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[4, 1].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[0, 4].index = 4;
+        //        this.ingredientGrid[0, 4].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 4].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 4].index = 4;
+        //        this.ingredientGrid[1, 4].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 4].directions.Add(Direction.Down);
+
+        //        break;
+
+        //    case 2:
+        //        // Level 2
+        //        this.ingredientGrid[0, 0].index = 1;
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Right);
+        //        this.ingredientGrid[0, 1].index = 1;
+        //        this.ingredientGrid[0, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 1].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[0, 3].index = 6;
+        //        this.ingredientGrid[0, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 3].directions.Add(Direction.Right);
+        //        this.ingredientGrid[0, 4].index = 6;
+        //        this.ingredientGrid[0, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 4].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[2, 0].index = 2;
+        //        this.ingredientGrid[2, 0].directions.Add(Direction.Left);
+        //        this.ingredientGrid[2, 0].directions.Add(Direction.Right);
+        //        this.ingredientGrid[2, 1].index = 2;
+        //        this.ingredientGrid[2, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[2, 1].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[1, 4].index = 3;
+        //        this.ingredientGrid[1, 4].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 4].directions.Add(Direction.Down);
+        //        this.ingredientGrid[2, 4].index = 3;
+        //        this.ingredientGrid[2, 4].directions.Add(Direction.Up);
+        //        this.ingredientGrid[2, 4].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[3, 0].index = 4;
+        //        this.ingredientGrid[3, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[3, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[4, 0].index = 4;
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[4, 3].index = 5;
+        //        this.ingredientGrid[4, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[4, 3].directions.Add(Direction.Right);
+        //        this.ingredientGrid[4, 4].index = 5;
+        //        this.ingredientGrid[4, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[4, 4].directions.Add(Direction.Right);
+
+        //        break;
+
+        //    case 3:
+        //        // Level 3
+        //        this.ingredientGrid[0, 0].index = 1;
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 0].index = 1;
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[0, 2].index = 2;
+        //        this.ingredientGrid[0, 2].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 2].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 2].index = 2;
+        //        this.ingredientGrid[1, 2].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 2].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[0, 4].index = 3;
+        //        this.ingredientGrid[0, 4].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 4].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 4].index = 3;
+        //        this.ingredientGrid[1, 4].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 4].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[2, 2].index = 4;
+        //        this.ingredientGrid[2, 2].directions.Add(Direction.Up);
+        //        this.ingredientGrid[2, 2].directions.Add(Direction.Down);
+        //        this.ingredientGrid[3, 2].index = 4;
+        //        this.ingredientGrid[3, 2].directions.Add(Direction.Up);
+        //        this.ingredientGrid[3, 2].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[3, 0].index = 5;
+        //        this.ingredientGrid[3, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[3, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[4, 0].index = 5;
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[3, 4].index = 6;
+        //        this.ingredientGrid[3, 4].directions.Add(Direction.Up);
+        //        this.ingredientGrid[3, 4].directions.Add(Direction.Down);
+        //        this.ingredientGrid[4, 4].index = 6;
+        //        this.ingredientGrid[4, 4].directions.Add(Direction.Up);
+        //        this.ingredientGrid[4, 4].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[5, 0].index = 7;
+        //        this.ingredientGrid[5, 0].directions.Add(Direction.Left);
+        //        this.ingredientGrid[5, 0].directions.Add(Direction.Right);
+        //        this.ingredientGrid[5, 1].index = 7;
+        //        this.ingredientGrid[5, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[5, 1].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[5, 3].index = 8;
+        //        this.ingredientGrid[5, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[5, 3].directions.Add(Direction.Right); 
+        //        this.ingredientGrid[5, 4].index = 8;
+        //        this.ingredientGrid[5, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[5, 4].directions.Add(Direction.Right);
+
+        //        break;
+
+        //    case 4:
+        //        this.ingredientGrid[0, 0].index = 1;
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Right);
+        //        this.ingredientGrid[0, 1].index = 1;
+        //        this.ingredientGrid[0, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 1].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[5, 3].index = 2;
+        //        this.ingredientGrid[5, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[5, 3].directions.Add(Direction.Right);
+        //        this.ingredientGrid[5, 4].index = 2;
+        //        this.ingredientGrid[5, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[5, 4].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[4, 0].index = 3;
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[5, 0].index = 3;
+        //        this.ingredientGrid[5, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[5, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[0, 4].index = 4;
+        //        this.ingredientGrid[0, 4].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 4].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 4].index = 4;
+        //        this.ingredientGrid[1, 4].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 4].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[1, 1].index = 5;
+        //        this.ingredientGrid[1, 1].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 1].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[2, 0].index = 6;
+        //        this.ingredientGrid[2, 0].directions.Add(Direction.Left);
+        //        this.ingredientGrid[2, 0].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[1, 1].index = 5;
+        //        this.ingredientGrid[1, 1].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 1].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[2, 0].index = 6;
+        //        this.ingredientGrid[2, 0].directions.Add(Direction.Left);
+        //        this.ingredientGrid[2, 0].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[2, 2].index = 7;
+        //        this.ingredientGrid[2, 2].directions.Add(Direction.Up);
+        //        this.ingredientGrid[2, 2].directions.Add(Direction.Down);
+                
+        //        this.ingredientGrid[4, 3].index = 8;
+        //        this.ingredientGrid[4, 3].directions.Add(Direction.Up);
+        //        this.ingredientGrid[4, 3].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[3, 4].index = 9;
+        //        this.ingredientGrid[3, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[3, 4].directions.Add(Direction.Right);
+
+        //        break;
+
+        //    case 5:
+        //        //level 5
+        //        this.ingredientGrid[5, 0].index = 1;
+        //        this.ingredientGrid[5, 0].directions.Add(Direction.Left);
+        //        this.ingredientGrid[5, 0].directions.Add(Direction.Right);
+        //        this.ingredientGrid[5, 1].index = 1;
+        //        this.ingredientGrid[5, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[5, 1].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[0, 0].index = 2;
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 0].index = 2;
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[0, 5].index = 3;
+        //        this.ingredientGrid[0, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 5].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 5].index = 3;
+        //        this.ingredientGrid[1, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 5].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[4, 5].index = 4;
+        //        this.ingredientGrid[4, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[4, 5].directions.Add(Direction.Down);
+        //        this.ingredientGrid[5, 5].index = 4;
+        //        this.ingredientGrid[5, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[5, 5].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[3, 2].index = 5;
+        //        this.ingredientGrid[3, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[3, 2].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[2, 5].index = 6;
+        //        this.ingredientGrid[2, 5].directions.Add(Direction.Left);
+        //        this.ingredientGrid[2, 5].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[4, 1].index = 7;
+        //        this.ingredientGrid[4, 1].directions.Add(Direction.Up);
+        //        this.ingredientGrid[4, 1].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[0, 4].index = 8;
+        //        this.ingredientGrid[0, 4].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 4].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[0, 2].index = 9;
+        //        this.ingredientGrid[0, 2].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 2].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 2].index = 9;
+        //        this.ingredientGrid[1, 2].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 2].directions.Add(Direction.Down);
+
+        //        break;
+                
+        //    case 6:
+        //        // Level 6
+        //        this.ingredientGrid[1, 0].index = 1;
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[2, 0].index = 1;
+        //        this.ingredientGrid[2, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[2, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[4, 0].index = 2;
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[5, 0].index = 2;
+        //        this.ingredientGrid[5, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[5, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[6, 0].index = 3;
+        //        this.ingredientGrid[6, 0].directions.Add(Direction.Left);
+        //        this.ingredientGrid[6, 0].directions.Add(Direction.Right);
+        //        this.ingredientGrid[6, 1].index = 3;
+        //        this.ingredientGrid[6, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[6, 1].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[0, 1].index = 4;
+        //        this.ingredientGrid[0, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 1].directions.Add(Direction.Right);
+        //        this.ingredientGrid[0, 2].index = 4;
+        //        this.ingredientGrid[0, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 2].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[3, 1].index = 5;
+        //        this.ingredientGrid[3, 1].directions.Add(Direction.Up);
+        //        this.ingredientGrid[3, 1].directions.Add(Direction.Down);
+        //        this.ingredientGrid[4, 1].index = 5;
+        //        this.ingredientGrid[4, 1].directions.Add(Direction.Up);
+        //        this.ingredientGrid[4, 1].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[0, 3].index = 6;
+        //        this.ingredientGrid[0, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 3].directions.Add(Direction.Right);
+        //        this.ingredientGrid[0, 4].index = 6;
+        //        this.ingredientGrid[0, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 4].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[7, 2].index = 7;
+        //        this.ingredientGrid[7, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[7, 2].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[4, 4].index = 8;
+        //        this.ingredientGrid[4, 4].directions.Add(Direction.Up);
+        //        this.ingredientGrid[4, 4].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[6, 4].index = 9;
+        //        this.ingredientGrid[6, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[6, 4].directions.Add(Direction.Right);
+        //        this.ingredientGrid[6, 5].index = 9;
+        //        this.ingredientGrid[6, 5].directions.Add(Direction.Left);
+        //        this.ingredientGrid[6, 5].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[1, 5].index = 10;
+        //        this.ingredientGrid[1, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 5].directions.Add(Direction.Down);
+        //        this.ingredientGrid[2, 5].index = 10;
+        //        this.ingredientGrid[2, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[2, 5].directions.Add(Direction.Down);
+
+        //        break;
+            
+        //    case 7:
+        //        this.ingredientGrid[0, 0].index = 1;
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 0].index = 1;
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[1, 1].index = 2;
+        //        this.ingredientGrid[1, 1].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 1].directions.Add(Direction.Down);
+        //        this.ingredientGrid[2, 1].index = 2;
+        //        this.ingredientGrid[2, 1].directions.Add(Direction.Up);
+        //        this.ingredientGrid[2, 1].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[0, 2].index = 3;
+        //        this.ingredientGrid[0, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 2].directions.Add(Direction.Right);
+        //        this.ingredientGrid[0, 3].index = 3;
+        //        this.ingredientGrid[0, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 3].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[0, 5].index = 4;
+        //        this.ingredientGrid[0, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 5].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 5].index = 4;
+        //        this.ingredientGrid[1, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 5].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[2, 4].index = 5;
+        //        this.ingredientGrid[2, 4].directions.Add(Direction.Up);
+        //        this.ingredientGrid[2, 4].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[3, 2].index = 6;
+        //        this.ingredientGrid[3, 2].directions.Add(Direction.Up);
+        //        this.ingredientGrid[3, 2].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[4, 0].index = 7;
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[6, 3].index = 8;
+        //        this.ingredientGrid[6, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[6, 3].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[4, 2].index = 9;
+        //        this.ingredientGrid[4, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[4, 2].directions.Add(Direction.Right);
+        //        this.ingredientGrid[4, 3].index = 9;
+        //        this.ingredientGrid[4, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[4, 3].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[6, 0].index = 10;
+        //        this.ingredientGrid[6, 0].directions.Add(Direction.Left);
+        //        this.ingredientGrid[6, 0].directions.Add(Direction.Right);
+        //        this.ingredientGrid[6, 1].index = 10;
+        //        this.ingredientGrid[6, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[6, 1].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[7, 2].index = 11;
+        //        this.ingredientGrid[7, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[7, 2].directions.Add(Direction.Right);
+        //        this.ingredientGrid[7, 3].index = 11;
+        //        this.ingredientGrid[7, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[7, 3].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[6, 4].index = 12;
+        //        this.ingredientGrid[6, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[6, 4].directions.Add(Direction.Right);
+        //        this.ingredientGrid[6, 5].index = 12;
+        //        this.ingredientGrid[6, 5].directions.Add(Direction.Left);
+        //        this.ingredientGrid[6, 5].directions.Add(Direction.Right);                
+
+        //        break;
+
+        //    case 8:
+        //        this.ingredientGrid[2, 4].index = 1;
+        //        this.ingredientGrid[2, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[2, 4].directions.Add(Direction.Right);
+        //        this.ingredientGrid[2, 5].index = 1;
+        //        this.ingredientGrid[2, 5].directions.Add(Direction.Left);
+        //        this.ingredientGrid[2, 5].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[5, 0].index = 2;
+        //        this.ingredientGrid[5, 0].directions.Add(Direction.Left);
+        //        this.ingredientGrid[5, 0].directions.Add(Direction.Right);
+        //        this.ingredientGrid[5, 1].index = 2;
+        //        this.ingredientGrid[5, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[5, 1].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[6, 5].index = 3;
+        //        this.ingredientGrid[6, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[6, 5].directions.Add(Direction.Down);
+        //        this.ingredientGrid[7, 5].index = 3;
+        //        this.ingredientGrid[7, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[7, 5].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[0, 0].index = 4;
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 0].index = 4;
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[1, 2].index = 5;
+        //        this.ingredientGrid[1, 2].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 2].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[6, 3].index = 6;
+        //        this.ingredientGrid[6, 3].directions.Add(Direction.Up);
+        //        this.ingredientGrid[6, 3].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[0, 1].index = 7;
+        //        this.ingredientGrid[0, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 1].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[7, 4].index = 8;
+        //        this.ingredientGrid[7, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[7, 4].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[6, 0].index = 9;
+        //        this.ingredientGrid[6, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[6, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[7, 0].index = 9;
+        //        this.ingredientGrid[7, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[7, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[5, 2].index = 10;
+        //        this.ingredientGrid[5, 2].directions.Add(Direction.Up);
+        //        this.ingredientGrid[5, 2].directions.Add(Direction.Down);
+        //        this.ingredientGrid[6, 2].index = 10;
+        //        this.ingredientGrid[6, 2].directions.Add(Direction.Up);
+        //        this.ingredientGrid[6, 2].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[2, 3].index = 11;
+        //        this.ingredientGrid[2, 3].directions.Add(Direction.Up);
+        //        this.ingredientGrid[2, 3].directions.Add(Direction.Down);
+        //        this.ingredientGrid[3, 3].index = 11;
+        //        this.ingredientGrid[3, 3].directions.Add(Direction.Up);
+        //        this.ingredientGrid[3, 3].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[0, 5].index = 12;
+        //        this.ingredientGrid[0, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 5].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 5].index = 12;
+        //        this.ingredientGrid[1, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 5].directions.Add(Direction.Down);
+        //        break; 
+            
+        //    case 9:
+        //        this.ingredientGrid[0, 2].index = 1;
+        //        this.ingredientGrid[0, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 2].directions.Add(Direction.Right);
+        //        this.ingredientGrid[0, 3].index = 1;
+        //        this.ingredientGrid[0, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 3].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[3, 1].index = 2;
+        //        this.ingredientGrid[3, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[3, 1].directions.Add(Direction.Right);
+        //        this.ingredientGrid[3, 2].index = 2;
+        //        this.ingredientGrid[3, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[3, 2].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[5, 5].index = 3;
+        //        this.ingredientGrid[5, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[5, 5].directions.Add(Direction.Down);
+        //        this.ingredientGrid[6, 5].index = 3;
+        //        this.ingredientGrid[6, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[6, 5].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[6, 0].index = 4;
+        //        this.ingredientGrid[6, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[6, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[7, 0].index = 4;
+        //        this.ingredientGrid[7, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[7, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[1, 2].index = 5;
+        //        this.ingredientGrid[1, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[1, 2].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[2, 3].index = 6;
+        //        this.ingredientGrid[2, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[2, 3].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[6, 3].index = 7;
+        //        this.ingredientGrid[6, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[6, 3].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[5, 2].index = 8;
+        //        this.ingredientGrid[5, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[5, 2].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[1, 0].index = 9;
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[2, 0].index = 9;
+        //        this.ingredientGrid[2, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[2, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[0, 5].index = 10;
+        //        this.ingredientGrid[0, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 5].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 5].index = 10;
+        //        this.ingredientGrid[1, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 5].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[7, 2].index = 11;
+        //        this.ingredientGrid[7, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[7, 2].directions.Add(Direction.Right);
+        //        this.ingredientGrid[7, 3].index = 11;
+        //        this.ingredientGrid[7, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[7, 3].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[4, 3].index = 12;
+        //        this.ingredientGrid[4, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[4, 3].directions.Add(Direction.Right);
+        //        this.ingredientGrid[4, 4].index = 12;
+        //        this.ingredientGrid[4, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[4, 4].directions.Add(Direction.Right);
+        //        break;
+
+        //    case 10:
+
+        //        break;
+
+        //    case 11:
+
+        //        break;
+
+        //    case 12:
+        //        this.ingredientGrid[0, 1].index = 1;
+        //        this.ingredientGrid[0, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 1].directions.Add(Direction.Right);
+        //        this.ingredientGrid[0, 2].index = 1;
+        //        this.ingredientGrid[0, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[0, 2].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[2, 1].index = 2;
+        //        this.ingredientGrid[2, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[2, 1].directions.Add(Direction.Right);
+        //        this.ingredientGrid[2, 2].index = 2;
+        //        this.ingredientGrid[2, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[2, 2].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[4, 0].index = 3;
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Left);
+        //        this.ingredientGrid[4, 0].directions.Add(Direction.Right);
+        //        this.ingredientGrid[4, 1].index = 3;
+        //        this.ingredientGrid[4, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[4, 1].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[7, 0].index = 4;
+        //        this.ingredientGrid[7, 0].directions.Add(Direction.Left);
+        //        this.ingredientGrid[7, 0].directions.Add(Direction.Right);
+        //        this.ingredientGrid[7, 1].index = 4;
+        //        this.ingredientGrid[7, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[7, 1].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[0, 0].index = 5;
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 0].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 0].index = 5;
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 0].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[0, 5].index = 6;
+        //        this.ingredientGrid[0, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[0, 5].directions.Add(Direction.Down);
+        //        this.ingredientGrid[1, 5].index = 6;
+        //        this.ingredientGrid[1, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 5].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[1, 3].index = 7;
+        //        this.ingredientGrid[1, 3].directions.Add(Direction.Up);
+        //        this.ingredientGrid[1, 3].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[3, 2].index = 8;
+        //        this.ingredientGrid[3, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[3, 2].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[7, 4].index = 9;
+        //        this.ingredientGrid[7, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[7, 4].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[3, 5].index = 10;
+        //        this.ingredientGrid[3, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[3, 5].directions.Add(Direction.Down);
+        //        this.ingredientGrid[4, 5].index = 10;
+        //        this.ingredientGrid[4, 5].directions.Add(Direction.Up);
+        //        this.ingredientGrid[4, 5].directions.Add(Direction.Down);
+
+        //        this.ingredientGrid[6, 3].index = 11;
+        //        this.ingredientGrid[6, 3].directions.Add(Direction.Left);
+        //        this.ingredientGrid[6, 3].directions.Add(Direction.Right);
+        //        this.ingredientGrid[6, 4].index = 11;
+        //        this.ingredientGrid[6, 4].directions.Add(Direction.Left);
+        //        this.ingredientGrid[6, 4].directions.Add(Direction.Right);
+
+        //        this.ingredientGrid[5, 1].index = 12;
+        //        this.ingredientGrid[5, 1].directions.Add(Direction.Left);
+        //        this.ingredientGrid[5, 1].directions.Add(Direction.Right);
+        //        this.ingredientGrid[5, 2].index = 12;
+        //        this.ingredientGrid[5, 2].directions.Add(Direction.Left);
+        //        this.ingredientGrid[5, 2].directions.Add(Direction.Right);
+
+        //        break;
+        //}
     }
 
-    protected override void Awake()
+    private void Start()
+    {
+        SpawnLevel(GameManager.Instance.currentLevel - 1);
+    }
+
+    private void SpawnLevel(int level)
     {
         this.ingredientGrid = new IngredientModel[8, 6];
         for (int i = 0; i < 8; i++)
@@ -37,635 +681,51 @@ public class MatrixController : MonoSingleton<MatrixController>
             }
         }
 
-        switch (DataManager.Instance.LevelData.Levels[GameManager.Instance.currentLevel-1].LevelId)
+        SetMatrixSize(DataManager.Instance.FoodLevelData.FoodsLevelList[level].MatrixType);
+
+        SpawnMatrix(DataManager.Instance.FoodLevelData.FoodsLevelList[level].MatrixType);
+
+        SpawnFoods(DataManager.Instance.FoodLevelData.FoodsLevelList[level].FoodLevelList);
+    }
+
+    private void SetMatrixSize(MatrixType type)
+    {
+        this.MatrixSize = DataManager.Instance.MatrixData.GetMatrixSize(type);
+    }
+
+    private void SpawnMatrix(MatrixType matrixType)
+    {
+        GameObject matrixGO = Instantiate(DataManager.Instance.MatrixData.GetMatrixPrefab(matrixType), DataManager.Instance.MatrixData.GetMatrixPosition(matrixType), Quaternion.identity);
+        this.GridContainer = matrixGO.transform;
+    }
+
+    public void SpawnFoods(List<FoodLevel> foodLevels)
+    {
+        for (int i = 0; i < foodLevels.Count; i++)
         {
-            case 1:
-                this.ingredientGrid[0, 0].index = 1;
-                this.ingredientGrid[0, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 0].index = 1;
-                this.ingredientGrid[1, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[4, 3].index = 2;
-                this.ingredientGrid[4, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 3].directions.Add(Direction.Right);
-                this.ingredientGrid[4, 4].index = 2;
-                this.ingredientGrid[4, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 4].directions.Add(Direction.Right);
-
-                this.ingredientGrid[4, 0].index = 3;
-                this.ingredientGrid[4, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 0].directions.Add(Direction.Right);
-                this.ingredientGrid[4, 1].index = 3;
-                this.ingredientGrid[4, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 1].directions.Add(Direction.Right);
-
-                this.ingredientGrid[0, 4].index = 4;
-                this.ingredientGrid[0, 4].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 4].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 4].index = 4;
-                this.ingredientGrid[1, 4].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 4].directions.Add(Direction.Down);
-
-                break;
-
-            case 2:
-                // Level 2
-                this.ingredientGrid[0, 0].index = 1;
-                this.ingredientGrid[0, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 0].directions.Add(Direction.Right);
-                this.ingredientGrid[0, 1].index = 1;
-                this.ingredientGrid[0, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 1].directions.Add(Direction.Right);
-
-                this.ingredientGrid[0, 3].index = 6;
-                this.ingredientGrid[0, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 3].directions.Add(Direction.Right);
-                this.ingredientGrid[0, 4].index = 6;
-                this.ingredientGrid[0, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 4].directions.Add(Direction.Right);
-
-                this.ingredientGrid[2, 0].index = 2;
-                this.ingredientGrid[2, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[2, 0].directions.Add(Direction.Right);
-                this.ingredientGrid[2, 1].index = 2;
-                this.ingredientGrid[2, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[2, 1].directions.Add(Direction.Right);
-
-                this.ingredientGrid[1, 4].index = 3;
-                this.ingredientGrid[1, 4].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 4].directions.Add(Direction.Down);
-                this.ingredientGrid[2, 4].index = 3;
-                this.ingredientGrid[2, 4].directions.Add(Direction.Up);
-                this.ingredientGrid[2, 4].directions.Add(Direction.Down);
-
-                this.ingredientGrid[3, 0].index = 4;
-                this.ingredientGrid[3, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[3, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[4, 0].index = 4;
-                this.ingredientGrid[4, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[4, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[4, 3].index = 5;
-                this.ingredientGrid[4, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 3].directions.Add(Direction.Right);
-                this.ingredientGrid[4, 4].index = 5;
-                this.ingredientGrid[4, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 4].directions.Add(Direction.Right);
-
-                break;
-
-            case 3:
-                // Level 3
-                this.ingredientGrid[0, 0].index = 1;
-                this.ingredientGrid[0, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 0].index = 1;
-                this.ingredientGrid[1, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[0, 2].index = 2;
-                this.ingredientGrid[0, 2].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 2].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 2].index = 2;
-                this.ingredientGrid[1, 2].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 2].directions.Add(Direction.Down);
-
-                this.ingredientGrid[0, 4].index = 3;
-                this.ingredientGrid[0, 4].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 4].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 4].index = 3;
-                this.ingredientGrid[1, 4].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 4].directions.Add(Direction.Down);
-
-                this.ingredientGrid[2, 2].index = 4;
-                this.ingredientGrid[2, 2].directions.Add(Direction.Up);
-                this.ingredientGrid[2, 2].directions.Add(Direction.Down);
-                this.ingredientGrid[3, 2].index = 4;
-                this.ingredientGrid[3, 2].directions.Add(Direction.Up);
-                this.ingredientGrid[3, 2].directions.Add(Direction.Down);
-
-                this.ingredientGrid[3, 0].index = 5;
-                this.ingredientGrid[3, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[3, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[4, 0].index = 5;
-                this.ingredientGrid[4, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[4, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[3, 4].index = 6;
-                this.ingredientGrid[3, 4].directions.Add(Direction.Up);
-                this.ingredientGrid[3, 4].directions.Add(Direction.Down);
-                this.ingredientGrid[4, 4].index = 6;
-                this.ingredientGrid[4, 4].directions.Add(Direction.Up);
-                this.ingredientGrid[4, 4].directions.Add(Direction.Down);
-
-                this.ingredientGrid[5, 0].index = 7;
-                this.ingredientGrid[5, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 0].directions.Add(Direction.Right);
-                this.ingredientGrid[5, 1].index = 7;
-                this.ingredientGrid[5, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 1].directions.Add(Direction.Right);
-
-                this.ingredientGrid[5, 3].index = 8;
-                this.ingredientGrid[5, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 3].directions.Add(Direction.Right); 
-                this.ingredientGrid[5, 4].index = 8;
-                this.ingredientGrid[5, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 4].directions.Add(Direction.Right);
-
-                break;
-
-            case 4:
-                this.ingredientGrid[0, 0].index = 1;
-                this.ingredientGrid[0, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 0].directions.Add(Direction.Right);
-                this.ingredientGrid[0, 1].index = 1;
-                this.ingredientGrid[0, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 1].directions.Add(Direction.Right);
-
-                this.ingredientGrid[5, 3].index = 2;
-                this.ingredientGrid[5, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 3].directions.Add(Direction.Right);
-                this.ingredientGrid[5, 4].index = 2;
-                this.ingredientGrid[5, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 4].directions.Add(Direction.Right);
-
-                this.ingredientGrid[4, 0].index = 3;
-                this.ingredientGrid[4, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[4, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[5, 0].index = 3;
-                this.ingredientGrid[5, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[5, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[0, 4].index = 4;
-                this.ingredientGrid[0, 4].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 4].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 4].index = 4;
-                this.ingredientGrid[1, 4].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 4].directions.Add(Direction.Down);
-
-                this.ingredientGrid[1, 1].index = 5;
-                this.ingredientGrid[1, 1].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 1].directions.Add(Direction.Down);
-
-                this.ingredientGrid[2, 0].index = 6;
-                this.ingredientGrid[2, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[2, 0].directions.Add(Direction.Right);
-
-                this.ingredientGrid[1, 1].index = 5;
-                this.ingredientGrid[1, 1].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 1].directions.Add(Direction.Down);
-
-                this.ingredientGrid[2, 0].index = 6;
-                this.ingredientGrid[2, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[2, 0].directions.Add(Direction.Right);
-
-                this.ingredientGrid[2, 2].index = 7;
-                this.ingredientGrid[2, 2].directions.Add(Direction.Up);
-                this.ingredientGrid[2, 2].directions.Add(Direction.Down);
-                
-                this.ingredientGrid[4, 3].index = 8;
-                this.ingredientGrid[4, 3].directions.Add(Direction.Up);
-                this.ingredientGrid[4, 3].directions.Add(Direction.Down);
-
-                this.ingredientGrid[3, 4].index = 9;
-                this.ingredientGrid[3, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[3, 4].directions.Add(Direction.Right);
-
-                break;
-
-            case 5:
-                //level 5
-                this.ingredientGrid[5, 0].index = 1;
-                this.ingredientGrid[5, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 0].directions.Add(Direction.Right);
-                this.ingredientGrid[5, 1].index = 1;
-                this.ingredientGrid[5, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 1].directions.Add(Direction.Right);
-
-                this.ingredientGrid[0, 0].index = 2;
-                this.ingredientGrid[0, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 0].index = 2;
-                this.ingredientGrid[1, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[0, 5].index = 3;
-                this.ingredientGrid[0, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 5].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 5].index = 3;
-                this.ingredientGrid[1, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 5].directions.Add(Direction.Down);
-
-                this.ingredientGrid[4, 5].index = 4;
-                this.ingredientGrid[4, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[4, 5].directions.Add(Direction.Down);
-                this.ingredientGrid[5, 5].index = 4;
-                this.ingredientGrid[5, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[5, 5].directions.Add(Direction.Down);
-
-                this.ingredientGrid[3, 2].index = 5;
-                this.ingredientGrid[3, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[3, 2].directions.Add(Direction.Right);
-
-                this.ingredientGrid[2, 5].index = 6;
-                this.ingredientGrid[2, 5].directions.Add(Direction.Left);
-                this.ingredientGrid[2, 5].directions.Add(Direction.Right);
-
-                this.ingredientGrid[4, 1].index = 7;
-                this.ingredientGrid[4, 1].directions.Add(Direction.Up);
-                this.ingredientGrid[4, 1].directions.Add(Direction.Down);
-
-                this.ingredientGrid[0, 4].index = 8;
-                this.ingredientGrid[0, 4].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 4].directions.Add(Direction.Down);
-
-                this.ingredientGrid[0, 2].index = 9;
-                this.ingredientGrid[0, 2].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 2].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 2].index = 9;
-                this.ingredientGrid[1, 2].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 2].directions.Add(Direction.Down);
-
-                break;
-                
-            case 6:
-                // Level 6
-                this.ingredientGrid[1, 0].index = 1;
-                this.ingredientGrid[1, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[2, 0].index = 1;
-                this.ingredientGrid[2, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[2, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[4, 0].index = 2;
-                this.ingredientGrid[4, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[4, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[5, 0].index = 2;
-                this.ingredientGrid[5, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[5, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[6, 0].index = 3;
-                this.ingredientGrid[6, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[6, 0].directions.Add(Direction.Right);
-                this.ingredientGrid[6, 1].index = 3;
-                this.ingredientGrid[6, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[6, 1].directions.Add(Direction.Right);
-
-                this.ingredientGrid[0, 1].index = 4;
-                this.ingredientGrid[0, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 1].directions.Add(Direction.Right);
-                this.ingredientGrid[0, 2].index = 4;
-                this.ingredientGrid[0, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 2].directions.Add(Direction.Right);
-
-                this.ingredientGrid[3, 1].index = 5;
-                this.ingredientGrid[3, 1].directions.Add(Direction.Up);
-                this.ingredientGrid[3, 1].directions.Add(Direction.Down);
-                this.ingredientGrid[4, 1].index = 5;
-                this.ingredientGrid[4, 1].directions.Add(Direction.Up);
-                this.ingredientGrid[4, 1].directions.Add(Direction.Down);
-
-                this.ingredientGrid[0, 3].index = 6;
-                this.ingredientGrid[0, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 3].directions.Add(Direction.Right);
-                this.ingredientGrid[0, 4].index = 6;
-                this.ingredientGrid[0, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 4].directions.Add(Direction.Right);
-
-                this.ingredientGrid[7, 2].index = 7;
-                this.ingredientGrid[7, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[7, 2].directions.Add(Direction.Right);
-
-                this.ingredientGrid[4, 4].index = 8;
-                this.ingredientGrid[4, 4].directions.Add(Direction.Up);
-                this.ingredientGrid[4, 4].directions.Add(Direction.Down);
-
-                this.ingredientGrid[6, 4].index = 9;
-                this.ingredientGrid[6, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[6, 4].directions.Add(Direction.Right);
-                this.ingredientGrid[6, 5].index = 9;
-                this.ingredientGrid[6, 5].directions.Add(Direction.Left);
-                this.ingredientGrid[6, 5].directions.Add(Direction.Right);
-
-                this.ingredientGrid[1, 5].index = 10;
-                this.ingredientGrid[1, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 5].directions.Add(Direction.Down);
-                this.ingredientGrid[2, 5].index = 10;
-                this.ingredientGrid[2, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[2, 5].directions.Add(Direction.Down);
-
-                break;
-            
-            case 7:
-                this.ingredientGrid[0, 0].index = 1;
-                this.ingredientGrid[0, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 0].index = 1;
-                this.ingredientGrid[1, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[1, 1].index = 2;
-                this.ingredientGrid[1, 1].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 1].directions.Add(Direction.Down);
-                this.ingredientGrid[2, 1].index = 2;
-                this.ingredientGrid[2, 1].directions.Add(Direction.Up);
-                this.ingredientGrid[2, 1].directions.Add(Direction.Down);
-
-                this.ingredientGrid[0, 2].index = 3;
-                this.ingredientGrid[0, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 2].directions.Add(Direction.Right);
-                this.ingredientGrid[0, 3].index = 3;
-                this.ingredientGrid[0, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 3].directions.Add(Direction.Right);
-
-                this.ingredientGrid[0, 5].index = 4;
-                this.ingredientGrid[0, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 5].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 5].index = 4;
-                this.ingredientGrid[1, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 5].directions.Add(Direction.Down);
-
-                this.ingredientGrid[2, 4].index = 5;
-                this.ingredientGrid[2, 4].directions.Add(Direction.Up);
-                this.ingredientGrid[2, 4].directions.Add(Direction.Down);
-
-                this.ingredientGrid[3, 2].index = 6;
-                this.ingredientGrid[3, 2].directions.Add(Direction.Up);
-                this.ingredientGrid[3, 2].directions.Add(Direction.Down);
-
-                this.ingredientGrid[4, 0].index = 7;
-                this.ingredientGrid[4, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[4, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[6, 3].index = 8;
-                this.ingredientGrid[6, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[6, 3].directions.Add(Direction.Right);
-
-                this.ingredientGrid[4, 2].index = 9;
-                this.ingredientGrid[4, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 2].directions.Add(Direction.Right);
-                this.ingredientGrid[4, 3].index = 9;
-                this.ingredientGrid[4, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 3].directions.Add(Direction.Right);
-
-                this.ingredientGrid[6, 0].index = 10;
-                this.ingredientGrid[6, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[6, 0].directions.Add(Direction.Right);
-                this.ingredientGrid[6, 1].index = 10;
-                this.ingredientGrid[6, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[6, 1].directions.Add(Direction.Right);
-
-                this.ingredientGrid[7, 2].index = 11;
-                this.ingredientGrid[7, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[7, 2].directions.Add(Direction.Right);
-                this.ingredientGrid[7, 3].index = 11;
-                this.ingredientGrid[7, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[7, 3].directions.Add(Direction.Right);
-
-                this.ingredientGrid[6, 4].index = 12;
-                this.ingredientGrid[6, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[6, 4].directions.Add(Direction.Right);
-                this.ingredientGrid[6, 5].index = 12;
-                this.ingredientGrid[6, 5].directions.Add(Direction.Left);
-                this.ingredientGrid[6, 5].directions.Add(Direction.Right);                
-
-                break;
-
-            case 8:
-                this.ingredientGrid[2, 4].index = 1;
-                this.ingredientGrid[2, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[2, 4].directions.Add(Direction.Right);
-                this.ingredientGrid[2, 5].index = 1;
-                this.ingredientGrid[2, 5].directions.Add(Direction.Left);
-                this.ingredientGrid[2, 5].directions.Add(Direction.Right);
-
-                this.ingredientGrid[5, 0].index = 2;
-                this.ingredientGrid[5, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 0].directions.Add(Direction.Right);
-                this.ingredientGrid[5, 1].index = 2;
-                this.ingredientGrid[5, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 1].directions.Add(Direction.Right);
-
-                this.ingredientGrid[6, 5].index = 3;
-                this.ingredientGrid[6, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[6, 5].directions.Add(Direction.Down);
-                this.ingredientGrid[7, 5].index = 3;
-                this.ingredientGrid[7, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[7, 5].directions.Add(Direction.Down);
-
-                this.ingredientGrid[0, 0].index = 4;
-                this.ingredientGrid[0, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 0].index = 4;
-                this.ingredientGrid[1, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[1, 2].index = 5;
-                this.ingredientGrid[1, 2].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 2].directions.Add(Direction.Down);
-
-                this.ingredientGrid[6, 3].index = 6;
-                this.ingredientGrid[6, 3].directions.Add(Direction.Up);
-                this.ingredientGrid[6, 3].directions.Add(Direction.Down);
-
-                this.ingredientGrid[0, 1].index = 7;
-                this.ingredientGrid[0, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 1].directions.Add(Direction.Right);
-
-                this.ingredientGrid[7, 4].index = 8;
-                this.ingredientGrid[7, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[7, 4].directions.Add(Direction.Right);
-
-                this.ingredientGrid[6, 0].index = 9;
-                this.ingredientGrid[6, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[6, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[7, 0].index = 9;
-                this.ingredientGrid[7, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[7, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[5, 2].index = 10;
-                this.ingredientGrid[5, 2].directions.Add(Direction.Up);
-                this.ingredientGrid[5, 2].directions.Add(Direction.Down);
-                this.ingredientGrid[6, 2].index = 10;
-                this.ingredientGrid[6, 2].directions.Add(Direction.Up);
-                this.ingredientGrid[6, 2].directions.Add(Direction.Down);
-
-                this.ingredientGrid[2, 3].index = 11;
-                this.ingredientGrid[2, 3].directions.Add(Direction.Up);
-                this.ingredientGrid[2, 3].directions.Add(Direction.Down);
-                this.ingredientGrid[3, 3].index = 11;
-                this.ingredientGrid[3, 3].directions.Add(Direction.Up);
-                this.ingredientGrid[3, 3].directions.Add(Direction.Down);
-
-                this.ingredientGrid[0, 5].index = 12;
-                this.ingredientGrid[0, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 5].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 5].index = 12;
-                this.ingredientGrid[1, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 5].directions.Add(Direction.Down);
-                break; 
-            
-            case 9:
-                this.ingredientGrid[0, 2].index = 1;
-                this.ingredientGrid[0, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 2].directions.Add(Direction.Right);
-                this.ingredientGrid[0, 3].index = 1;
-                this.ingredientGrid[0, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 3].directions.Add(Direction.Right);
-
-                this.ingredientGrid[3, 1].index = 2;
-                this.ingredientGrid[3, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[3, 1].directions.Add(Direction.Right);
-                this.ingredientGrid[3, 2].index = 2;
-                this.ingredientGrid[3, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[3, 2].directions.Add(Direction.Right);
-
-                this.ingredientGrid[5, 5].index = 3;
-                this.ingredientGrid[5, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[5, 5].directions.Add(Direction.Down);
-                this.ingredientGrid[6, 5].index = 3;
-                this.ingredientGrid[6, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[6, 5].directions.Add(Direction.Down);
-
-                this.ingredientGrid[6, 0].index = 4;
-                this.ingredientGrid[6, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[6, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[7, 0].index = 4;
-                this.ingredientGrid[7, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[7, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[1, 2].index = 5;
-                this.ingredientGrid[1, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[1, 2].directions.Add(Direction.Right);
-
-                this.ingredientGrid[2, 3].index = 6;
-                this.ingredientGrid[2, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[2, 3].directions.Add(Direction.Right);
-
-                this.ingredientGrid[6, 3].index = 7;
-                this.ingredientGrid[6, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[6, 3].directions.Add(Direction.Right);
-
-                this.ingredientGrid[5, 2].index = 8;
-                this.ingredientGrid[5, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 2].directions.Add(Direction.Right);
-
-                this.ingredientGrid[1, 0].index = 9;
-                this.ingredientGrid[1, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[2, 0].index = 9;
-                this.ingredientGrid[2, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[2, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[0, 5].index = 10;
-                this.ingredientGrid[0, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 5].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 5].index = 10;
-                this.ingredientGrid[1, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 5].directions.Add(Direction.Down);
-
-                this.ingredientGrid[7, 2].index = 11;
-                this.ingredientGrid[7, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[7, 2].directions.Add(Direction.Right);
-                this.ingredientGrid[7, 3].index = 11;
-                this.ingredientGrid[7, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[7, 3].directions.Add(Direction.Right);
-
-                this.ingredientGrid[4, 3].index = 12;
-                this.ingredientGrid[4, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 3].directions.Add(Direction.Right);
-                this.ingredientGrid[4, 4].index = 12;
-                this.ingredientGrid[4, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 4].directions.Add(Direction.Right);
-                break;
-
-            case 10:
-
-                break;
-
-            case 11:
-
-                break;
-
-            case 12:
-                this.ingredientGrid[0, 1].index = 1;
-                this.ingredientGrid[0, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 1].directions.Add(Direction.Right);
-                this.ingredientGrid[0, 2].index = 1;
-                this.ingredientGrid[0, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[0, 2].directions.Add(Direction.Right);
-
-                this.ingredientGrid[2, 1].index = 2;
-                this.ingredientGrid[2, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[2, 1].directions.Add(Direction.Right);
-                this.ingredientGrid[2, 2].index = 2;
-                this.ingredientGrid[2, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[2, 2].directions.Add(Direction.Right);
-
-                this.ingredientGrid[4, 0].index = 3;
-                this.ingredientGrid[4, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 0].directions.Add(Direction.Right);
-                this.ingredientGrid[4, 1].index = 3;
-                this.ingredientGrid[4, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[4, 1].directions.Add(Direction.Right);
-
-                this.ingredientGrid[7, 0].index = 4;
-                this.ingredientGrid[7, 0].directions.Add(Direction.Left);
-                this.ingredientGrid[7, 0].directions.Add(Direction.Right);
-                this.ingredientGrid[7, 1].index = 4;
-                this.ingredientGrid[7, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[7, 1].directions.Add(Direction.Right);
-
-                this.ingredientGrid[0, 0].index = 5;
-                this.ingredientGrid[0, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 0].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 0].index = 5;
-                this.ingredientGrid[1, 0].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 0].directions.Add(Direction.Down);
-
-                this.ingredientGrid[0, 5].index = 6;
-                this.ingredientGrid[0, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[0, 5].directions.Add(Direction.Down);
-                this.ingredientGrid[1, 5].index = 6;
-                this.ingredientGrid[1, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 5].directions.Add(Direction.Down);
-
-                this.ingredientGrid[1, 3].index = 7;
-                this.ingredientGrid[1, 3].directions.Add(Direction.Up);
-                this.ingredientGrid[1, 3].directions.Add(Direction.Down);
-
-                this.ingredientGrid[3, 2].index = 8;
-                this.ingredientGrid[3, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[3, 2].directions.Add(Direction.Right);
-
-                this.ingredientGrid[7, 4].index = 9;
-                this.ingredientGrid[7, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[7, 4].directions.Add(Direction.Right);
-
-                this.ingredientGrid[3, 5].index = 10;
-                this.ingredientGrid[3, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[3, 5].directions.Add(Direction.Down);
-                this.ingredientGrid[4, 5].index = 10;
-                this.ingredientGrid[4, 5].directions.Add(Direction.Up);
-                this.ingredientGrid[4, 5].directions.Add(Direction.Down);
-
-                this.ingredientGrid[6, 3].index = 11;
-                this.ingredientGrid[6, 3].directions.Add(Direction.Left);
-                this.ingredientGrid[6, 3].directions.Add(Direction.Right);
-                this.ingredientGrid[6, 4].index = 11;
-                this.ingredientGrid[6, 4].directions.Add(Direction.Left);
-                this.ingredientGrid[6, 4].directions.Add(Direction.Right);
-
-                this.ingredientGrid[5, 1].index = 12;
-                this.ingredientGrid[5, 1].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 1].directions.Add(Direction.Right);
-                this.ingredientGrid[5, 2].index = 12;
-                this.ingredientGrid[5, 2].directions.Add(Direction.Left);
-                this.ingredientGrid[5, 2].directions.Add(Direction.Right);
-
-                break;
+            SpawnFood(foodLevels[i], i+1);
+        }
+    }
+
+    public void SpawnFood(FoodLevel foodLevel, int index)
+    {
+        Vector3 pos = GetPosition(foodLevel.PoseList);
+        pos.y = 1.41f;
+        IngredientView foodViewGO = Instantiate(foodLevel.Prefab, pos, foodLevel.Prefab.transform.rotation, this.transform).GetComponent<IngredientView>();
+        if (foodLevel.isCooked)
+        {
+            foodViewGO.SetInitCook();
+        }
+
+        foodViewGO.poses = new List<Vector2Int>(foodLevel.PoseList);
+
+        foreach (var pose in foodLevel.PoseList)
+        {
+            this.ingredientGrid[pose.x, pose.y].index = index;
+            foreach (var direction in foodLevel.DirectionList)
+            {
+                this.ingredientGrid[pose.x, pose.y].directions.Add(direction);
+            }
         }
     }
 
