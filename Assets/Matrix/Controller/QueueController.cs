@@ -29,21 +29,25 @@ public class QueueController : MonoSingleton<QueueController>
             if (queueElements[i].FoodType == FoodType.None)
             {
                 queueElements[i].SetInfor(foodType);
-                //CheckOrder();
-                if (!CheckOrder())
+
+                if (!CustomerManager.Instance.isSwitching)
                 {
-                    for (int j = 0; j < queueElements.Count; j++)
+
+                    //CheckOrder();
+                    if (!CheckOrder())
                     {
-                        if (queueElements[j].FoodType == FoodType.None)
+                        for (int j = 0; j < queueElements.Count; j++)
                         {
-                            return;
+                            if (queueElements[j].FoodType == FoodType.None)
+                            {
+                                return;
+                            }
                         }
+
+                        GameManager.Instance.LoseGame();
                     }
 
-                    GameManager.Instance.LoseGame();
                 }
-
-
 
                 //Debug.Log("Queue is full");
 
@@ -57,8 +61,6 @@ public class QueueController : MonoSingleton<QueueController>
 
     public bool CheckOrder()
     {
-        if (CustomerManager.Instance.isSwitching) return false;
-
         List<FoodType> foodTypes2 = new List<FoodType>();
         for (int i = 0; i < queueElements.Count; i++)
         {
