@@ -17,8 +17,11 @@ public class CustomerManager : MonoSingleton<CustomerManager>
     public Order orderNext = null;
     private int currentId = 0;
 
+    public bool isSwitching = false;
+
     private void Start()
     {
+        isSwitching = false;
         currentId = -1;
         //Invoke(nameof(SpawnCustomer), 4f);
         SpawnCustomer();
@@ -94,6 +97,8 @@ public class CustomerManager : MonoSingleton<CustomerManager>
 
     public void CompleteOrder()
     {
+        isSwitching = true;
+
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
         sequence.AppendInterval(1f); // chờ 1s
@@ -112,6 +117,8 @@ public class CustomerManager : MonoSingleton<CustomerManager>
             {
                 GameManager.Instance.WinGame();
             }
+
+            isSwitching = false;
         });
     }
 

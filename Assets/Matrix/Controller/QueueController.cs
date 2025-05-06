@@ -57,6 +57,8 @@ public class QueueController : MonoSingleton<QueueController>
 
     public bool CheckOrder()
     {
+        if (CustomerManager.Instance.isSwitching) return false;
+
         List<FoodType> foodTypes2 = new List<FoodType>();
         for (int i = 0; i < queueElements.Count; i++)
         {
