@@ -24,7 +24,7 @@ public class QueueController : MonoSingleton<QueueController>
 
     public void AddQueue(FoodType foodType)
     {
-        for (int i = queueElements.Count-1; i >= 0; i--)
+        for (int i = 0; i < queueElements.Count; i++)
         {
             if (queueElements[i].FoodType == FoodType.None)
             {

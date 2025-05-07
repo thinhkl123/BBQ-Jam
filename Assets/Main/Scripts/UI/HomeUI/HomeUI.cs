@@ -20,7 +20,6 @@ public class HomeUI : UIController
 
     public void OnSettingBtnClick()
     {
-        Debug.Log("Click");
         OnSettingBtn?.Invoke();
     }
 

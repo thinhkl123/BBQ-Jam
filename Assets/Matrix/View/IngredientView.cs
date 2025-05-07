@@ -37,6 +37,17 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             //this.transform.position = new Vector3(newPos.x, this.transform.position.y, newPos.z);
             this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.OutBounce);
         }
+        else
+        {
+            //Debug.Log("Shake");
+            transform.DOShakeRotation(
+                duration: 0.5f,                 // Thời gian lắc
+                strength: new Vector3(0, 0, 20f), // Chỉ lắc theo trục Z
+                vibrato: 10,                  // Số lần rung
+                randomness: 90f,              // Độ ngẫu nhiên
+                fadeOut: true                 // Giảm dần độ rung về sau
+            );
+        }
     }
 
     public void SetInitCook()
@@ -93,7 +104,10 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public void MoveOut(Vector3 t1, Vector3 t2)
     {
         DG.Tweening.Sequence sequence = DOTween.Sequence();
-        sequence.Append(this.transform.DOMove(new Vector3(t1.x, this.transform.position.y, t1.z), 0.5f).SetEase(Ease.Linear));
+        if (Vector3.Distance(t1, this.transform.position) >= 0.1f)
+        {
+            sequence.Append(this.transform.DOMove(new Vector3(t1.x, this.transform.position.y, t1.z), 0.3f).SetEase(Ease.Linear));
+        }
         sequence.AppendCallback(() =>
         {
             SoundsManager.Instance.PlaySFX(SoundType.Woosh);

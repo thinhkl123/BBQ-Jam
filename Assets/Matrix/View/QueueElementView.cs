@@ -25,6 +25,7 @@ public class QueueElementView : MonoBehaviour
 
     public void SetInfor(FoodType foodType)
     {
+        Vector3 initScale = DataManager.Instance.FoodData.GetScale(foodType);
         Debug.Log(foodType.ToString() + " " + this.name);
 
         SpriteRenderer.transform.localScale = Vector3.zero;
@@ -32,7 +33,7 @@ public class QueueElementView : MonoBehaviour
         this.FoodType = foodType;
         this.SpriteRenderer.enabled = true;
         this.SpriteRenderer.sprite = DataManager.Instance.FoodData.GetIcon(foodType);
-        this.SpriteRenderer.transform.localScale = DataManager.Instance.FoodData.GetScale(FoodType);
+        //this.SpriteRenderer.transform.localScale = DataManager.Instance.FoodData.GetScale(FoodType);
 
         //StartCoroutine(SetInforCoroutine());
 
@@ -43,7 +44,7 @@ public class QueueElementView : MonoBehaviour
         {
             SoundsManager.Instance.PlaySFX(SoundType.Pop);
         });
-        sequence.Append(SpriteRenderer.transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 0.2f)); // trở về kích thước gốc nếu muốn
+        sequence.Append(SpriteRenderer.transform.DOScale(initScale, 0.2f)); // trở về kích thước gốc nếu muốn
         sequence.AppendCallback(() =>
         {
             isSpawning = false;
@@ -92,8 +93,8 @@ public class QueueElementView : MonoBehaviour
 
         isDisapearing = true;
 
-        sequence.AppendInterval(1.2f); // chờ 1s
-        sequence.Append(SpriteRenderer.transform.DOScale(Vector3.zero, 0.2f)); // trở về kích thước gốc nếu muốn
+        sequence.AppendInterval(1f); 
+        sequence.Append(SpriteRenderer.transform.DOScale(Vector3.zero, 0.2f)); 
         sequence.AppendCallback(() =>
         {
             this.SpriteRenderer.enabled = false;
