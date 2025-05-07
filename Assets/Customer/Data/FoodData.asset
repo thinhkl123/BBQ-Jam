@@ -16,9 +16,12 @@ MonoBehaviour:
   - FoodType: 3
     Icon: {fileID: 21300000, guid: c3c56cdab96926848ac624d04e4bdf69, type: 3}
     Scale: {x: 0.5, y: 0.5, z: 0.5}
+    HighLightScale: {x: 1.05, y: 1.2, z: 1.1}
   - FoodType: 1
     Icon: {fileID: 21300000, guid: 05d4aded0cef53644953e995e332b1f5, type: 3}
     Scale: {x: 1.2, y: 1.2, z: 1.2}
+    HighLightScale: {x: 1.2, y: 1.2, z: 1.2}
   - FoodType: 2
     Icon: {fileID: 21300000, guid: ed9c87e2092579f489afed7dd7cf9d51, type: 3}
     Scale: {x: 0.8, y: 0.8, z: 0.8}
+    HighLightScale: {x: 1.25, y: 1.1, z: 1.1}

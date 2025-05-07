@@ -11,6 +11,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public List<Vector2Int> poses;
     public bool isCooked;
     public Sprite sprite;
+    public GameObject hightLight;
     //public GameObject cookedPrefab;
     public FoodType FoodType;
 
@@ -24,6 +25,18 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         MatrixController.Instance.currentView = this;
         MatrixController.Instance.isPressing = false;
+
+        ShowHightLight();
+    }
+
+    public void ShowHightLight()
+    {
+        hightLight.SetActive(true);
+    }
+
+    public void HideHightLight()
+    {
+        hightLight.SetActive(false);
     }
 
     public void SetPoses(List<Vector2Int> poses)
@@ -58,6 +71,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         if (sprite != null)
         {
             this.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            this.hightLight.GetComponent<SpriteRenderer>().sprite = sprite;
         }
     }
 
@@ -89,6 +103,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             if (sprite != null)
             {
                 this.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+                this.hightLight.GetComponent<SpriteRenderer>().sprite = sprite;
             }
         });
 

@@ -9,6 +9,7 @@ public class FoodInfo
     public FoodType FoodType;
     public Sprite Icon;
     public Vector3 Scale;
+    public Vector3 HighLightScale;
 }
 
 [CreateAssetMenu(menuName = "FoodData", fileName = "FoodData")]
