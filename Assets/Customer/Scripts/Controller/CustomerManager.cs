@@ -117,8 +117,6 @@ public class CustomerManager : MonoSingleton<CustomerManager>
             {
                 GameManager.Instance.WinGame();
             }
-
-            isSwitching = false;
         });
     }
 

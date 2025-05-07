@@ -737,7 +737,7 @@ public class MatrixController : MonoSingleton<MatrixController>
             this.Dir = dir;
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && !CustomerManager.Instance.isSwitching)
         {
             //Debug.Log(this.Dir + " " + currentView.name);
             if (currentView != null)
