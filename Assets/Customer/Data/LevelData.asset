@@ -15,10 +15,10 @@ MonoBehaviour:
   Levels:
   - LevelId: 1
     Orders:
-    - Customer: 0
+    - Customer: 4
       Foods: 0300000003000000
       Time: 40
-    - Customer: 0
+    - Customer: 3
       Foods: 0300000003000000
       Time: 20
   - LevelId: 2

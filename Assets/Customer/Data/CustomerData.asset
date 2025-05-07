@@ -14,6 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CustomerList:
   - CustomerType: 0
-    CustomerPrefab: {fileID: 0}
+    CustomerPrefab: {fileID: 2386644536470031858, guid: 90d7ffbc1d12b8d41ae133eb737666c0, type: 3}
   - CustomerType: 1
-    CustomerPrefab: {fileID: 0}
+    CustomerPrefab: {fileID: 2586684651930730096, guid: cf22d7135db9399439c667b9f9e44e05, type: 3}
+  - CustomerType: 2
+    CustomerPrefab: {fileID: 5249856412203380365, guid: 2a583686b51e0964dafbf50a661491e7, type: 3}
+  - CustomerType: 3
+    CustomerPrefab: {fileID: 6117983274203381810, guid: c98da17c42fdd4d458a6b68debc04566, type: 3}
+  - CustomerType: 4
+    CustomerPrefab: {fileID: 1217618441745140643, guid: cfda96bee24e9b34d9dc6eddf17c4c9a, type: 3}
+  - CustomerType: 5
+    CustomerPrefab: {fileID: 2492277841916432404, guid: 5ff5f659520d7ae48897fe35345e3888, type: 3}

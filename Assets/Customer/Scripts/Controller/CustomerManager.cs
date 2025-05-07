@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class CustomerManager : MonoSingleton<CustomerManager>
 {
-    public Customer CustomerPrefab;
+    //public Customer CustomerPrefab;
     public Transform spawnTf;
     public Transform orderTf;
     public Transform outTf;
@@ -42,7 +42,8 @@ public class CustomerManager : MonoSingleton<CustomerManager>
 
     private void SpawnCustomer(Order order, bool isFirst = false)
     {
-        Customer customerGO = Instantiate(CustomerPrefab);
+        //Customer customerGO = Instantiate(CustomerPrefab);
+        Customer customerGO = Instantiate(DataManager.Instance.CustomerData.GetPrefab(order.Customer));
         customerGO.MaxTime = order.Time;
         customerGO.SetTransformAtFirst(spawnTf.position, new Vector3 (0, 90f, 0));
 

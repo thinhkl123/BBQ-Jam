@@ -18,6 +18,8 @@ public class MatrixController : MonoSingleton<MatrixController>
 
     private Vector2Int offset;
 
+    public bool isPressing = false;
+
     protected override void Awake()
     {
         //this.ingredientGrid = new IngredientModel[8, 6];
@@ -666,6 +668,8 @@ public class MatrixController : MonoSingleton<MatrixController>
 
     private void Start()
     {
+        isPressing = false;
+
         SpawnLevel(GameManager.Instance.currentLevel - 1);
     }
 
@@ -732,13 +736,18 @@ public class MatrixController : MonoSingleton<MatrixController>
     private void Update()
     {
         Direction dir = this.GetDirection();
+
+        //Debug.Log(dir);
+
         if (dir != Direction.None)
         {
             this.Dir = dir;
         }
 
-        if (Input.GetMouseButtonUp(0) && !CustomerManager.Instance.isSwitching)
+        Touch touch = Input.GetTouch(0);
+        if (touch.phase == TouchPhase.Ended && !CustomerManager.Instance.isSwitching)
         {
+            Debug.Log(dir);
             //Debug.Log(this.Dir + " " + currentView.name);
             if (currentView != null)
                 Move(Dir, currentView.poses);
@@ -787,6 +796,8 @@ public class MatrixController : MonoSingleton<MatrixController>
             Debug.Log("Invalid move");
             return;
         }
+
+        isPressing = true;
 
         int id = ingredientGrid[poses[0].x, poses[0].y].index;
         List<Direction> ds = new List<Direction>(ingredientGrid[poses[0].x, poses[0].y].directions);

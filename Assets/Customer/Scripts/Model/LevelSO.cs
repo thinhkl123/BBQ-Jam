@@ -6,8 +6,12 @@ namespace LevelManager
 {
     public enum CustomerType
     {
-        WearShort = 0,
-        WearClothes = 1,
+        M19 = 0,
+        M33 = 1,
+        M2 = 2, 
+        M27 = 3,
+        F5 = 4,
+        F7 = 5,
     }
 
     public enum FoodType

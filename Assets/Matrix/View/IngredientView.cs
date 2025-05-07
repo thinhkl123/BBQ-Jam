@@ -23,6 +23,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public void OnPointerDown(PointerEventData pointerEventData)
     {
         MatrixController.Instance.currentView = this;
+        MatrixController.Instance.isPressing = false;
     }
 
     public void SetPoses(List<Vector2Int> poses)

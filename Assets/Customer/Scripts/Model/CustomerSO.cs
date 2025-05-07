@@ -14,4 +14,17 @@ public class CustomerInfo
 public class CustomerSO : ScriptableObject
 {
     public List<CustomerInfo> CustomerList;
+
+    public Customer GetPrefab(CustomerType customerType)
+    {
+        foreach (var item in CustomerList)
+        {
+            if (item.CustomerType == customerType)
+            {
+                return item.CustomerPrefab;
+            }
+        }
+
+        return null;
+    }
 }
