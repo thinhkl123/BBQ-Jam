@@ -32,6 +32,7 @@ public class QueueElementView : MonoBehaviour
         this.FoodType = foodType;
         this.SpriteRenderer.enabled = true;
         this.SpriteRenderer.sprite = DataManager.Instance.FoodData.GetIcon(foodType);
+        this.SpriteRenderer.transform.localScale = DataManager.Instance.FoodData.GetScale(FoodType);
 
         //StartCoroutine(SetInforCoroutine());
 
