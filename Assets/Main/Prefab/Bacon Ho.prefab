@@ -104,7 +104,8 @@ MonoBehaviour:
   - {x: 0, y: 1}
   isCooked: 0
   sprite: {fileID: 21300000, guid: 871119f4d31b85347ad8f8f19d7dc5ff, type: 3}
-  FoodType: 3
+  hightLight: {fileID: 2496707696987278162}
+  FoodType: 2
 --- !u!65 &3933801254215293176
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -137,6 +138,10 @@ PrefabInstance:
     - target: {fileID: 928746685474747223, guid: dda793360a8e7a847bcc6edaeaffdcb3, type: 3}
       propertyPath: m_Name
       value: Hightlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 928746685474747223, guid: dda793360a8e7a847bcc6edaeaffdcb3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1194665818844184410, guid: dda793360a8e7a847bcc6edaeaffdcb3, type: 3}
       propertyPath: m_LocalScale.x
@@ -203,6 +208,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dda793360a8e7a847bcc6edaeaffdcb3, type: 3}
+--- !u!1 &2496707696987278162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 928746685474747223, guid: dda793360a8e7a847bcc6edaeaffdcb3, type: 3}
+  m_PrefabInstance: {fileID: 3334216632106104837}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4526621644304680799 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1194665818844184410, guid: dda793360a8e7a847bcc6edaeaffdcb3, type: 3}
