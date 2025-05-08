@@ -50,9 +50,12 @@ public class TutorialManager : MonoBehaviour
     {
         if (isDone) return;
 
-        if (Input.touchCount > 0)
-        {
-            HidePopUp();
+        if (isPopUp)
+        {    
+            if (Input.touchCount > 0)
+            {
+                HidePopUp();
+            }
         }
     }
 
