@@ -26,7 +26,24 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         MatrixController.Instance.currentView = this;
         MatrixController.Instance.isPressing = false;
 
-        ShowHightLight();
+        if (TutorialManager.Instance != null)
+        {
+            if (!TutorialManager.Instance.isDone)
+            {
+                if (TutorialManager.Instance.GetCurrentObjectStep() == this.name)
+                {
+                    ShowHightLight();
+                }
+            }
+            else
+            {
+                ShowHightLight();
+            }
+        }
+        else
+        {
+            ShowHightLight();
+        }
     }
 
     public void ShowHightLight()

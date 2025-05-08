@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: MatrixData
   m_EditorClassIdentifier: 
   MatrixConfigs:
+  - MatrixType: 0
+    MatrixSize: {x: 4, y: 4}
+    Prefab: {fileID: 981018918622987977, guid: 0a605558b931cde4cb8c0f48c50704e2, type: 3}
+    Position: {x: 1.1, y: 0, z: 3.3}
   - MatrixType: 1
     MatrixSize: {x: 5, y: 5}
     Prefab: {fileID: 6264008671373138223, guid: edc3a5ab5da2dc54f97c6c00380475f0, type: 3}
