@@ -1,7 +1,9 @@
+using DG.Tweening;
 using FoodLevelData;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
@@ -38,10 +40,66 @@ public class TutorialManager : MonoBehaviour
                 StepObList[i].SetActive(false);
             }
         }
+        else
+        {
+            ShowPopUp();
+        }
+    }
+
+    private void Update()
+    {
+        if (isDone) return;
+
+        if (Input.touchCount > 0)
+        {
+            HidePopUp();
+        }
+    }
+
+    private void ShowPopUp()
+    {
+        //float animationDuration = 0.3f;
+        //Ease easeType = Ease.OutBack;
+
+        //RectTransform popupTransform = PopUpOb.GetComponentInChildren<RectTransform>();
+
+        //popupTransform.localScale = Vector3.zero;
+        //popupTransform.DOScale(Vector3.one, animationDuration)
+        //              .SetEase(easeType);
+
+        //PopUpOb.GetComponent<CanvasGroup>().DOFade(1f, animationDuration);
+
+        PopUpOb.SetActive(true);
+    }
+
+    private void HidePopUp()
+    {
+        //PopUpOb.SetActive(false);
+        isDone = true;
+
+        float animationDuration = 0.3f;
+        Ease easeType = Ease.OutBack;
+
+        RectTransform popupTransform = PopUpOb.GetComponentInChildren<RectTransform>();
+
+        popupTransform.localScale = Vector3.one;
+        popupTransform.DOScale(Vector3.zero, animationDuration)
+                      .SetEase(easeType);
+
+        PopUpOb.GetComponent<CanvasGroup>().DOFade(0f, animationDuration).
+            OnComplete(() =>
+            {
+                PopUpOb.SetActive(false);
+            });
     }
 
     public bool CheckStep(string Obname, Direction direction)
     {
+        if (isPopUp)
+        {
+            return false;
+        }
+
         if (StepList[currentStep].ObjectName == Obname && StepList[currentStep].Direction == direction)
         {
             NextStep();
