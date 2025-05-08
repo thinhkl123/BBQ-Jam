@@ -23,6 +23,8 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void OnPointerDown(PointerEventData pointerEventData)
     {
+        if (CustomerManager.Instance.isSwitching) return;
+
         MatrixController.Instance.currentView = this;
         MatrixController.Instance.isPressing = false;
 
