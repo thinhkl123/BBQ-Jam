@@ -13,10 +13,22 @@ MonoBehaviour:
   m_Name: LevelData
   m_EditorClassIdentifier: 
   Levels:
-  - LevelId: 0
+  - LevelId: 1
     TutorialId: 1
     Orders:
     - Customer: 2
+      Foods: 03000000
+      Time: 3600
+    - Customer: 4
+      Foods: 03000000
+      Time: 3600
+  - LevelId: 2
+    TutorialId: 2
+    Orders:
+    - Customer: 1
+      Foods: 0300000003000000
+      Time: 3600
+    - Customer: 5
       Foods: 0300000003000000
       Time: 3600
   - LevelId: 1
