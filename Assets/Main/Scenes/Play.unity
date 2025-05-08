@@ -171,6 +171,7 @@ MonoBehaviour:
   GridContainer: {fileID: 0}
   currentView: {fileID: 0}
   Dir: 0
+  isPressing: 0
 --- !u!1 &778969162
 GameObject:
   m_ObjectHideFlags: 0

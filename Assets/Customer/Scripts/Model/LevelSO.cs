@@ -34,6 +34,7 @@ namespace LevelManager
     public class Level
     {
         public int LevelId;
+        public int TutorialId;
         public List<Order> Orders;
     }
 

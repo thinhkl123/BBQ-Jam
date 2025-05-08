@@ -7,6 +7,7 @@ namespace MatrixData
     [Serializable]
     public enum MatrixType
     {
+        M4x4 = 0,
         M5x5 = 1,
         M5x6 = 2,
         M6x6 = 3,

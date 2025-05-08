@@ -26,7 +26,7 @@ public class QueueElementView : MonoBehaviour
     public void SetInfor(FoodType foodType)
     {
         Vector3 initScale = DataManager.Instance.FoodData.GetScale(foodType);
-        Debug.Log(foodType.ToString() + " " + this.name);
+        //Debug.Log(foodType.ToString() + " " + this.name);
 
         SpriteRenderer.transform.localScale = Vector3.zero;
 
@@ -39,7 +39,7 @@ public class QueueElementView : MonoBehaviour
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
-        sequence.AppendInterval(1f); // chờ 1s
+        sequence.AppendInterval(0.8f); // chờ 1s
         sequence.AppendCallback(() =>
         {
             SoundsManager.Instance.PlaySFX(SoundType.Pop);
@@ -85,7 +85,7 @@ public class QueueElementView : MonoBehaviour
 
     public void SetNull()
     {
-        Debug.Log("Null");
+        //Debug.Log("Null");
 
         this.FoodType = FoodType.None;
 
