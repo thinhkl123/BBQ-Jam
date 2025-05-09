@@ -98,6 +98,7 @@ public class CustomerManager : MonoSingleton<CustomerManager>
 
     public void CompleteOrder()
     {
+        currentCus.isOrdering = false;
         isSwitching = true;
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
@@ -107,7 +108,6 @@ public class CustomerManager : MonoSingleton<CustomerManager>
         {
             SoundsManager.Instance.PlaySFX(SoundType.OrderComplete);
 
-            currentCus.isOrdering = false;
             currentCus.MoveOut(outTf.position);
             currentCus = customerNext;
 
