@@ -98,6 +98,8 @@ public class CustomerManager : MonoSingleton<CustomerManager>
 
     public void CompleteOrder()
     {
+        currentCus.isOrdering = false;
+
         isSwitching = true;
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
