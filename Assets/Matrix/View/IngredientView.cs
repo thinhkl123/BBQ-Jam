@@ -15,6 +15,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public GameObject hightLight;
     //public GameObject cookedPrefab;
     public FoodType FoodType;
+    public bool isAnim = false;
 
     public void OnPointerUp(PointerEventData pointerEventData)
     {
@@ -24,7 +25,9 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void OnPointerDown(PointerEventData pointerEventData)
     {
-        if (CustomerManager.Instance.isSwitching) return;
+        //Debug.Log(isAnim);
+
+        if (CustomerManager.Instance.isSwitching || isAnim) return;
 
         MatrixController.Instance.currentView = this;
         MatrixController.Instance.isPressing = false;
@@ -97,6 +100,8 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void SetCook()
     {
+        isAnim = true;
+
         isCooked = true;
 
         float delay = 0.5f;          // thời gian chờ trước khi bắt đầu
@@ -130,7 +135,11 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         // Hiện lại và scale to hơn
         sequence.Append(this.transform.DOScale(spawnScale, growDuration).SetEase(Ease.OutBack));
         sequence.Append(this.transform.DOScale(originalScale, 0.2f)); // trở về kích thước gốc nếu muốn
-        sequence.AppendInterval(0.4f); 
+        sequence.AppendCallback(() =>
+        {
+            isAnim = false;
+        });
+        sequence.AppendInterval(0.4f);
         sequence.AppendCallback(() =>
         {
             MatrixController.Instance.UnFire(poses);
@@ -139,6 +148,8 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void SetUnCook()
     {
+        isAnim = true;
+
         isCooked = false;
 
         float delay = 0.5f;          // thời gian chờ trước khi bắt đầu
@@ -170,11 +181,16 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         // Hiện lại và scale to hơn
         sequence.Append(this.transform.DOScale(spawnScale, growDuration).SetEase(Ease.OutBack));
         sequence.Append(this.transform.DOScale(originalScale, 0.2f)); // trở về kích thước gốc nếu muốn
-        sequence.AppendInterval(0.4f);
+        sequence.AppendCallback(() =>
+        {
+            isAnim = false;
+        });
     }
 
     public void MoveOut(Vector3 t1, Vector3 t2)
     {
+        isAnim = true;
+
         DG.Tweening.Sequence sequence = DOTween.Sequence();
         if (Vector3.Distance(t1, this.transform.position) >= 0.1f)
         {
