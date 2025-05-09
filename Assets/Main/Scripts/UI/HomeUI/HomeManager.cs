@@ -30,6 +30,8 @@ public class HomeManager : MonoSingleton<HomeManager>
             WinManager.Instance.Setup();
             LostManager.Instance.Setup();
             PauseManager.Instance.Setup();
+
+            SoundsManager.Instance.PlayMusic(SoundType.GameMusic);
         }
 
         GameModeContainer.Instance.InitGame();
@@ -38,7 +40,6 @@ public class HomeManager : MonoSingleton<HomeManager>
 
         Setup();
 
-        SoundsManager.Instance.PlayMusic(SoundType.GameMusic);
     }
 
     private void CreateObjects()

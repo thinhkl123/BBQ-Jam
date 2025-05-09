@@ -164,7 +164,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         sequence.AppendInterval(delay); 
         sequence.AppendCallback(() =>
         {
-            SoundsManager.Instance.PlaySFX(SoundType.IceMelt);
+            SoundsManager.Instance.PlaySFX(SoundType.UnCooked);
         });
         sequence.Append(this.transform.DOScale(Vector3.zero, shrinkDuration).SetEase(Ease.InBack)); // thu nhỏ và biến mất
         sequence.AppendCallback(() =>
