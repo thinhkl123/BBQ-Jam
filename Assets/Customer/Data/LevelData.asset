@@ -213,18 +213,18 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0300000001000000
-      Time: 15
+      Time: 20
     - Customer: 3
       Foods: 0200000001000000
-      Time: 10
+      Time: 20
     - Customer: 0
       Foods: 0100000002000000
-      Time: 10
+      Time: 15
     - Customer: 5
       Foods: 0300000001000000
       Time: 10
     - Customer: 2
-      Foods: 0100000001000000
+      Foods: 0100000003000000
       Time: 10
   - LevelId: 13
     TutorialId: 0
