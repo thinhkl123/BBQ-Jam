@@ -48,3 +48,8 @@ MonoBehaviour:
     mixer: {fileID: 0}
     sounds:
     - {fileID: 8300000, guid: 74399261e70a29f48b916e32894ebb9c, type: 3}
+  - name: IceMelt
+    volume: 1
+    mixer: {fileID: 0}
+    sounds:
+    - {fileID: 8300000, guid: e223b81807dc4ee4a9a4a2570177cd48, type: 3}

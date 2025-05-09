@@ -252,7 +252,7 @@ MonoBehaviour:
       Foods: 0300000001000000
       Time: 20
   - LevelId: 14
-    TutorialId: 0
+    TutorialId: 14
     IceId: 2
     Orders:
     - Customer: 1

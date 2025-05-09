@@ -111,7 +111,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         sequence.AppendInterval(delay); // chờ 1s
         sequence.AppendCallback(() =>
         {
-            SoundsManager.Instance.PlaySFX(SoundType.Cooked);
+            SoundsManager.Instance.PlaySFX(SoundType.IceMelt);
 
             MatrixController.Instance.SetFire(poses);
         });

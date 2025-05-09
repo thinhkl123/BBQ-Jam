@@ -9,5 +9,6 @@ namespace SoundManager
         Lose = 4,
         Pop = 5,
         Woosh = 6,
+        IceMelt = 7,
     }
 }
