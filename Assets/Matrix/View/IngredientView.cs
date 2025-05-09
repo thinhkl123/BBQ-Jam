@@ -111,7 +111,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         sequence.AppendInterval(delay); // chờ 1s
         sequence.AppendCallback(() =>
         {
-            SoundsManager.Instance.PlaySFX(SoundType.IceMelt);
+            SoundsManager.Instance.PlaySFX(SoundType.Cooked);
 
             MatrixController.Instance.SetFire(poses);
         });
@@ -153,7 +153,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         sequence.AppendInterval(delay); 
         sequence.AppendCallback(() =>
         {
-            SoundsManager.Instance.PlaySFX(SoundType.Pop);
+            SoundsManager.Instance.PlaySFX(SoundType.IceMelt);
         });
         sequence.Append(this.transform.DOScale(Vector3.zero, shrinkDuration).SetEase(Ease.InBack)); // thu nhỏ và biến mất
         sequence.AppendCallback(() =>
