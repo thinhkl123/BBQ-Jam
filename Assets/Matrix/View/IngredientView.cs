@@ -135,14 +135,14 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         // Hiện lại và scale to hơn
         sequence.Append(this.transform.DOScale(spawnScale, growDuration).SetEase(Ease.OutBack));
         sequence.Append(this.transform.DOScale(originalScale, 0.2f)); // trở về kích thước gốc nếu muốn
-        sequence.AppendCallback(() =>
-        {
-            isAnim = false;
-        });
         sequence.AppendInterval(0.4f);
         sequence.AppendCallback(() =>
         {
             MatrixController.Instance.UnFire(poses);
+        });
+        sequence.AppendCallback(() =>
+        {
+            isAnim = false;
         });
     }
 
