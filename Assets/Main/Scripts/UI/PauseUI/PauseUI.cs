@@ -7,6 +7,7 @@ public class PauseUI : UIController
     public System.Action OnContinueBtn;
     public System.Action OnHomeBtn;
     public System.Action OnSettingBtn;
+    public System.Action OnReStartBtn;
 
     [SerializeField] private Button continueBtn;
     [SerializeField] private Button settingBtn;
@@ -25,5 +26,10 @@ public class PauseUI : UIController
     public void OnSettingBtnClick()
     {
         OnSettingBtn?.Invoke();
+    }
+
+    public void OnRestartBtnClick()
+    {
+        OnReStartBtn?.Invoke();
     }
 }

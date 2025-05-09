@@ -15,8 +15,15 @@ public class PauseManager : MonoSingleton<PauseManager>
         _pauseUI.OnHomeBtn = BackHome;
         _pauseUI.OnContinueBtn = ContinueGame;
         _pauseUI.OnSettingBtn = SettingManager.Instance.ShowUI;
+        _pauseUI.OnReStartBtn = RetryLevel;
 
         HideUI();
+    }
+
+    private void RetryLevel()
+    {
+        HideUI();
+        GameManager.Instance.PlayGame();
     }
 
     private void ContinueGame()
