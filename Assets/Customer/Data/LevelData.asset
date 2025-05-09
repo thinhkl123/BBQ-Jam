@@ -309,3 +309,60 @@ MonoBehaviour:
     - Customer: 5
       Foods: 0200000001000000
       Time: 10
+  - LevelId: 18
+    TutorialId: 0
+    IceId: 4
+    Orders:
+    - Customer: 0
+      Foods: 0300000002000000
+      Time: 25
+    - Customer: 3
+      Foods: 0300000001000000
+      Time: 15
+    - Customer: 0
+      Foods: 01000000
+      Time: 15
+    - Customer: 5
+      Foods: 02000000
+      Time: 15
+    - Customer: 1
+      Foods: 0100000003000000
+      Time: 10
+  - LevelId: 19
+    TutorialId: 0
+    IceId: 5
+    Orders:
+    - Customer: 0
+      Foods: 0200000003000000
+      Time: 25
+    - Customer: 3
+      Foods: 0200000003000000
+      Time: 15
+    - Customer: 0
+      Foods: 0200000001000000
+      Time: 15
+    - Customer: 5
+      Foods: 0300000001000000
+      Time: 15
+    - Customer: 1
+      Foods: 0100000001000000
+      Time: 10
+  - LevelId: 20
+    TutorialId: 0
+    IceId: 6
+    Orders:
+    - Customer: 0
+      Foods: 0300000002000000
+      Time: 25
+    - Customer: 3
+      Foods: 0300000001000000
+      Time: 15
+    - Customer: 0
+      Foods: 0200000001000000
+      Time: 15
+    - Customer: 5
+      Foods: 0300000002000000
+      Time: 15
+    - Customer: 1
+      Foods: 0300000001000000
+      Time: 10
