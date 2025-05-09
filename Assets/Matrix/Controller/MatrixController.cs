@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using FoodLevelData;
 using MatrixData;
-using static UnityEditor.ShaderData;
 
 public class MatrixController : MonoSingleton<MatrixController>
 {
@@ -175,6 +174,8 @@ public class MatrixController : MonoSingleton<MatrixController>
                     Move(Dir, currentView.poses);
                 }
             }
+
+            currentView = null;
         }
     }
 
