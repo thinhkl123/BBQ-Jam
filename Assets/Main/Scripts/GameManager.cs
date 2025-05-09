@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    public int MaxLevel = 14;
+    public int MaxLevel = 15;
     public int currentLevel;
     public bool isLost;
 

@@ -704,31 +704,6 @@ MonoBehaviour:
   - LevelId: 14
     MatrixType: 1
     FoodLevelList:
-    - Prefab: {fileID: 7323792893318384941, guid: fe8e12f5889c60a4a991607bc9f6c3d8, type: 3}
-      DirectionList: 0300000004000000
-      PoseList:
-      - {x: 3, y: 0}
-      - {x: 4, y: 0}
-      isCooked: 1
-    - Prefab: {fileID: 7323792893318384941, guid: fe8e12f5889c60a4a991607bc9f6c3d8, type: 3}
-      DirectionList: 0300000004000000
-      PoseList:
-      - {x: 1, y: 4}
-      - {x: 2, y: 4}
-      isCooked: 1
-    - Prefab: {fileID: 1522501863384181740, guid: d881896e60ba4414ab6217347706e3c9, type: 3}
-      DirectionList: 0100000002000000
-      PoseList:
-      - {x: 0, y: 1}
-      isCooked: 0
-    - Prefab: {fileID: 1522501863384181740, guid: d881896e60ba4414ab6217347706e3c9, type: 3}
-      DirectionList: 0100000002000000
-      PoseList:
-      - {x: 4, y: 2}
-      isCooked: 0
-  - LevelId: 15
-    MatrixType: 1
-    FoodLevelList:
     - Prefab: {fileID: 4869546526334599328, guid: 487524ba1616528499c3225edfb17990, type: 3}
       DirectionList: 0100000002000000
       PoseList:
@@ -751,4 +726,29 @@ MonoBehaviour:
       DirectionList: 0100000002000000
       PoseList:
       - {x: 0, y: 0}
+      isCooked: 0
+  - LevelId: 15
+    MatrixType: 1
+    FoodLevelList:
+    - Prefab: {fileID: 7323792893318384941, guid: fe8e12f5889c60a4a991607bc9f6c3d8, type: 3}
+      DirectionList: 0300000004000000
+      PoseList:
+      - {x: 3, y: 0}
+      - {x: 4, y: 0}
+      isCooked: 1
+    - Prefab: {fileID: 7323792893318384941, guid: fe8e12f5889c60a4a991607bc9f6c3d8, type: 3}
+      DirectionList: 0300000004000000
+      PoseList:
+      - {x: 1, y: 4}
+      - {x: 2, y: 4}
+      isCooked: 1
+    - Prefab: {fileID: 1522501863384181740, guid: d881896e60ba4414ab6217347706e3c9, type: 3}
+      DirectionList: 0100000002000000
+      PoseList:
+      - {x: 0, y: 1}
+      isCooked: 0
+    - Prefab: {fileID: 1522501863384181740, guid: d881896e60ba4414ab6217347706e3c9, type: 3}
+      DirectionList: 0100000002000000
+      PoseList:
+      - {x: 4, y: 2}
       isCooked: 0
