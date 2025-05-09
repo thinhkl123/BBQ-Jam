@@ -313,7 +313,7 @@ MonoBehaviour:
       - {x: 5, y: 0}
       isCooked: 0
     - Prefab: {fileID: 7323792893318384941, guid: fe8e12f5889c60a4a991607bc9f6c3d8, type: 3}
-      DirectionList: 0200000004000000
+      DirectionList: 0300000004000000
       PoseList:
       - {x: 0, y: 2}
       - {x: 1, y: 2}
@@ -942,7 +942,7 @@ MonoBehaviour:
       - {x: 1, y: 3}
       - {x: 1, y: 4}
       isCooked: 0
-    - Prefab: {fileID: 7323792893318384941, guid: fe8e12f5889c60a4a991607bc9f6c3d8, type: 3}
+    - Prefab: {fileID: 8026425755979737215, guid: 22d103f02ba8a084c8563cdcca0934dd, type: 3}
       DirectionList: 0300000004000000
       PoseList:
       - {x: 3, y: 5}
@@ -970,7 +970,7 @@ MonoBehaviour:
       - {x: 7, y: 0}
       isCooked: 0
     - Prefab: {fileID: 7323792893318384941, guid: fe8e12f5889c60a4a991607bc9f6c3d8, type: 3}
-      DirectionList: 0200000004000000
+      DirectionList: 0300000004000000
       PoseList:
       - {x: 1, y: 4}
       - {x: 2, y: 4}
