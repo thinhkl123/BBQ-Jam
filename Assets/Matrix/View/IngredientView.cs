@@ -10,7 +10,8 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 {
     public List<Vector2Int> poses;
     public bool isCooked;
-    public Sprite sprite;
+    public Sprite cookedSprite;
+    public Sprite unCookedSprite;
     public GameObject hightLight;
     //public GameObject cookedPrefab;
     public FoodType FoodType;
@@ -87,10 +88,10 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         isCooked = true;
 
-        if (sprite != null)
+        if (cookedSprite != null)
         {
-            this.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
-            this.hightLight.GetComponent<SpriteRenderer>().sprite = sprite;
+            this.GetComponentInChildren<SpriteRenderer>().sprite = cookedSprite;
+            this.hightLight.GetComponent<SpriteRenderer>().sprite = cookedSprite;
         }
     }
 
@@ -119,10 +120,10 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             this.transform.localScale = Vector3.zero; // đảm bảo đang invisible
             // Có thể tắt gameObject tại đây nếu cần
-            if (sprite != null)
+            if (cookedSprite != null)
             {
-                this.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
-                this.hightLight.GetComponent<SpriteRenderer>().sprite = sprite;
+                this.GetComponentInChildren<SpriteRenderer>().sprite = cookedSprite;
+                this.hightLight.GetComponent<SpriteRenderer>().sprite = cookedSprite;
             }
         });
 
@@ -134,6 +135,42 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             MatrixController.Instance.UnFire(poses);
         });
+    }
+
+    public void SetUnCook()
+    {
+        isCooked = false;
+
+        float delay = 0.5f;          // thời gian chờ trước khi bắt đầu
+        float shrinkDuration = 0.2f;
+        float growDuration = 0.2f;
+        Vector3 spawnScale = Vector3.one * 0.4f; // scale khi xuất hiện lại
+
+        Vector3 originalScale = this.transform.localScale;
+
+        DG.Tweening.Sequence sequence = DOTween.Sequence();
+
+        sequence.AppendInterval(delay); 
+        sequence.AppendCallback(() =>
+        {
+            SoundsManager.Instance.PlaySFX(SoundType.Pop);
+        });
+        sequence.Append(this.transform.DOScale(Vector3.zero, shrinkDuration).SetEase(Ease.InBack)); // thu nhỏ và biến mất
+        sequence.AppendCallback(() =>
+        {
+            this.transform.localScale = Vector3.zero; // đảm bảo đang invisible
+            // Có thể tắt gameObject tại đây nếu cần
+            if (cookedSprite != null)
+            {
+                this.GetComponentInChildren<SpriteRenderer>().sprite = unCookedSprite;
+                this.hightLight.GetComponent<SpriteRenderer>().sprite = unCookedSprite;
+            }
+        });
+
+        // Hiện lại và scale to hơn
+        sequence.Append(this.transform.DOScale(spawnScale, growDuration).SetEase(Ease.OutBack));
+        sequence.Append(this.transform.DOScale(originalScale, 0.2f)); // trở về kích thước gốc nếu muốn
+        sequence.AppendInterval(0.4f);
     }
 
     public void MoveOut(Vector3 t1, Vector3 t2)

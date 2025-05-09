@@ -101,7 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poses: []
   isCooked: 0
-  sprite: {fileID: 21300000, guid: c3c56cdab96926848ac624d04e4bdf69, type: 3}
+  cookedSprite: {fileID: 21300000, guid: c3c56cdab96926848ac624d04e4bdf69, type: 3}
+  unCookedSprite: {fileID: 21300000, guid: 3fbe13e6a9b0b1f439074a9696ad4866, type: 3}
   hightLight: {fileID: 3938667291126352518}
   FoodType: 3
 --- !u!65 &6506912733770579620

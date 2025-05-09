@@ -275,6 +275,7 @@ MonoBehaviour:
   GridContainer: {fileID: 1638435330}
   currentView: {fileID: 0}
   Dir: 0
+  isPressing: 0
 --- !u!1 &778969162
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c71ed979b4c0974a8e61c9254e7fdd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CustomerPrefab: {fileID: 2386644536470031858, guid: 90d7ffbc1d12b8d41ae133eb737666c0, type: 3}
   spawnTf: {fileID: 2144740302}
   orderTf: {fileID: 778969163}
   outTf: {fileID: 861339919}
@@ -376,6 +376,7 @@ MonoBehaviour:
     Customer: 0
     Foods: 
     Time: 0
+  isSwitching: 0
 --- !u!4 &931468769
 Transform:
   m_ObjectHideFlags: 0

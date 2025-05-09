@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FoodLevelData;
 using MatrixData;
+using static UnityEditor.ShaderData;
 
 public class MatrixController : MonoSingleton<MatrixController>
 {
@@ -20,6 +21,8 @@ public class MatrixController : MonoSingleton<MatrixController>
 
     public bool isPressing = false;
     private bool isTutorial = false;
+    private bool isSetCooked = false;
+
 
     private void Start()
     {
@@ -53,6 +56,27 @@ public class MatrixController : MonoSingleton<MatrixController>
         SpawnMatrix(DataManager.Instance.FoodLevelData.FoodsLevelList[level].MatrixType);
 
         SpawnFoods(DataManager.Instance.FoodLevelData.FoodsLevelList[level].FoodLevelList);
+
+        if (DataManager.Instance.LevelData.Levels[level].IceId != 0)
+        {
+            SpawnIce(DataManager.Instance.IceData.IceLevelList[DataManager.Instance.LevelData.Levels[level].IceId - 1]);
+        }
+    }
+
+    private void SpawnIce(IceLevel iceLevel)
+    {
+        foreach (var ice in iceLevel.IceList)
+        {
+            List<Vector2Int> l = new List<Vector2Int>();
+            l.Add(ice.Pos);
+            Vector3 pos = GetPosition(l);
+            pos.y = 1.41f;
+            IceView iceGO = Instantiate(DataManager.Instance.IceData.IcePrefab, pos, DataManager.Instance.IceData.IcePrefab.transform.rotation, this.transform);
+            iceGO.SetHealth(ice.Health);
+
+            this.ingredientGrid[ice.Pos.x, ice.Pos.y].index = -ice.Health;
+            this.ingredientGrid[ice.Pos.x, ice.Pos.y].IceView = iceGO;
+        }
     }
 
     private void SpawnTutorialGuide(int tutorialId)
@@ -253,84 +277,33 @@ public class MatrixController : MonoSingleton<MatrixController>
 
             case Direction.Left:
                 Vector2Int p = poses[0] + offset;
-                if (!IsInMatrix(p))
-                {
-                    if (currentView.isCooked)
-                    {
-                        //Debug.Log("Cut ra");
-                        currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
-                        QueueController.Instance.AddQueue(currentView.FoodType);
-                        //Destroy(currentView.gameObject);
-                        return;
-                    }
-                }
-                else if (ingredientGrid[p.x, p.y].index != 0)
-                {
-                    //Debug.Log("Touch");
-                    if (!currentView.isCooked) currentView.SetCook();
-                }
+
+                SolveMatrix(p, poses);
 
                 break;
             case Direction.Right:
                 p = poses[poses.Count-1] + offset;
-                if (!IsInMatrix(p))
-                {
-                    if (currentView.isCooked)
-                    {
-                        //Debug.Log("Cut ra");
-                        currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
-                        QueueController.Instance.AddQueue(currentView.FoodType);
-                        //Destroy(currentView.gameObject);
-                        return;
-                    }
-                }
-                else if (ingredientGrid[p.x, p.y].index != 0)
-                {
-                    //Debug.Log("Touch");
-                    if (!currentView.isCooked) currentView.SetCook();
-                }
+
+                SolveMatrix(p, poses);
 
                 break;
             case Direction.Up:
                 p = poses[0] + offset;
-                if (!IsInMatrix(p))
-                {
-                    if (currentView.isCooked)
-                    {
-                        //Debug.Log("Cut ra");
-                        currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
-                        QueueController.Instance.AddQueue(currentView.FoodType);
-                        //Destroy(currentView.gameObject);
-                        return;
-                    }
-                }
-                else if (ingredientGrid[p.x, p.y].index != 0)
-                {
-                    //Debug.Log("Touch");
-                    if (!currentView.isCooked) currentView.SetCook();
-                }
+
+                SolveMatrix(p, poses);
 
                 break;
             case Direction.Down:
                 p = poses[poses.Count - 1] + offset;
-                if (!IsInMatrix(p))
-                {
-                    if (currentView.isCooked)
-                    {
-                        //Debug.Log("Cut ra");
-                        currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
-                        QueueController.Instance.AddQueue(currentView.FoodType);
-                        //Destroy(currentView.gameObject);
-                        return;
-                    }
-                }
-                else if (ingredientGrid[p.x, p.y].index != 0)
-                {
-                    //Debug.Log("Touch");
-                    if (!currentView.isCooked) currentView.SetCook();
-                }
+
+                SolveMatrix(p, poses);
 
                 break;
+        }
+
+        if (isSetCooked)
+        {
+            return;
         }
 
         for (int i = 0; i < poses.Count; i++)
@@ -345,10 +318,44 @@ public class MatrixController : MonoSingleton<MatrixController>
         return;
     }
 
-    //public bool isContains()
-    //{
+    private void SolveMatrix(Vector2Int p, List<Vector2Int> poses)
+    {
+        isSetCooked = false;
 
-    //}
+        if (!IsInMatrix(p))
+        {
+            if (currentView.isCooked)
+            {
+                //Debug.Log("Cut ra");
+                currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
+                QueueController.Instance.AddQueue(currentView.FoodType);
+                isSetCooked = true;
+                //Destroy(currentView.gameObject);
+                return;
+            }
+        }
+        else if (ingredientGrid[p.x, p.y].index > 0)
+        {
+            //Debug.Log("Touch");
+            if (!currentView.isCooked) currentView.SetCook();
+        }
+        else if (ingredientGrid[p.x, p.y].index < 0)
+        {
+            //Debug.Log("Ice Touch");
+            if (currentView.isCooked)
+            {
+                currentView.SetUnCook();
+                this.ingredientGrid[p.x, p.y].index += 1;
+                //this.ingredientGrid[p.x, p.y].IceView.SetHealth(-this.ingredientGrid[p.x, p.y].index);
+                this.ingredientGrid[p.x, p.y].IceView.DecreaseHealth(-this.ingredientGrid[p.x, p.y].index);
+                if (this.ingredientGrid[p.x, p.y].index == 0)
+                {
+                    this.ingredientGrid[p.x, p.y].IceView.Melt();
+                    this.ingredientGrid[p.x, p.y].IceView = null;
+                }
+            }
+        }
+    }
 
     private bool IsInMatrix(Vector2Int pos)
     {

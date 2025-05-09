@@ -10,6 +10,7 @@ public class DataManager : MonoSingleton<DataManager>
     public CustomerSO CustomerData;
     public FoodLevelSO FoodLevelData;
     public MatrixSO MatrixData;
+    public IceSO IceData;
 
     protected override void Awake()
     {

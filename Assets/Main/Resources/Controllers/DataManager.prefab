@@ -49,3 +49,4 @@ MonoBehaviour:
   CustomerData: {fileID: 11400000, guid: a422281eb48978f4789e8d7534057c49, type: 2}
   FoodLevelData: {fileID: 11400000, guid: 37e4eeeb893a4e04b96ea01efb978338, type: 2}
   MatrixData: {fileID: 11400000, guid: 57498912ca099314f8b7b2fba06865e2, type: 2}
+  IceData: {fileID: 11400000, guid: 14bf919bb28f9824b941bfcee3222fac, type: 2}
