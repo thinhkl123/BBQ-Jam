@@ -128,7 +128,7 @@ MonoBehaviour:
     Orders:
     - Customer: 2
       Foods: 0300000003000000
-      Time: 15
+      Time: 20
     - Customer: 3
       Foods: 0200000001000000
       Time: 15
@@ -299,7 +299,7 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 02000000
-      Time: 25
+      Time: 30
     - Customer: 3
       Foods: 03000000
       Time: 15
@@ -315,7 +315,7 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0300000002000000
-      Time: 35
+      Time: 25
     - Customer: 3
       Foods: 0300000001000000
       Time: 15
