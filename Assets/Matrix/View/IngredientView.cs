@@ -72,7 +72,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             //Debug.Log(newPos);
 
             //this.transform.position = new Vector3(newPos.x, this.transform.position.y, newPos.z);
-            this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.OutBounce);
+            this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.InQuint);
         }
         else
         {
@@ -113,18 +113,72 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
-        sequence.AppendInterval(delay); // chờ 1s
+        //sequence.AppendInterval(delay); // chờ 1s
+        //sequence.AppendCallback(() =>
+        //{
+        //    SoundsManager.Instance.PlaySFX(SoundType.Cooked);
+
+        //    MatrixController.Instance.SetFire(poses);
+        //});
+        //sequence.Append(this.transform.DOScale(Vector3.zero, shrinkDuration).SetEase(Ease.InBack)); // thu nhỏ và biến mất
+        //sequence.AppendCallback(() =>
+        //{
+        //    this.transform.localScale = Vector3.zero; // đảm bảo đang invisible
+        //    // Có thể tắt gameObject tại đây nếu cần
+        //    if (cookedSprite != null)
+        //    {
+        //        this.GetComponentInChildren<SpriteRenderer>().sprite = cookedSprite;
+        //        this.hightLight.GetComponent<SpriteRenderer>().sprite = cookedSprite;
+        //    }
+        //});
+
+        //// Hiện lại và scale to hơn
+        //sequence.Append(this.transform.DOScale(spawnScale, growDuration).SetEase(Ease.OutBack));
+        //sequence.Append(this.transform.DOScale(originalScale, 0.2f)); // trở về kích thước gốc nếu muốn
+        //sequence.AppendInterval(0.4f);
+        //sequence.AppendCallback(() =>
+        //{
+        //    MatrixController.Instance.UnFire(poses);
+        //});
+        //sequence.AppendCallback(() =>
+        //{
+        //    isAnim = false;
+        //});
+
+        //transform.DORotate(new Vector3(0, 90f, 0), 0.15f, RotateMode.Fast)
+        //         .SetEase(Ease.InOutSine)
+        //         .OnComplete(() =>
+        //         {
+        //             // Giai đoạn 2: đổi sprite khi ở nửa vòng
+        //             spriteRenderer.sprite = cookedSprite;
+
+        //             // Giai đoạn 3: hoàn tất xoay còn lại
+        //             transform.DORotate(new Vector3(0, 180f, 0), 0.15f, RotateMode.Fast)
+        //                      .SetEase(Ease.InOutSine);
+        //         });
+
+        sequence.AppendInterval(delay);
         sequence.AppendCallback(() =>
         {
             SoundsManager.Instance.PlaySFX(SoundType.Cooked);
 
             MatrixController.Instance.SetFire(poses);
         });
-        sequence.Append(this.transform.DOScale(Vector3.zero, shrinkDuration).SetEase(Ease.InBack)); // thu nhỏ và biến mất
+
+        //Debug.Log(new Vector3(this.transform.localEulerAngles.x, this.transform.localEulerAngles.y + 90f, this.transform.localEulerAngles.z));
+        sequence.Append(this.transform.DORotate(new Vector3(this.transform.localEulerAngles.x, this.transform.localEulerAngles.y + 90f, this.transform.localEulerAngles.z), 0.3f, RotateMode.Fast)
+                 .SetEase(Ease.InOutSine));
+        if (this.name.Contains("Hon"))
+        {
+            sequence.Join(this.transform.DOMoveZ(this.transform.position.z + 1f, 0.3f).SetEase(Ease.OutQuint));
+        }
+        else
+        {
+            sequence.Join(this.transform.DOMoveX(this.transform.position.x + 0.5f, 0.3f).SetEase(Ease.OutQuint));
+        }
+        sequence.Join(this.transform.DOScale(this.transform.localScale * 1.5f, 0.3f).SetEase(Ease.OutQuint));
         sequence.AppendCallback(() =>
         {
-            this.transform.localScale = Vector3.zero; // đảm bảo đang invisible
-            // Có thể tắt gameObject tại đây nếu cần
             if (cookedSprite != null)
             {
                 this.GetComponentInChildren<SpriteRenderer>().sprite = cookedSprite;
@@ -132,9 +186,18 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             }
         });
 
-        // Hiện lại và scale to hơn
-        sequence.Append(this.transform.DOScale(spawnScale, growDuration).SetEase(Ease.OutBack));
-        sequence.Append(this.transform.DOScale(originalScale, 0.2f)); // trở về kích thước gốc nếu muốn
+        //sequence.Append(transform.DORotate(new Vector3(90f, 180f, 0), 0.3f, RotateMode.Fast).SetEase(Ease.InOutSine));
+        sequence.Append(transform.DORotate(new Vector3(this.transform.localEulerAngles.x, this.transform.localEulerAngles.y + 180f, this.transform.localEulerAngles.z), 0.3f, RotateMode.Fast)
+                              .SetEase(Ease.InOutSine));
+        if (this.name.Contains("Hon"))
+        {
+            sequence.Join(this.transform.DOMoveZ(this.transform.position.z , 0.3f).SetEase(Ease.InExpo));
+        }
+        else
+        {
+            sequence.Join(this.transform.DOMoveX(this.transform.position.x, 0.3f).SetEase(Ease.InExpo));
+        }
+        sequence.Join(this.transform.DOScale(this.transform.localScale, 0.3f).SetEase(Ease.InExpo));
         sequence.AppendInterval(0.4f);
         sequence.AppendCallback(() =>
         {

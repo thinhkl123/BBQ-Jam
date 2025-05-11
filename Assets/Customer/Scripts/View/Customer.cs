@@ -66,7 +66,7 @@ public class Customer : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(rot);
         //Visual.transform.rotation = Quaternion.Euler(new Vector3(50f, 0f, 0));
         Visual.transform.rotation = Quaternion.Euler(new Vector3(310.063354f, 176.161789f, 2.93932462f));
-        Invoke(nameof(ShowOrder), 1.5f);
+        Invoke(nameof(ShowOrder), 0.7f);
     }
 
     public void ShowOrder()
@@ -74,7 +74,7 @@ public class Customer : MonoBehaviour
         OrderUI.SetActive(true);
     }
 
-    public void MoveTo(Vector3 target, float time = 1f)
+    public void MoveTo(Vector3 target, float time = 0.2f)
     {
         this.animator.SetBool("Walk", true);
         this.transform.DOMove(target, time).SetEase(Ease.Linear)
@@ -97,7 +97,7 @@ public class Customer : MonoBehaviour
         });
     }
 
-    public void MoveOut(Vector3 target, float time = 1f)
+    public void MoveOut(Vector3 target, float time = 0.2f)
     {
         OrderUI.SetActive(false);
         TimerUI.SetActive(false);

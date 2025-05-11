@@ -105,6 +105,7 @@ MonoBehaviour:
   unCookedSprite: {fileID: 21300000, guid: 3fbe13e6a9b0b1f439074a9696ad4866, type: 3}
   hightLight: {fileID: 7480747007890241523}
   FoodType: 3
+  isAnim: 0
 --- !u!65 &5976017920031040106
 BoxCollider:
   m_ObjectHideFlags: 0
