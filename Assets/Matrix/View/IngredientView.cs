@@ -27,7 +27,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         //Debug.Log(isAnim);
 
-        if (CustomerManager.Instance.isSwitching || isAnim) return;
+        if (/*CustomerManager.Instance.isSwitching ||*/ isAnim) return;
 
         MatrixController.Instance.currentView = this;
         MatrixController.Instance.isPressing = false;

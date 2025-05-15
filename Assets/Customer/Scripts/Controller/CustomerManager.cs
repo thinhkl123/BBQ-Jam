@@ -103,7 +103,7 @@ public class CustomerManager : MonoSingleton<CustomerManager>
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
-        sequence.AppendInterval(1f); // chờ 1s
+        sequence.AppendInterval(1f);
         sequence.AppendCallback(() =>
         {
             SoundsManager.Instance.PlaySFX(SoundType.OrderComplete);

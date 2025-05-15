@@ -39,7 +39,7 @@ public class QueueElementView : MonoBehaviour
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
-        sequence.AppendInterval(0.8f); // chờ 1s
+        sequence.AppendInterval(0.8f); 
         sequence.AppendCallback(() =>
         {
             SoundsManager.Instance.PlaySFX(SoundType.Pop);
@@ -87,7 +87,7 @@ public class QueueElementView : MonoBehaviour
     {
         //Debug.Log("Null");
 
-        this.FoodType = FoodType.None;
+        //this.FoodType = FoodType.None;
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
@@ -98,6 +98,8 @@ public class QueueElementView : MonoBehaviour
         sequence.AppendCallback(() =>
         {
             this.SpriteRenderer.enabled = false;
+
+            this.FoodType = FoodType.None;
 
             isDisapearing = false;
         });

@@ -145,7 +145,7 @@ public class MatrixController : MonoSingleton<MatrixController>
         }
 
         Touch touch = Input.GetTouch(0);
-        if (touch.phase == TouchPhase.Ended && !CustomerManager.Instance.isSwitching)
+        if (touch.phase == TouchPhase.Ended /*&& !CustomerManager.Instance.isSwitching*/)
         {
             //Debug.Log(dir);
             //Debug.Log(this.Dir + " " + currentView.name);
