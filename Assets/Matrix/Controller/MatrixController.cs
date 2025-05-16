@@ -308,15 +308,23 @@ public class MatrixController : MonoSingleton<MatrixController>
             return;
         }
 
+        if (isSetCookedFailure)
+        {
+            poses = currentView.poses;
+
+            for (int i = 0; i < poses.Count; i++)
+            {
+                ingredientGrid[poses[i].x, poses[i].y].index = id;
+                ingredientGrid[poses[i].x, poses[i].y].directions = ds;
+            }
+
+            return;
+        }
+
         for (int i = 0; i < poses.Count; i++)
         {
             ingredientGrid[poses[i].x, poses[i].y].index = id;
             ingredientGrid[poses[i].x, poses[i].y].directions = ds;
-        }
-
-        if (isSetCookedFailure) 
-        { 
-            return; 
         }
 
         currentView.SetPosesAndMove(poses);
