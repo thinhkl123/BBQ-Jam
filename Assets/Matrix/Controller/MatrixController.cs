@@ -332,13 +332,14 @@ public class MatrixController : MonoSingleton<MatrixController>
                     //Debug.Log("Cut ra");
                     currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
                     QueueController.Instance.AddQueue(currentView.FoodType);
-                    isSetCooked = true;
                     //Destroy(currentView.gameObject);
                 }
                 else
                 {
                     currentView.Shake();
                 }
+                isSetCooked = true;
+
                 return;
             }
         }
