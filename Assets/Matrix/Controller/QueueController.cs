@@ -102,6 +102,19 @@ public class QueueController : MonoSingleton<QueueController>
         return true;
     } 
 
+    public bool IsAvailablePos()
+    {
+        for (int i = 0; i < queueElements.Count; i++)
+        {
+            if (queueElements[i].FoodType == FoodType.None)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public Vector3 GetAvailablePos()
     {
         for (int i = 0; i < queueElements.Count; i++)

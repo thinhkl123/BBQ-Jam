@@ -325,7 +325,7 @@ public class MatrixController : MonoSingleton<MatrixController>
 
         if (!IsInMatrix(p))
         {
-            if (currentView.isCooked)
+            if (currentView.isCooked && QueueController.Instance.IsAvailablePos())
             {
                 //Debug.Log("Cut ra");
                 currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
