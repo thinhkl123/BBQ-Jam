@@ -347,6 +347,8 @@ public class MatrixController : MonoSingleton<MatrixController>
                     isSetCookedFailure = true;
                 }
 
+                Debug.Log(isSetCookedSuccess + " " + isSetCookedFailure);
+
                 return;
             }
         }
