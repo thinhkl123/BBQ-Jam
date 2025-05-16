@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FoodLevelData;
 using MatrixData;
+using DG.Tweening;
 
 public class MatrixController : MonoSingleton<MatrixController>
 {
@@ -22,6 +23,8 @@ public class MatrixController : MonoSingleton<MatrixController>
     private bool isTutorial = false;
     private bool isSetCookedSuccess = false;
     private bool isSetCookedFailure = false;
+
+    public Vector3 firstPos;
 
 
     private void Start()
@@ -146,37 +149,70 @@ public class MatrixController : MonoSingleton<MatrixController>
         }
 
         Touch touch = Input.GetTouch(0);
+
+        Vector3 secondPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0f));
+
+        float x = secondPos.x - firstPos.x;
+        float y = secondPos.z - firstPos.z;
+
+        bool isCancel = false;
+
+        if (Mathf.Abs(x) <= 0.05f && Mathf.Abs(y) <= 0.05f)
+        {
+            isCancel = true;
+        }
+
         if (touch.phase == TouchPhase.Ended /*&& !CustomerManager.Instance.isSwitching*/)
         {
-            //Debug.Log(dir);
-            //Debug.Log(this.Dir + " " + currentView.name);
-            if (currentView != null)
+            if (!isCancel)
             {
-                if (TutorialManager.Instance != null)
+
+                if (currentView != null)
                 {
-                    if (!TutorialManager.Instance.isDone)
+                    currentView.ReturnFirstPosition();
+
+                    if (TutorialManager.Instance != null)
                     {
-                        if (TutorialManager.Instance.CheckStep(currentView?.name, Dir))
+                        if (!TutorialManager.Instance.isDone)
+                        {
+                            if (TutorialManager.Instance.CheckStep(currentView?.name, Dir))
+                            {
+                                currentView.HideHightLight();
+                                Move(Dir, currentView.poses);
+                            }
+                        }
+                        else
                         {
                             currentView.HideHightLight();
                             Move(Dir, currentView.poses);
                         }
+
                     }
                     else
                     {
                         currentView.HideHightLight();
                         Move(Dir, currentView.poses);
                     }
-
-                }
-                else
-                {
-                    currentView.HideHightLight();
-                    Move(Dir, currentView.poses);
                 }
             }
+            else
+            {
+                if (currentView != null)
+                {
+                    currentView.HideHightLight();
+                    currentView.ReturnFirstPosition();
+                }
+            }
+            
 
             currentView = null;
+        }
+        else
+        {
+            if (currentView != null)
+            {
+                currentView.Nudge(firstPos, secondPos);
+            }
         }
     }
 
@@ -417,10 +453,5 @@ public class MatrixController : MonoSingleton<MatrixController>
         {
             GridContainer.GetChild(poses[i].x * MatrixSize.y + poses[i].y).GetComponent<Stove>().UnFire();
         }
-    }
-
-    public void Nudge(Direction direction)
-    {
-
-    }    
+    }   
 }

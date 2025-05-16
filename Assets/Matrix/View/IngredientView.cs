@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using FoodLevelData;
 using LevelManager;
 using SoundManager;
 using System.Collections.Generic;
@@ -17,6 +18,9 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public FoodType FoodType;
     public bool isAnim = false;
 
+    private Direction curDir = Direction.None;
+    private Vector3 firstPosition;
+
     public void OnPointerUp(PointerEventData pointerEventData)
     {
         //Debug.Log(MatrixController.Instance.Dir);
@@ -28,6 +32,10 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         //Debug.Log(isAnim);
 
         if (/*CustomerManager.Instance.isSwitching ||*/ isAnim) return;
+
+        firstPosition = this.transform.position;
+        Touch touch = Input.GetTouch(0); 
+        MatrixController.Instance.firstPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0f));
 
         MatrixController.Instance.currentView = this;
         MatrixController.Instance.isPressing = false;
@@ -62,6 +70,22 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         hightLight.SetActive(false);
     }
 
+    public void ReturnFirstPosition()
+    {
+        //Debug.Log(firstPosition);
+        this.transform.position = firstPosition;
+        //Debug.Log(this.transform.position);
+    }
+
+    public void SetPoses(List<Vector2Int> poses)
+    {
+        this.poses = poses;
+
+        Vector3 newPos = MatrixController.Instance.GetPosition(poses);
+
+        this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.1f).SetEase(Ease.Linear);
+    }
+
     public void SetPosesAndMove(List<Vector2Int> poses)
     {
         if (this.poses != poses)
@@ -76,7 +100,6 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         }
         else
         {
-            //Debug.Log("Shake");
             transform.DOShakeRotation(
                 duration: 0.5f,                 // Thời gian lắc
                 strength: new Vector3(0, 0, 20f), // Chỉ lắc theo trục Z
@@ -90,6 +113,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public void Shake()
     {
         //Debug.Log("Shake");
+
         transform.DOShakeRotation(
             duration: 0.5f,                 // Thời gian lắc
             strength: new Vector3(0, 0, 20f), // Chỉ lắc theo trục Z
@@ -280,5 +304,57 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             Destroy(this.gameObject);
         });
+    }
+
+    public void Nudge(Vector3 fpos, Vector3 scPos)
+    {
+        //Debug.Log("Nudge");
+
+        Vector3 offset = Vector3.zero;
+        Direction dir;
+
+        float x = scPos.x - fpos.x;
+        float y = scPos.z - fpos.z;
+
+        if (Mathf.Abs(x) <= 0.05f && Mathf.Abs(y) <= 0.05f)
+        {
+            dir = Direction.None;
+        }
+        else if (Mathf.Abs(x) > Mathf.Abs(y))
+        {
+            dir = x > 0 ? Direction.Right : Direction.Left;
+        }
+        else
+        {
+            dir = y > 0 ? Direction.Up : Direction.Down;
+        }
+
+        if (dir == Direction.None || !MatrixController.Instance.ingredientGrid[poses[0].x, poses[0].y].directions.Contains(dir)) 
+        {
+            return;
+        }
+
+        x = Mathf.Min(Mathf.Abs(x), 0.35f);
+        y = Mathf.Min(Mathf.Abs(y), 0.35f);
+
+        switch (dir)
+        {
+            case Direction.Left:
+                offset = new Vector3(-1, 0, 0);
+                break;
+            case Direction.Right:
+                offset = new Vector3(1, 0, 0);
+                break;
+            case Direction.Up:
+                offset = new Vector3(0, 0, 1);
+                break;
+            case Direction.Down:
+                offset = new Vector3(0, 0, -1);
+                break;
+        }
+
+        offset = new Vector3(offset.x * Mathf.Abs(x), 0f, offset.z * Mathf.Abs(y));
+
+        this.transform.position = firstPosition + offset;
     }
 }
