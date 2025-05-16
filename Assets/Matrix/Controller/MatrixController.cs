@@ -20,7 +20,8 @@ public class MatrixController : MonoSingleton<MatrixController>
 
     public bool isPressing = false;
     private bool isTutorial = false;
-    private bool isSetCooked = false;
+    private bool isSetCookedSuccess = false;
+    private bool isSetCookedFailure = false;
 
 
     private void Start()
@@ -302,7 +303,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                 break;
         }
 
-        if (isSetCooked)
+        if (isSetCookedSuccess)
         {
             return;
         }
@@ -313,15 +314,20 @@ public class MatrixController : MonoSingleton<MatrixController>
             ingredientGrid[poses[i].x, poses[i].y].directions = ds;
         }
 
+        if (isSetCookedFailure) 
+        { 
+            return; 
+        }
 
-        currentView.SetPoses(poses);
+        currentView.SetPosesAndMove(poses);
 
         return;
     }
 
     private void SolveMatrix(Vector2Int p, List<Vector2Int> poses)
     {
-        isSetCooked = false;
+        isSetCookedSuccess = false;
+        isSetCookedFailure = false;
 
         if (!IsInMatrix(p))
         {
@@ -332,13 +338,14 @@ public class MatrixController : MonoSingleton<MatrixController>
                     //Debug.Log("Cut ra");
                     currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
                     QueueController.Instance.AddQueue(currentView.FoodType);
+                    isSetCookedSuccess = true;
                     //Destroy(currentView.gameObject);
                 }
                 else
                 {
                     currentView.Shake();
+                    isSetCookedFailure = true;
                 }
-                isSetCooked = true;
 
                 return;
             }
@@ -401,4 +408,9 @@ public class MatrixController : MonoSingleton<MatrixController>
             GridContainer.GetChild(poses[i].x * MatrixSize.y + poses[i].y).GetComponent<Stove>().UnFire();
         }
     }
+
+    public void Nudge(Direction direction)
+    {
+
+    }    
 }

@@ -62,7 +62,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         hightLight.SetActive(false);
     }
 
-    public void SetPoses(List<Vector2Int> poses)
+    public void SetPosesAndMove(List<Vector2Int> poses)
     {
         if (this.poses != poses)
         {
