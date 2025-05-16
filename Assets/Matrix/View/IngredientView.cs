@@ -87,6 +87,18 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         }
     }
 
+    public void Shake()
+    {
+        //Debug.Log("Shake");
+        transform.DOShakeRotation(
+            duration: 0.5f,                 // Thời gian lắc
+            strength: new Vector3(0, 0, 20f), // Chỉ lắc theo trục Z
+            vibrato: 10,                  // Số lần rung
+            randomness: 90f,              // Độ ngẫu nhiên
+            fadeOut: true                 // Giảm dần độ rung về sau
+        );
+    }
+
     public void SetInitCook()
     {
         isCooked = true;

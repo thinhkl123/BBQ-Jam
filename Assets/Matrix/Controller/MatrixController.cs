@@ -325,13 +325,20 @@ public class MatrixController : MonoSingleton<MatrixController>
 
         if (!IsInMatrix(p))
         {
-            if (currentView.isCooked && QueueController.Instance.IsAvailablePos())
+            if (currentView.isCooked)
             {
-                //Debug.Log("Cut ra");
-                currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
-                QueueController.Instance.AddQueue(currentView.FoodType);
-                isSetCooked = true;
-                //Destroy(currentView.gameObject);
+                if (QueueController.Instance.IsAvailablePos())
+                {
+                    //Debug.Log("Cut ra");
+                    currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
+                    QueueController.Instance.AddQueue(currentView.FoodType);
+                    isSetCooked = true;
+                    //Destroy(currentView.gameObject);
+                }
+                else
+                {
+                    currentView.Shake();
+                }
                 return;
             }
         }
