@@ -64,6 +64,29 @@ public class MatrixController : MonoSingleton<MatrixController>
         {
             SpawnIce(DataManager.Instance.IceData.IceLevelList[DataManager.Instance.LevelData.Levels[level].IceId - 1]);
         }
+
+        if (DataManager.Instance.LevelData.Levels[level].PortId != 0)
+        {
+            SpawnPort(DataManager.Instance.PortLevelData.PortLevels[DataManager.Instance.LevelData.Levels[level].PortId - 1]);
+        }
+    }
+
+    private void SpawnPort(PortLevelConfig portLevel)
+    {
+        foreach (var portData in portLevel.Ports)
+        {
+            List<Vector2Int> l = new List<Vector2Int>();
+            l.Add(portData.Pos);
+            Vector3 pos = GetPosition(l);
+            pos.y = 1.41f;
+
+            PortView portGO = Instantiate(DataManager.Instance.PortData.GetPrefab(portData.PortType));
+            portGO.transform.position = pos;
+            portGO.transform.SetParent(this.transform);
+
+            this.ingredientGrid[portData.Pos.x, portData.Pos.y].index = 5000;
+            this.ingredientGrid[portData.Pos.x, portData.Pos.y].portView = portGO;
+        }
     }
 
     private void SpawnIce(IceLevel iceLevel)

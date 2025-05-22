@@ -36,6 +36,7 @@ namespace LevelManager
         public int LevelId;
         public int TutorialId;
         public int IceId;
+        public int PortId;
         public List<Order> Orders;
     }
 

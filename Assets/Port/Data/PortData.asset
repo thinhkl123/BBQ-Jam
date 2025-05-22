@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32180c38735ac7543a14b418bf060263, type: 3}
+  m_Name: PortData
+  m_EditorClassIdentifier: 
+  PortConfigs:
+  - PortType: 1
+    PortPrefab: {fileID: 6729136299748698404, guid: 1c69f673a52e2944e9049eb382b08155, type: 3}
+  - PortType: 2
+    PortPrefab: {fileID: 7726394640858441970, guid: 8349a51ef3f114940bf9ec79daa70f6d, type: 3}
+  - PortType: 3
+    PortPrefab: {fileID: 8757753106184029398, guid: 1b9243353f4250d48826dbcefacdcc90, type: 3}
+  - PortType: 4
+    PortPrefab: {fileID: 27432090489680863, guid: 764d7fb287c9cee47ad612e22de682ea, type: 3}

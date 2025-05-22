@@ -11,6 +11,8 @@ public class DataManager : MonoSingleton<DataManager>
     public FoodLevelSO FoodLevelData;
     public MatrixSO MatrixData;
     public IceSO IceData;
+    public PortLevelSO PortLevelData;
+    public PortSO PortData;
 
     protected override void Awake()
     {

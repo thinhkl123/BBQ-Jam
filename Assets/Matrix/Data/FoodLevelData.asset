@@ -19,6 +19,15 @@ MonoBehaviour:
     - Prefab: {fileID: 4869546526334599328, guid: 487524ba1616528499c3225edfb17990, type: 3}
       DirectionList: 0100000002000000
       PoseList:
+      - {x: 0, y: 2}
+      - {x: 0, y: 3}
+      isCooked: 0
+  - LevelId: 1
+    MatrixType: 0
+    FoodLevelList:
+    - Prefab: {fileID: 4869546526334599328, guid: 487524ba1616528499c3225edfb17990, type: 3}
+      DirectionList: 0100000002000000
+      PoseList:
       - {x: 2, y: 0}
       - {x: 2, y: 1}
       isCooked: 0
