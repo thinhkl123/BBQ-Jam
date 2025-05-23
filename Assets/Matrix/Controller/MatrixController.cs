@@ -5,12 +5,16 @@ using UnityEngine;
 using FoodLevelData;
 using MatrixData;
 using DG.Tweening;
+using System;
 
 public class MatrixController : MonoSingleton<MatrixController>
 {
     public Vector2Int MatrixSize;
     public Transform GridContainer;
     public IngredientView currentView;
+
+    // Rock
+    public RockView currentRockView;
 
     public IngredientModel[,] ingredientGrid;
 
@@ -64,6 +68,12 @@ public class MatrixController : MonoSingleton<MatrixController>
         {
             SpawnIce(DataManager.Instance.IceData.IceLevelList[DataManager.Instance.LevelData.Levels[level].IceId - 1]);
         }
+
+        // Rock
+        if (DataManager.Instance.LevelData.Levels[level].RockId != 0)
+        {
+            SpawnRock(DataManager.Instance.RockData.RockLevelList[DataManager.Instance.LevelData.Levels[level].RockId - 1]);
+        }
     }
 
     private void SpawnIce(IceLevel iceLevel)
@@ -79,6 +89,34 @@ public class MatrixController : MonoSingleton<MatrixController>
 
             this.ingredientGrid[ice.Pos.x, ice.Pos.y].index = -ice.Health;
             this.ingredientGrid[ice.Pos.x, ice.Pos.y].IceView = iceGO;
+        }
+    }
+
+    // Rock
+    private void SpawnRock(RockLevel rockLevel)
+    {
+        int count = 0;
+        foreach (var rock in rockLevel.RockList)
+        {
+            count++;
+            List<Vector2Int> l = new List<Vector2Int>();
+            l.Add(rock.Pos);
+            Vector3 pos = GetPosition(l);
+            pos.y = 2.6f;
+            RockView rockView = Instantiate(rock.RockPrefab, pos, rock.RockPrefab.transform.rotation, this.transform);
+
+            this.ingredientGrid[rock.Pos.x, rock.Pos.y].index = 500 + count;
+            string newName = rockView.name.Replace("(Clone)", " " + this.ingredientGrid[rock.Pos.x, rock.Pos.y].index.ToString());
+            this.ingredientGrid[rock.Pos.x, rock.Pos.y].RockView = rockView;
+            rockView.name = newName;
+
+            rockView.poses = new List<Vector2Int>();
+            rockView.poses.Add(rock.Pos);
+
+            foreach (var direction in rock.DirectionList)
+            {
+                this.ingredientGrid[rock.Pos.x, rock.Pos.y].directions.Add(direction);
+            }
         }
     }
 
@@ -194,6 +232,11 @@ public class MatrixController : MonoSingleton<MatrixController>
                         Move(Dir, currentView.poses);
                     }
                 }
+
+                if (currentRockView != null)
+                {
+                    Move(Dir, currentRockView.poses, 2);
+                }
             }
             else
             {
@@ -203,9 +246,9 @@ public class MatrixController : MonoSingleton<MatrixController>
                     currentView.ReturnFirstPosition();
                 }
             }
-            
 
             currentView = null;
+            currentRockView = null;
         }
         else
         {
@@ -251,7 +294,7 @@ public class MatrixController : MonoSingleton<MatrixController>
         return dir;
     }
 
-    public void Move(Direction dir, List<Vector2Int> poses)
+    public void Move(Direction dir, List<Vector2Int> poses, int type = 1)
     {
         if (!ingredientGrid[poses[0].x, poses[0].y].directions.Contains(dir))
         {
@@ -301,13 +344,24 @@ public class MatrixController : MonoSingleton<MatrixController>
                 }
                 else
                 {
-                    //Debug.Log(newPos);
                     newPosses.Add(newPos);
                 }
             }
 
             if (!check) break;
             poses = newPosses;
+        }
+
+        // Rock
+        if (type == 2)
+        {
+            for (int i = 0; i < poses.Count; i++)
+            {
+                ingredientGrid[poses[i].x, poses[i].y].index = id;
+                ingredientGrid[poses[i].x, poses[i].y].directions = ds;
+            }
+            currentRockView.SetPosesAndMove(poses);
+            return;
         }
 
         switch (dir)
@@ -392,11 +446,10 @@ public class MatrixController : MonoSingleton<MatrixController>
                 }
 
                 Debug.Log(isSetCookedSuccess + " " + isSetCookedFailure);
-
                 return;
             }
         }
-        else if (ingredientGrid[p.x, p.y].index > 0)
+        else if (ingredientGrid[p.x, p.y].index > 0 && ingredientGrid[p.x, p.y].index < 500)
         {
             //Debug.Log("Touch");
             if (!currentView.isCooked) currentView.SetCook();

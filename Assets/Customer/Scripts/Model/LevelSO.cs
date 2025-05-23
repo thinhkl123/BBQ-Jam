@@ -36,6 +36,9 @@ namespace LevelManager
         public int LevelId;
         public int TutorialId;
         public int IceId;
+        
+        // Rock
+        public int RockId;
         public List<Order> Orders;
     }
 

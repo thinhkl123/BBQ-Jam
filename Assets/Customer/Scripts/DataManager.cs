@@ -12,6 +12,9 @@ public class DataManager : MonoSingleton<DataManager>
     public MatrixSO MatrixData;
     public IceSO IceData;
 
+    // Rock
+    public RockSO RockData;
+
     protected override void Awake()
     {
         base.Awake();

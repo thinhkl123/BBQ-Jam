@@ -16,6 +16,7 @@ MonoBehaviour:
   - LevelId: 1
     TutorialId: 1
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 4
       Foods: 03000000
@@ -26,6 +27,7 @@ MonoBehaviour:
   - LevelId: 2
     TutorialId: 2
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 1
       Foods: 0300000003000000
@@ -36,6 +38,7 @@ MonoBehaviour:
   - LevelId: 3
     TutorialId: 0
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 0
       Foods: 0300000003000000
@@ -52,6 +55,7 @@ MonoBehaviour:
   - LevelId: 4
     TutorialId: 4
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 1
       Foods: 01000000
@@ -68,6 +72,7 @@ MonoBehaviour:
   - LevelId: 5
     TutorialId: 0
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 1
       Foods: 0100000003000000
@@ -84,6 +89,7 @@ MonoBehaviour:
   - LevelId: 6
     TutorialId: 0
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 0
       Foods: 0300000001000000
@@ -103,6 +109,7 @@ MonoBehaviour:
   - LevelId: 7
     TutorialId: 0
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 0
       Foods: 0100000002000000
@@ -122,6 +129,7 @@ MonoBehaviour:
   - LevelId: 8
     TutorialId: 0
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 2
       Foods: 0300000003000000
@@ -141,6 +149,7 @@ MonoBehaviour:
   - LevelId: 9
     TutorialId: 0
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 0
       Foods: 0200000001000000
@@ -163,6 +172,7 @@ MonoBehaviour:
   - LevelId: 10
     TutorialId: 0
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 4
       Foods: 0300000003000000
@@ -185,6 +195,7 @@ MonoBehaviour:
   - LevelId: 11
     TutorialId: 0
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 0
       Foods: 0300000003000000
@@ -207,6 +218,7 @@ MonoBehaviour:
   - LevelId: 12
     TutorialId: 0
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 0
       Foods: 0300000001000000
@@ -226,6 +238,7 @@ MonoBehaviour:
   - LevelId: 13
     TutorialId: 0
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 1
       Foods: 0300000001000000
@@ -248,6 +261,7 @@ MonoBehaviour:
   - LevelId: 14
     TutorialId: 0
     IceId: 0
+    RockId: 0
     Orders:
     - Customer: 0
       Foods: 0200000003000000
@@ -270,6 +284,7 @@ MonoBehaviour:
   - LevelId: 15
     TutorialId: 14
     IceId: 2
+    RockId: 0
     Orders:
     - Customer: 1
       Foods: 0300000003000000
@@ -283,6 +298,7 @@ MonoBehaviour:
   - LevelId: 16
     TutorialId: 0
     IceId: 1
+    RockId: 0
     Orders:
     - Customer: 0
       Foods: 0300000003000000
@@ -293,6 +309,7 @@ MonoBehaviour:
   - LevelId: 17
     TutorialId: 0
     IceId: 3
+    RockId: 0
     Orders:
     - Customer: 0
       Foods: 02000000
@@ -309,6 +326,7 @@ MonoBehaviour:
   - LevelId: 18
     TutorialId: 0
     IceId: 4
+    RockId: 0
     Orders:
     - Customer: 0
       Foods: 0300000002000000
@@ -328,6 +346,7 @@ MonoBehaviour:
   - LevelId: 19
     TutorialId: 0
     IceId: 5
+    RockId: 0
     Orders:
     - Customer: 0
       Foods: 0200000003000000
@@ -346,7 +365,22 @@ MonoBehaviour:
       Time: 15
   - LevelId: 20
     TutorialId: 0
+    IceId: 0
+    RockId: 1
+    Orders:
+    - Customer: 0
+      Foods: 0300000003000000
+      Time: 30
+    - Customer: 3
+      Foods: 0300000003000000
+      Time: 30
+    - Customer: 0
+      Foods: 03000000
+      Time: 30
+  - LevelId: 21
+    TutorialId: 0
     IceId: 6
+    RockId: 0
     Orders:
     - Customer: 0
       Foods: 0300000002000000

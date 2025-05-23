@@ -10,6 +10,9 @@ public class IngredientModel
     public List<Direction> directions;
     public IceView IceView;
 
+    // Rock
+    public RockView RockView;
+
     public void Init()
     {
         this.index = 0;

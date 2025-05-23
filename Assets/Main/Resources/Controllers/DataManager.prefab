@@ -50,3 +50,4 @@ MonoBehaviour:
   FoodLevelData: {fileID: 11400000, guid: 37e4eeeb893a4e04b96ea01efb978338, type: 2}
   MatrixData: {fileID: 11400000, guid: 57498912ca099314f8b7b2fba06865e2, type: 2}
   IceData: {fileID: 11400000, guid: 14bf919bb28f9824b941bfcee3222fac, type: 2}
+  RockData: {fileID: 11400000, guid: c92e947b6e77ea14683fc77fe5a95679, type: 2}
