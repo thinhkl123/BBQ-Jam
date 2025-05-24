@@ -14,6 +14,11 @@ public class QueueController : MonoSingleton<QueueController>
         Init();
     }
 
+    private void Update()
+    {
+        CheckQueue();
+    }
+
     public void Init()
     {
         for (int i = 0; i < queueElements.Count; i++)
@@ -30,24 +35,24 @@ public class QueueController : MonoSingleton<QueueController>
             {
                 queueElements[i].SetInfor(foodType, MatrixController.Instance.TimeWait);
 
-                if (!CustomerManager.Instance.isSwitching)
-                {
+                //if (!CustomerManager.Instance.isSwitching)
+                //{
 
-                    //CheckOrder();
-                    if (!CheckOrder())
-                    {
-                        for (int j = 0; j < queueElements.Count; j++)
-                        {
-                            if (queueElements[j].FoodType == FoodType.None)
-                            {
-                                return;
-                            }
-                        }
+                //    CheckOrder();
+                //    if (!CheckOrder())
+                //    {
+                //        for (int j = 0; j < queueElements.Count; j++)
+                //        {
+                //            if (queueElements[j].FoodType == FoodType.None)
+                //            {
+                //                return;
+                //            }
+                //        }
 
-                        GameManager.Instance.LoseGame();
-                    }
+                //        GameManager.Instance.LoseGame();
+                //    }
 
-                }
+                //}
 
                 //Debug.Log("Queue is full");
 
@@ -56,12 +61,34 @@ public class QueueController : MonoSingleton<QueueController>
         }
     }
 
+    public void CheckQueue()
+    {
+        if (!CustomerManager.Instance.isSwitching)
+        {
+
+            //CheckOrder();
+            if (!CheckOrder())
+            {
+                for (int j = 0; j < queueElements.Count; j++)
+                {
+                    if (queueElements[j].FoodType == FoodType.None)
+                    {
+                        return;
+                    }
+                }
+
+                GameManager.Instance.LoseGame();
+            }
+
+        }
+    }
+
     public bool CheckOrder()
     {
         List<FoodType> foodTypes2 = new List<FoodType>();
         for (int i = 0; i < queueElements.Count; i++)
         {
-            if (queueElements[i].FoodType != FoodType.None)
+            if (queueElements[i].FoodType != FoodType.None && !queueElements[i].isSpawning)
             {
                 foodTypes2.Add(queueElements[i].FoodType);
             }

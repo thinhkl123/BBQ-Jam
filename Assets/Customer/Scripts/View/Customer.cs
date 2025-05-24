@@ -91,7 +91,7 @@ public class Customer : MonoBehaviour
 
             CustomerManager.Instance.SpawnContinue();
 
-            QueueController.Instance.CheckOrder();
+            //QueueController.Instance.CheckOrder();
 
             CustomerManager.Instance.isSwitching = false;
         });

@@ -25,6 +25,8 @@ public class QueueElementView : MonoBehaviour
 
     public void SetInfor(FoodType foodType, float time = 0f)
     {
+        isSpawning = true;  
+
         Vector3 initScale = DataManager.Instance.FoodData.GetScale(foodType);
         //Debug.Log(foodType.ToString() + " " + this.name);
 
@@ -93,7 +95,7 @@ public class QueueElementView : MonoBehaviour
 
         isDisapearing = true;
 
-        sequence.AppendInterval(1f + time); 
+        sequence.AppendInterval(0f + time); 
         sequence.Append(SpriteRenderer.transform.DOScale(Vector3.zero, 0.2f)); 
         sequence.AppendCallback(() =>
         {
