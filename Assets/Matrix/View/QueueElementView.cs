@@ -11,7 +11,7 @@ public class QueueElementView : MonoBehaviour
     public SpriteRenderer SpriteRenderer;
     public FoodType FoodType;
 
-    private bool isSpawning = false;
+    public bool isSpawning = false;
     private bool isDisapearing = false;
 
     public void Init()
@@ -23,7 +23,7 @@ public class QueueElementView : MonoBehaviour
         this.isDisapearing = false;
     }
 
-    public void SetInfor(FoodType foodType)
+    public void SetInfor(FoodType foodType, float time = 0f)
     {
         Vector3 initScale = DataManager.Instance.FoodData.GetScale(foodType);
         //Debug.Log(foodType.ToString() + " " + this.name);
@@ -39,7 +39,7 @@ public class QueueElementView : MonoBehaviour
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
-        sequence.AppendInterval(0.8f); 
+        sequence.AppendInterval(0.8f + time); 
         sequence.AppendCallback(() =>
         {
             SoundsManager.Instance.PlaySFX(SoundType.Pop);
@@ -83,7 +83,7 @@ public class QueueElementView : MonoBehaviour
         });
     }
 
-    public void SetNull()
+    public void SetNull(float time = 0f)
     {
         //Debug.Log("Null");
 
@@ -93,7 +93,7 @@ public class QueueElementView : MonoBehaviour
 
         isDisapearing = true;
 
-        sequence.AppendInterval(1f); 
+        sequence.AppendInterval(1f + time); 
         sequence.Append(SpriteRenderer.transform.DOScale(Vector3.zero, 0.2f)); 
         sequence.AppendCallback(() =>
         {

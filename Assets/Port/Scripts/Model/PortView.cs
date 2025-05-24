@@ -12,5 +12,6 @@ public class PortView : MonoBehaviour
 public class DirectionCombo
 {
     public Direction directionIn;
-    public Direction directionOut;
+    public List<Direction> directionOut;
+    public float angle;
 }

@@ -1,10 +1,11 @@
-using LevelManager;
+﻿using LevelManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FoodLevelData;
 using MatrixData;
 using DG.Tweening;
+using System;
 
 public class MatrixController : MonoSingleton<MatrixController>
 {
@@ -23,6 +24,13 @@ public class MatrixController : MonoSingleton<MatrixController>
     private bool isTutorial = false;
     private bool isSetCookedSuccess = false;
     private bool isSetCookedFailure = false;
+
+    //Port
+    private bool isPort = false;
+    private List<Vector2Int> newPosses;
+    private List<Direction> newDs;
+    public float TimeWait = 0f;
+    public float TouchTime = 0f;
 
     public Vector3 firstPos;
 
@@ -159,6 +167,8 @@ public class MatrixController : MonoSingleton<MatrixController>
     {
         Direction dir = this.GetDirection();
 
+        TouchTime += Time.deltaTime;
+
         //Debug.Log(dir);
 
         if (dir != Direction.None)
@@ -187,12 +197,14 @@ public class MatrixController : MonoSingleton<MatrixController>
 
         if (touch.phase == TouchPhase.Ended /*&& !CustomerManager.Instance.isSwitching*/)
         {
+            TimeWait = 0f;
+
             if (!isCancel)
             {
 
                 if (currentView != null)
                 {
-                    currentView.ReturnFirstPosition();
+                    //currentView.ReturnFirstPosition();
 
                     if (TutorialManager.Instance != null)
                     {
@@ -232,7 +244,7 @@ public class MatrixController : MonoSingleton<MatrixController>
         }
         else
         {
-            if (currentView != null)
+            if (currentView != null && TouchTime >= 1f)
             {
                 currentView.Nudge(firstPos, secondPos);
             }
@@ -311,6 +323,7 @@ public class MatrixController : MonoSingleton<MatrixController>
 
         List<Vector2Int> newPosses;
         bool check = true;
+
         while (check)
         {
             newPosses = new List<Vector2Int>();
@@ -339,25 +352,25 @@ public class MatrixController : MonoSingleton<MatrixController>
             case Direction.Left:
                 Vector2Int p = poses[0] + offset;
 
-                SolveMatrix(p, poses);
+                SolveMatrix(p, poses, dir, id, ds);
 
                 break;
             case Direction.Right:
                 p = poses[poses.Count-1] + offset;
 
-                SolveMatrix(p, poses);
+                SolveMatrix(p, poses, dir, id, ds);
 
                 break;
             case Direction.Up:
                 p = poses[0] + offset;
 
-                SolveMatrix(p, poses);
+                SolveMatrix(p, poses, dir, id, ds);
 
                 break;
             case Direction.Down:
                 p = poses[poses.Count - 1] + offset;
 
-                SolveMatrix(p, poses);
+                SolveMatrix(p, poses, dir, id, ds);
 
                 break;
         }
@@ -380,21 +393,37 @@ public class MatrixController : MonoSingleton<MatrixController>
             return;
         }
 
+
+        if (isPort)
+        {
+            for (int i = 0; i < this.newPosses.Count; i++)
+            {
+                ingredientGrid[this.newPosses[i].x, this.newPosses[i].y].index = id;
+                ingredientGrid[this.newPosses[i].x, this.newPosses[i].y].directions = newDs;
+            }
+
+            Move(newDs[0], this.newPosses);
+
+            return;
+        }
+
+        currentView.SetPosesAndMove(poses, TimeWait);
+
         for (int i = 0; i < poses.Count; i++)
         {
             ingredientGrid[poses[i].x, poses[i].y].index = id;
             ingredientGrid[poses[i].x, poses[i].y].directions = ds;
         }
 
-        currentView.SetPosesAndMove(poses);
 
         return;
     }
 
-    private void SolveMatrix(Vector2Int p, List<Vector2Int> poses)
+    private void SolveMatrix(Vector2Int p, List<Vector2Int> poses, Direction dir, int id, List<Direction> ds)
     {
         isSetCookedSuccess = false;
         isSetCookedFailure = false;
+        isPort = false;
 
         if (!IsInMatrix(p))
         {
@@ -403,33 +432,150 @@ public class MatrixController : MonoSingleton<MatrixController>
                 if (QueueController.Instance.IsAvailablePos())
                 {
                     //Debug.Log("Cut ra");
-                    currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos());
+                    currentView.MoveOut(GetPosition(poses), QueueController.Instance.GetAvailablePos(), TimeWait);
                     QueueController.Instance.AddQueue(currentView.FoodType);
                     isSetCookedSuccess = true;
                     //Destroy(currentView.gameObject);
                 }
                 else
                 {
-                    currentView.Shake();
+                    currentView.Shake(TimeWait);
                     isSetCookedFailure = true;
                 }
 
-                Debug.Log(isSetCookedSuccess + " " + isSetCookedFailure);
+                //Debug.Log(isSetCookedSuccess + " " + isSetCookedFailure);
 
                 return;
+            }
+        }
+        else if (ingredientGrid[p.x, p.y].index == 5000)
+        {
+            //Debug.Log(p.x + " " + p.y);
+
+            foreach (DirectionCombo combo in ingredientGrid[p.x, p.y].portView.DirectionCombos)
+            {
+                if (combo.directionIn == dir)
+                {
+                    dir = combo.directionOut[0];
+
+                    switch (dir)
+                    {
+                        case Direction.Left:
+                            offset = new Vector2Int(0, -1);
+                            break;
+                        case Direction.Right:
+                            offset = new Vector2Int(0, 1);
+                            break;
+                        case Direction.Up:
+                            offset = new Vector2Int(-1, 0);
+                            break;
+                        case Direction.Down:
+                            offset = new Vector2Int(1, 0);
+                            break;
+                    }
+
+                    List<Vector2Int> newPosses = new List<Vector2Int>();
+
+                    if (combo.angle != 0)
+                    {
+                        newPosses = RotateIngredient(p, poses, combo.angle);
+                    }
+                    else
+                    {
+                        int mul = 3;
+                        if (currentView.FoodType == FoodType.Mushroom)
+                        {
+                            mul = 2;
+                        }
+
+                        for (int i = 0; i < poses.Count; i++)
+                        {
+                            newPosses.Add(poses[i] + offset * mul);
+                        }
+                    }
+
+                    //foreach (Vector2Int vector2Int in newPosses)
+                    //{
+                    //    Debug.Log(vector2Int);
+                    //}
+
+                    if (newPosses.Count > 1)
+                    {
+                        if (!(newPosses[0].x <= newPosses[1].x && newPosses[0].y <= newPosses[1].y))
+                        {
+                            Vector2Int temp = newPosses[0];
+                            newPosses[0] = newPosses[1];
+                            newPosses[1] = temp;
+                        }
+                    }
+
+                    for (int i = 0; i < newPosses.Count; i++)
+                    {
+                        if (!IsInMatrix(newPosses[i]) || ingredientGrid[newPosses[i].x, newPosses[i].y].index != 0)
+                        {
+                            return;
+                        }
+                    }
+
+                    isPort = true;
+                    this.newPosses = newPosses;
+                    this.newDs = combo.directionOut;
+
+                    //foreach (Vector2Int vector2Int in newPosses)
+                    //{
+                    //    Debug.Log(vector2Int);
+                    //}
+
+                    currentView.SetPosesAndMove(poses, TimeWait);
+
+                    IngredientView foodPrefab;
+
+                    if (combo.angle != 0)
+                    {
+                        foodPrefab = currentView.convertObj;
+                    }
+                    else
+                    {
+                        foodPrefab = currentView;
+                    }
+
+                    currentView.Hide(0.5f + TimeWait);
+
+                    Vector3 pos = GetPosition(newPosses);
+                    pos.y = 1.41f;
+                    IngredientView foodViewGO = Instantiate(foodPrefab, pos, foodPrefab.transform.rotation, this.transform).GetComponent<IngredientView>();
+                    foodViewGO.transform.localScale = Vector3.zero;
+                    string newName = foodViewGO.name.Replace("(Clone)", " " + id.ToString());
+                    foodViewGO.name = newName;
+
+                    if (currentView.isCooked)
+                    {
+                        foodViewGO.SetInitCook();
+                    }
+
+                    foodViewGO.poses = new List<Vector2Int>(newPosses);
+
+                    foodViewGO.Spawn(0.7f + TimeWait);
+
+                    currentView = foodViewGO;
+
+                    TimeWait += 0.9f;
+
+                    return;
+                }
             }
         }
         else if (ingredientGrid[p.x, p.y].index > 0)
         {
             //Debug.Log("Touch");
-            if (!currentView.isCooked) currentView.SetCook();
+            if (!currentView.isCooked) currentView.SetCook(TimeWait);
         }
         else if (ingredientGrid[p.x, p.y].index < 0)
         {
             //Debug.Log("Ice Touch");
             if (currentView.isCooked)
             {
-                currentView.SetUnCook();
+                currentView.SetUnCook(TimeWait);
                 this.ingredientGrid[p.x, p.y].index += 1;
                 //this.ingredientGrid[p.x, p.y].IceView.SetHealth(-this.ingredientGrid[p.x, p.y].index);
                 this.ingredientGrid[p.x, p.y].IceView.DecreaseHealth(-this.ingredientGrid[p.x, p.y].index);
@@ -440,6 +586,30 @@ public class MatrixController : MonoSingleton<MatrixController>
                 }
             }
         }
+    }
+
+    private List<Vector2Int> RotateIngredient(Vector2Int root, List<Vector2Int> poses, float angle)
+    {
+        List<Vector2Int> l = new List<Vector2Int>();
+        foreach (Vector2Int pos in poses)
+        {
+            if (angle == 90)
+            {
+                Vector2Int pivot = new Vector2Int(pos.x - root.x, pos.y - root.y);
+                Vector2Int rotateVector = new Vector2Int(pivot.y, -pivot.x);
+                Vector2Int finalVector = new Vector2Int(rotateVector.x + root.x, rotateVector.y + root.y);
+                l.Add(finalVector);
+            }
+            else
+            {
+                Vector2Int pivot = new Vector2Int(pos.x - root.x, pos.y - root.y);
+                Vector2Int rotateVector = new Vector2Int(-pivot.y, pivot.x);
+                Vector2Int finalVector = new Vector2Int(rotateVector.x + root.x, rotateVector.y + root.y);
+                l.Add(finalVector);
+            }
+        }
+        
+        return l;
     }
 
     private bool IsInMatrix(Vector2Int pos)

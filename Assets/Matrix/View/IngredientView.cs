@@ -10,16 +10,25 @@ using UnityEngine.EventSystems;
 public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public List<Vector2Int> poses;
+    public List<Direction> directions;
     public bool isCooked;
     public Sprite cookedSprite;
     public Sprite unCookedSprite;
     public GameObject hightLight;
+    public IngredientView convertObj;
     //public GameObject cookedPrefab;
     public FoodType FoodType;
     public bool isAnim = false;
 
     private Direction curDir = Direction.None;
     private Vector3 firstPosition;
+
+    private Vector3 tarScale;
+
+    private void Awake()
+    {
+        tarScale = this.transform.localScale;
+    }
 
     public void OnPointerUp(PointerEventData pointerEventData)
     {
@@ -30,6 +39,8 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public void OnPointerDown(PointerEventData pointerEventData)
     {
         //Debug.Log(isAnim);
+
+        MatrixController.Instance.TouchTime = 0f;
 
         if (/*CustomerManager.Instance.isSwitching ||*/ isAnim) return;
 
@@ -70,6 +81,29 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         hightLight.SetActive(false);
     }
 
+    public void Hide(float time = 0f)
+    {
+        DG.Tweening.Sequence sequence = DOTween.Sequence();
+        sequence.AppendInterval(time);
+        sequence.Append(this.transform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InBack));
+        sequence.AppendCallback(() =>
+        {
+            Destroy(this.gameObject);
+        });
+    }
+
+    public void Spawn(float time = 0f)
+    {
+        isAnim = true;
+        DG.Tweening.Sequence sequence = DOTween.Sequence();
+        sequence.AppendInterval(time);
+        sequence.Append(this.transform.DOScale(tarScale, 0.2f).SetEase(Ease.OutBack));
+        sequence.AppendCallback(() =>
+        {
+            isAnim = false;
+        });
+    }
+
     public void ReturnFirstPosition()
     {
         //Debug.Log(firstPosition);
@@ -100,6 +134,8 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         }
         else
         {
+            ReturnFirstPosition();
+
             transform.DOShakeRotation(
                 duration: 0.5f,                 // Thời gian lắc
                 strength: new Vector3(0, 0, 20f), // Chỉ lắc theo trục Z
@@ -110,16 +146,57 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         }
     }
 
-    public void Shake()
+    public void SetPosesAndMove(List<Vector2Int> poses, float time)
     {
-        //Debug.Log("Shake");
+        DG.Tweening.Sequence sequence = DOTween.Sequence();
 
-        transform.DOShakeRotation(
-            duration: 0.5f,                 // Thời gian lắc
-            strength: new Vector3(0, 0, 20f), // Chỉ lắc theo trục Z
-            vibrato: 10,                  // Số lần rung
-            randomness: 90f,              // Độ ngẫu nhiên
-            fadeOut: true                 // Giảm dần độ rung về sau
+        sequence.AppendInterval(time);
+
+        if (this.poses != poses)
+        {
+            this.poses = poses;
+
+            Vector3 newPos = MatrixController.Instance.GetPosition(poses);
+            //Debug.Log(newPos);
+
+            //this.transform.position = new Vector3(newPos.x, this.transform.position.y, newPos.z);
+            sequence.Append(
+                this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.InQuint)
+            );
+        }
+        else
+        {
+            sequence.AppendCallback(() =>
+            {
+                ReturnFirstPosition();
+            });
+
+            sequence.Append(
+                transform.DOShakeRotation(
+                    duration: 0.5f,                 // Thời gian lắc
+                    strength: new Vector3(0, 0, 20f), // Chỉ lắc theo trục Z
+                    vibrato: 10,                  // Số lần rung
+                    randomness: 90f,              // Độ ngẫu nhiên
+                    fadeOut: true                 // Giảm dần độ rung về sau
+                )
+            );
+        }
+    }
+
+    public void Shake(float time = 0f)
+    {
+        DG.Tweening.Sequence sequence = DOTween.Sequence();
+
+        sequence.AppendInterval(time);
+
+        sequence.Append(
+            transform.DOShakeRotation(
+                duration: 0.5f,                 // Thời gian lắc
+                strength: new Vector3(0, 0, 20f), // Chỉ lắc theo trục Z
+                vibrato: 10,                  // Số lần rung
+                randomness: 90f,              // Độ ngẫu nhiên
+                fadeOut: true                 // Giảm dần độ rung về sau
+            )
         );
     }
 
@@ -134,7 +211,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         }
     }
 
-    public void SetCook()
+    public void SetCook(float time = 0f)
     {
         isAnim = true;
 
@@ -149,51 +226,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
-        //sequence.AppendInterval(delay); // chờ 1s
-        //sequence.AppendCallback(() =>
-        //{
-        //    SoundsManager.Instance.PlaySFX(SoundType.Cooked);
-
-        //    MatrixController.Instance.SetFire(poses);
-        //});
-        //sequence.Append(this.transform.DOScale(Vector3.zero, shrinkDuration).SetEase(Ease.InBack)); // thu nhỏ và biến mất
-        //sequence.AppendCallback(() =>
-        //{
-        //    this.transform.localScale = Vector3.zero; // đảm bảo đang invisible
-        //    // Có thể tắt gameObject tại đây nếu cần
-        //    if (cookedSprite != null)
-        //    {
-        //        this.GetComponentInChildren<SpriteRenderer>().sprite = cookedSprite;
-        //        this.hightLight.GetComponent<SpriteRenderer>().sprite = cookedSprite;
-        //    }
-        //});
-
-        //// Hiện lại và scale to hơn
-        //sequence.Append(this.transform.DOScale(spawnScale, growDuration).SetEase(Ease.OutBack));
-        //sequence.Append(this.transform.DOScale(originalScale, 0.2f)); // trở về kích thước gốc nếu muốn
-        //sequence.AppendInterval(0.4f);
-        //sequence.AppendCallback(() =>
-        //{
-        //    MatrixController.Instance.UnFire(poses);
-        //});
-        //sequence.AppendCallback(() =>
-        //{
-        //    isAnim = false;
-        //});
-
-        //transform.DORotate(new Vector3(0, 90f, 0), 0.15f, RotateMode.Fast)
-        //         .SetEase(Ease.InOutSine)
-        //         .OnComplete(() =>
-        //         {
-        //             // Giai đoạn 2: đổi sprite khi ở nửa vòng
-        //             spriteRenderer.sprite = cookedSprite;
-
-        //             // Giai đoạn 3: hoàn tất xoay còn lại
-        //             transform.DORotate(new Vector3(0, 180f, 0), 0.15f, RotateMode.Fast)
-        //                      .SetEase(Ease.InOutSine);
-        //         });
-
-        sequence.AppendInterval(delay);
+        sequence.AppendInterval(delay + time);
         sequence.AppendCallback(() =>
         {
             SoundsManager.Instance.PlaySFX(SoundType.Cooked);
@@ -212,7 +245,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             sequence.Join(this.transform.DOMoveX(this.transform.position.x + 0.5f, 0.3f).SetEase(Ease.OutQuint));
         }
-        sequence.Join(this.transform.DOScale(this.transform.localScale * 1.5f, 0.3f).SetEase(Ease.OutQuint));
+        sequence.Join(this.transform.DOScale(tarScale * 1.5f, 0.3f).SetEase(Ease.OutQuint));
         sequence.AppendCallback(() =>
         {
             if (cookedSprite != null)
@@ -233,7 +266,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             sequence.Join(this.transform.DOMoveX(this.transform.position.x, 0.3f).SetEase(Ease.InExpo));
         }
-        sequence.Join(this.transform.DOScale(this.transform.localScale, 0.3f).SetEase(Ease.InExpo));
+        sequence.Join(this.transform.DOScale(tarScale, 0.3f).SetEase(Ease.InExpo));
         sequence.AppendInterval(0.4f);
         sequence.AppendCallback(() =>
         {
@@ -245,7 +278,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         });
     }
 
-    public void SetUnCook()
+    public void SetUnCook(float time = 0f)
     {
         isAnim = true;
 
@@ -260,7 +293,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
-        sequence.AppendInterval(delay); 
+        sequence.AppendInterval(delay + time); 
         sequence.AppendCallback(() =>
         {
             SoundsManager.Instance.PlaySFX(SoundType.UnCooked);
@@ -286,11 +319,14 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         });
     }
 
-    public void MoveOut(Vector3 t1, Vector3 t2)
+    public void MoveOut(Vector3 t1, Vector3 t2, float time = 0f)
     {
         isAnim = true;
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
+
+        sequence.AppendInterval(time);
+
         if (Vector3.Distance(t1, this.transform.position) >= 0.1f)
         {
             sequence.Append(this.transform.DOMove(new Vector3(t1.x, this.transform.position.y, t1.z), 0.3f).SetEase(Ease.Linear));

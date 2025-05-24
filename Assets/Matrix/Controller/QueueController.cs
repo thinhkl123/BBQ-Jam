@@ -28,7 +28,7 @@ public class QueueController : MonoSingleton<QueueController>
         {
             if (queueElements[i].FoodType == FoodType.None)
             {
-                queueElements[i].SetInfor(foodType);
+                queueElements[i].SetInfor(foodType, MatrixController.Instance.TimeWait);
 
                 if (!CustomerManager.Instance.isSwitching)
                 {
@@ -54,9 +54,6 @@ public class QueueController : MonoSingleton<QueueController>
                 return;
             }
         }
-
-        
-
     }
 
     public bool CheckOrder()

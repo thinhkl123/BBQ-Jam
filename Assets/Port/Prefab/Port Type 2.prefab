@@ -99,6 +99,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DirectionCombos:
   - directionIn: 3
-    directionOut: 1
+    directionOut: 0100000002000000
+    angle: 90
   - directionIn: 2
-    directionOut: 4
+    directionOut: 0400000003000000
+    angle: -90
+  - directionIn: 1
+    directionOut: 0100000002000000
+    angle: 0

@@ -100,11 +100,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poses: []
+  directions: 0300000004000000
   isCooked: 0
   cookedSprite: {fileID: 21300000, guid: 05d4aded0cef53644953e995e332b1f5, type: 3}
   unCookedSprite: {fileID: 21300000, guid: 7b947c87dc392ef469da6ac21c29ef06, type: 3}
   hightLight: {fileID: 6750767319805196242}
+  convertObj: {fileID: 3411316522917645598, guid: d881896e60ba4414ab6217347706e3c9, type: 3}
   FoodType: 1
+  isAnim: 0
 --- !u!65 &5435325206057833402
 BoxCollider:
   m_ObjectHideFlags: 0

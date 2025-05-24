@@ -102,10 +102,12 @@ MonoBehaviour:
   poses:
   - {x: 4, y: 3}
   - {x: 4, y: 4}
+  directions: 0300000004000000
   isCooked: 0
   cookedSprite: {fileID: 21300000, guid: 5031249aa77cdde4ea5ea8f9f43bdce4, type: 3}
   unCookedSprite: {fileID: 21300000, guid: f9105f8d466dc3747907c11b3f4d772b, type: 3}
   hightLight: {fileID: 4948465201982757123}
+  convertObj: {fileID: 4039271974285899465, guid: 2d6ca1cc5f60e1d49afcdd28ced91919, type: 3}
   FoodType: 2
   isAnim: 0
 --- !u!65 &5400491318088420563

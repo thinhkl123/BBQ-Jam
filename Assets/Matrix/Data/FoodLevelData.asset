@@ -14,13 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FoodsLevelList:
   - LevelId: 1
-    MatrixType: 0
+    MatrixType: 4
     FoodLevelList:
     - Prefab: {fileID: 4869546526334599328, guid: 487524ba1616528499c3225edfb17990, type: 3}
       DirectionList: 0100000002000000
       PoseList:
-      - {x: 0, y: 2}
-      - {x: 0, y: 3}
+      - {x: 0, y: 4}
+      - {x: 0, y: 5}
+      isCooked: 0
+    - Prefab: {fileID: 4869546526334599328, guid: 487524ba1616528499c3225edfb17990, type: 3}
+      DirectionList: 0100000002000000
+      PoseList:
+      - {x: 6, y: 1}
+      - {x: 6, y: 2}
       isCooked: 0
   - LevelId: 1
     MatrixType: 0

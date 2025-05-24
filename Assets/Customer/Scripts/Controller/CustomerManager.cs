@@ -96,14 +96,14 @@ public class CustomerManager : MonoSingleton<CustomerManager>
         SpawnCustomer();
     }
 
-    public void CompleteOrder()
+    public void CompleteOrder(float time = 0f)
     {
         currentCus.isOrdering = false;
         isSwitching = true;
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
-        sequence.AppendInterval(1f);
+        sequence.AppendInterval(1f + time);
         sequence.AppendCallback(() =>
         {
             SoundsManager.Instance.PlaySFX(SoundType.OrderComplete);
