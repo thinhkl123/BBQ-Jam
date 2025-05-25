@@ -29,6 +29,10 @@ MonoBehaviour:
     MatrixSize: {x: 6, y: 6}
     Prefab: {fileID: 1131513202897104352, guid: 8bed52dca7a3f5745a376523323383ea, type: 3}
     Position: {x: 0, y: 0, z: 4.13}
+  - MatrixType: 5
+    MatrixSize: {x: 7, y: 6}
+    Prefab: {fileID: 5844769067727742966, guid: b317d2aa0cfd0404da152222a704adb6, type: 3}
+    Position: {x: 0, y: 0, z: 4.14}
   - MatrixType: 4
     MatrixSize: {x: 8, y: 6}
     Prefab: {fileID: 2844849410034515053, guid: f35159dbf79891a40807861c6291b344, type: 3}

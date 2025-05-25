@@ -19,10 +19,16 @@ MonoBehaviour:
     PortId: 1
     Orders:
     - Customer: 0
-      Foods: 03000000
+      Foods: 0300000003000000
       Time: 3000
     - Customer: 3
-      Foods: 03000000
+      Foods: 0300000002000000
+      Time: 3000
+    - Customer: 3
+      Foods: 02000000
+      Time: 3000
+    - Customer: 3
+      Foods: 0100000001000000
       Time: 3000
   - LevelId: 1
     TutorialId: 1

@@ -11,6 +11,7 @@ namespace MatrixData
         M5x5 = 1,
         M5x6 = 2,
         M6x6 = 3,
+        M6x7 = 5,
         M6x8 = 4,
     }
 
