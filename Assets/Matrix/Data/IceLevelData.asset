@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IcePrefab: {fileID: 3221942208621931247, guid: d50f93050a95eaf46a68aa971077a00d, type: 3}
   IceLevelList:
+  - LevelId: 1
+    IceList:
+    - Pos: {x: 0, y: 5}
+      Health: 1
   - LevelId: 15
     IceList:
     - Pos: {x: 4, y: 4}

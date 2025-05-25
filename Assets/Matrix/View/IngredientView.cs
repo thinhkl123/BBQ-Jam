@@ -289,7 +289,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         float growDuration = 0.2f;
         Vector3 spawnScale = Vector3.one * 0.4f; // scale khi xuất hiện lại
 
-        Vector3 originalScale = this.transform.localScale;
+        //Vector3 originalScale = this.transform.localScale;
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
@@ -312,7 +312,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         // Hiện lại và scale to hơn
         sequence.Append(this.transform.DOScale(spawnScale, growDuration).SetEase(Ease.OutBack));
-        sequence.Append(this.transform.DOScale(originalScale, 0.2f)); // trở về kích thước gốc nếu muốn
+        sequence.Append(this.transform.DOScale(tarScale, 0.2f)); // trở về kích thước gốc nếu muốn
         sequence.AppendCallback(() =>
         {
             isAnim = false;

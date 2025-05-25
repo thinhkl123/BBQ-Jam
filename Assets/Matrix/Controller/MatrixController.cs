@@ -585,10 +585,10 @@ public class MatrixController : MonoSingleton<MatrixController>
                 currentView.SetUnCook(TimeWait);
                 this.ingredientGrid[p.x, p.y].index += 1;
                 //this.ingredientGrid[p.x, p.y].IceView.SetHealth(-this.ingredientGrid[p.x, p.y].index);
-                this.ingredientGrid[p.x, p.y].IceView.DecreaseHealth(-this.ingredientGrid[p.x, p.y].index);
+                this.ingredientGrid[p.x, p.y].IceView.DecreaseHealth(-this.ingredientGrid[p.x, p.y].index, TimeWait);
                 if (this.ingredientGrid[p.x, p.y].index == 0)
                 {
-                    this.ingredientGrid[p.x, p.y].IceView.Melt();
+                    this.ingredientGrid[p.x, p.y].IceView.Melt(TimeWait);
                     this.ingredientGrid[p.x, p.y].IceView = null;
                 }
             }

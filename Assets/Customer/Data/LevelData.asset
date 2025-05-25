@@ -15,7 +15,7 @@ MonoBehaviour:
   Levels:
   - LevelId: 1
     TutorialId: 0
-    IceId: 0
+    IceId: 1
     PortId: 1
     Orders:
     - Customer: 0

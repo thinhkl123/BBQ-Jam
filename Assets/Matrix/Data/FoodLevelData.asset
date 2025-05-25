@@ -33,7 +33,7 @@ MonoBehaviour:
       PoseList:
       - {x: 5, y: 3}
       - {x: 5, y: 4}
-      isCooked: 0
+      isCooked: 1
     - Prefab: {fileID: 6257933235289030155, guid: 2d6ca1cc5f60e1d49afcdd28ced91919, type: 3}
       DirectionList: 0100000002000000
       PoseList:
