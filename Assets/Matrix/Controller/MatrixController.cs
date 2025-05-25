@@ -525,8 +525,8 @@ public class MatrixController : MonoSingleton<MatrixController>
                     }
 
                     isPort = true;
-                    this.newPosses = newPosses;
-                    this.newDs = combo.directionOut;
+                    this.newPosses = new List<Vector2Int>(newPosses);
+                    this.newDs = new List<Direction>(combo.directionOut);
 
                     //foreach (Vector2Int vector2Int in newPosses)
                     //{
