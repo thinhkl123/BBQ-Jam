@@ -235,6 +235,7 @@ public class MatrixController : MonoSingleton<MatrixController>
 
                 if (currentRockView != null)
                 {
+                    currentRockView.HideHightLight();
                     Move(Dir, currentRockView.poses, 2);
                 }
             }
@@ -244,6 +245,12 @@ public class MatrixController : MonoSingleton<MatrixController>
                 {
                     currentView.HideHightLight();
                     currentView.ReturnFirstPosition();
+                }
+
+                if (currentRockView != null)
+                {
+                    currentRockView.HideHightLight();
+                    currentRockView.ReturnFirstPosition();
                 }
             }
 
@@ -255,6 +262,11 @@ public class MatrixController : MonoSingleton<MatrixController>
             if (currentView != null)
             {
                 currentView.Nudge(firstPos, secondPos);
+            }
+
+            if (currentRockView != null)
+            {
+                currentRockView.Nudge(firstPos, secondPos);
             }
         }
     }
@@ -407,7 +419,6 @@ public class MatrixController : MonoSingleton<MatrixController>
                 ingredientGrid[poses[i].x, poses[i].y].index = id;
                 ingredientGrid[poses[i].x, poses[i].y].directions = ds;
             }
-
             return;
         }
 
@@ -418,7 +429,6 @@ public class MatrixController : MonoSingleton<MatrixController>
         }
 
         currentView.SetPosesAndMove(poses);
-
         return;
     }
 
