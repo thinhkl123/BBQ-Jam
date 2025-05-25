@@ -20,6 +20,7 @@ namespace LevelManager
         Mushroom = 1,
         Bacon = 2,
         Sausage = 3,
+        Rock = 4,
     }
 
     [Serializable]

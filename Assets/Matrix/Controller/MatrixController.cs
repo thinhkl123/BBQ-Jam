@@ -155,7 +155,14 @@ public class MatrixController : MonoSingleton<MatrixController>
 
         foreach (var pose in foodLevel.PoseList)
         {
-            this.ingredientGrid[pose.x, pose.y].index = index;
+            if (foodViewGO.FoodType == FoodType.Rock)
+            {
+                this.ingredientGrid[pose.x, pose.y].index = index + 500;
+            }
+            else
+            {
+                this.ingredientGrid[pose.x, pose.y].index = index;
+            }
             foreach (var direction in foodLevel.DirectionList)
             {
                 this.ingredientGrid[pose.x, pose.y].directions.Add(direction);
@@ -565,10 +572,10 @@ public class MatrixController : MonoSingleton<MatrixController>
                 }
             }
         }
-        else if (ingredientGrid[p.x, p.y].index > 0)
+        else if (ingredientGrid[p.x, p.y].index > 0 && ingredientGrid[p.x, p.y].index < 500)
         {
             //Debug.Log("Touch");
-            if (!currentView.isCooked) currentView.SetCook(TimeWait);
+            if (!currentView.isCooked && currentView.FoodType != FoodType.Rock) currentView.SetCook(TimeWait);
         }
         else if (ingredientGrid[p.x, p.y].index < 0)
         {

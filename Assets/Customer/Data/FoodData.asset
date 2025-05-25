@@ -25,3 +25,7 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: ed9c87e2092579f489afed7dd7cf9d51, type: 3}
     Scale: {x: 0.8, y: 0.8, z: 0.8}
     HighLightScale: {x: 1.25, y: 1.1, z: 1.1}
+  - FoodType: 4
+    Icon: {fileID: 0}
+    Scale: {x: 0, y: 0, z: 0}
+    HighLightScale: {x: 0, y: 0, z: 0}
