@@ -93,8 +93,15 @@ public class Customer : MonoBehaviour
 
             //QueueController.Instance.CheckOrder();
 
-            CustomerManager.Instance.isSwitching = false;
+            //CustomerManager.Instance.isSwitching = false;
+
+            Invoke(nameof(DisableSwiching), 0.5f);
         });
+    }
+
+    public void DisableSwiching()
+    {
+        CustomerManager.Instance.isSwitching = false;
     }
 
     public void MoveOut(Vector3 target, float time = 0.2f)

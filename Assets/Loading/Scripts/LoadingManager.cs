@@ -26,7 +26,8 @@ public class LoadingManager : MonoBehaviour
 
     private void Start()
     {
-        _loadingUI.gameObject.SetActive(false);
+        //_loadingUI.gameObject.SetActive(false);
+        LoadScene("Home");
     }
 
     public void LoadScene(string sceneName)

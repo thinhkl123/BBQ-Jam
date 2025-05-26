@@ -225,7 +225,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   select: {fileID: 1619885246523536050}
+  active: {fileID: 2838195005784325042}
   levelId: 0
+  button: {fileID: 5149595376097879645}
 --- !u!1 &1619885246523536050
 GameObject:
   m_ObjectHideFlags: 0

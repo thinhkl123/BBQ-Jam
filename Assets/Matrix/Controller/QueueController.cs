@@ -4,14 +4,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QueueController : MonoSingleton<QueueController>
+public class QueueController : MonoBehaviour
 {
+    public static QueueController Instance;
+
     public List<QueueElementView> queueElements = new List<QueueElementView>();
     public int queueElemntCount = 3;
+    public bool isCheckingQueue = true;
 
-    protected override void Awake()
+    private void Awake()
     {
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        //Debug.Log("Init");
         Init();
+        isCheckingQueue = false;
     }
 
     private void Update()
@@ -63,28 +73,35 @@ public class QueueController : MonoSingleton<QueueController>
 
     public void CheckQueue()
     {
-        if (!CustomerManager.Instance.isSwitching)
+        if (!CustomerManager.Instance.isSwitching && !GameManager.Instance.isLost && !isCheckingQueue)
         {
+            //Debug.Log(isCheckingQueue);
 
-            //CheckOrder();
+            //Debug.Log("Check");
             if (!CheckOrder())
             {
                 for (int j = 0; j < queueElements.Count; j++)
                 {
-                    if (queueElements[j].FoodType == FoodType.None)
+                    if (queueElements[j].FoodType == FoodType.None || 
+                        (queueElements[j].FoodType != FoodType.None) && (queueElements[j].isSpawning))
                     {
                         return;
                     }
                 }
+                Debug.Log("Full Queue");
+                isCheckingQueue = true;
 
                 GameManager.Instance.LoseGame();
             }
 
         }
+        isCheckingQueue = false;
     }
 
     public bool CheckOrder()
     {
+        isCheckingQueue = true;
+
         List<FoodType> foodTypes2 = new List<FoodType>();
         for (int i = 0; i < queueElements.Count; i++)
         {

@@ -251,7 +251,7 @@ public class MatrixController : MonoSingleton<MatrixController>
         }
         else
         {
-            if (currentView != null && TouchTime >= 1f)
+            if (currentView != null && TouchTime >= 0.5f)
             {
                 currentView.Nudge(firstPos, secondPos);
             }
@@ -297,6 +297,10 @@ public class MatrixController : MonoSingleton<MatrixController>
     {
         if (!ingredientGrid[poses[0].x, poses[0].y].directions.Contains(dir))
         {
+            if (currentView != null)
+            {
+                currentView.ReturnFirstPosition();
+            }
             Debug.Log("Invalid move");
             return;
         }

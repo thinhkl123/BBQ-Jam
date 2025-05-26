@@ -119,7 +119,15 @@ public class CustomerManager : MonoSingleton<CustomerManager>
             {
                 GameManager.Instance.WinGame();
             }
+
+            //isSwitching = false;
+            //Invoke(nameof(SetDisableSwitching), 0.5f);
         });
+    }
+
+    private void SetDisableSwitching()
+    {
+        isSwitching = false;
     }
 
     public List<FoodType> GetCurrentOrder()

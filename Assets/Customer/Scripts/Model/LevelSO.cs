@@ -38,6 +38,7 @@ namespace LevelManager
         public int TutorialId;
         public int IceId;
         public int PortId;
+        public bool isHard;
         public List<Order> Orders;
     }
 

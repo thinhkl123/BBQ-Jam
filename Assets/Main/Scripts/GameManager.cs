@@ -1,4 +1,5 @@
 using Atom;
+using OneID;
 using SoundManager;
 using System;
 using System.Collections;
@@ -16,8 +17,6 @@ public class GameManager : MonoSingleton<GameManager>
         base.Awake();
 
         DontDestroyOnLoad(this);
-
-        currentLevel = 1;
     }
 
     private void Start()
@@ -27,6 +26,17 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void WinGame()
     {
+        Debug.Log("Win");
+        int curMaxLevel = PlayerPrefs.GetInt("MaxLevel", 1);
+        if (currentLevel >= curMaxLevel)
+        {
+            LeaderboardManager.Instance.UpdateLeaderboard(currentLevel);
+            if (currentLevel + 1 <= MaxLevel)
+            {
+                DataManager.Instance.UpdateUserData(currentLevel + 1);
+                PlayerPrefs.SetInt("MaxLevel", currentLevel+1);
+            }
+        }
         Invoke(nameof(ShowUIWin), 1f);
     }
 
@@ -39,7 +49,8 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void LoseGame()
     {
-        Invoke(nameof(ShowUILose), 1f);
+        isLost = true;
+        Invoke(nameof(ShowUILose), 0.5f);
     }
 
     private void ShowUILose()
@@ -53,7 +64,8 @@ public class GameManager : MonoSingleton<GameManager>
     public void PlayGame()
     {
         AppManager.Instance.PauseGame(false);
-        isLost = false;
+        LoginManager.Instance.HideSDK();
+        //isLost = false;
         //LoadingManager.instance.LoadScene("Level " + DataManager.Instance.LevelData.Levels[currentLevel - 1].LevelId.ToString());
         LoadingManager.instance.LoadScene("Play");
     }

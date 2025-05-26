@@ -9,7 +9,7 @@ using UnityEngine;
 public class QueueElementView : MonoBehaviour
 {
     public SpriteRenderer SpriteRenderer;
-    public FoodType FoodType;
+    public FoodType FoodType = FoodType.None;
 
     public bool isSpawning = false;
     private bool isDisapearing = false;
