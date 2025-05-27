@@ -38,3 +38,7 @@ MonoBehaviour:
       Health: 1
     - Pos: {x: 5, y: 5}
       Health: 1
+  - LevelId: 19
+    IceList:
+    - Pos: {x: 2, y: 4}
+      Health: 1
