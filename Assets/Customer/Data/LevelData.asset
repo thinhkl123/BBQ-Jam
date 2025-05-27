@@ -295,7 +295,19 @@ MonoBehaviour:
     - Customer: 3
       Foods: 03000000
       Time: 35
-  - LevelId: 17
+  - LevelId: 23
+    TutorialId: 0
+    IceId: 0
+    PortId: 1
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 03000000
+      Time: 35
+    - Customer: 3
+      Foods: 03000000
+      Time: 35
+  - LevelId: 23
     TutorialId: 0
     IceId: 0
     PortId: 1
