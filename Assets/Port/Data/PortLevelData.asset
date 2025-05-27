@@ -15,5 +15,5 @@ MonoBehaviour:
   PortLevels:
   - PortLevel: 1
     Ports:
-    - PortType: 4
-      Pos: {x: 3, y: 4}
+    - PortType: 1
+      Pos: {x: 0, y: 0}

@@ -14,39 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IcePrefab: {fileID: 3221942208621931247, guid: d50f93050a95eaf46a68aa971077a00d, type: 3}
   IceLevelList:
-  - LevelId: 1
-    IceList:
-    - Pos: {x: 0, y: 5}
-      Health: 1
-  - LevelId: 15
-    IceList:
-    - Pos: {x: 4, y: 4}
-      Health: 1
-  - LevelId: 14
+  - LevelId: 11
     IceList:
     - Pos: {x: 1, y: 2}
       Health: 1
-  - LevelId: 17
+  - LevelId: 12
+    IceList:
+    - Pos: {x: 4, y: 4}
+      Health: 1
+  - LevelId: 13
     IceList:
     - Pos: {x: 2, y: 1}
       Health: 1
     - Pos: {x: 4, y: 4}
       Health: 1
-  - LevelId: 18
+  - LevelId: 14
     IceList:
-    - Pos: {x: 2, y: 2}
+    - Pos: {x: 0, y: 5}
       Health: 2
-    - Pos: {x: 4, y: 4}
-      Health: 1
-  - LevelId: 19
+  - LevelId: 15
     IceList:
     - Pos: {x: 2, y: 0}
       Health: 1
-    - Pos: {x: 5, y: 5}
-      Health: 1
-  - LevelId: 20
-    IceList:
-    - Pos: {x: 0, y: 4}
-      Health: 2
     - Pos: {x: 5, y: 5}
       Health: 1
