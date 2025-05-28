@@ -44,7 +44,9 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         if (/*CustomerManager.Instance.isSwitching ||*/ isAnim) return;
 
-        if (DOTween.IsTweening(null)) return;
+        Debug.Log(DOTween.TotalPlayingTweens());
+
+        if (DOTween.TotalPlayingTweens() != 0) return;
 
         firstPosition = this.transform.position;
         Touch touch = Input.GetTouch(0); 
