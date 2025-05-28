@@ -348,10 +348,10 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 03000000
-      Time: 35
+      Time: 45
     - Customer: 3
       Foods: 0300000001000000
-      Time: 35
+      Time: 45
     - Customer: 3
       Foods: 0100000002000000
       Time: 35
@@ -405,6 +405,18 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 03000000
+      Time: 35
+    - Customer: 3
+      Foods: 03000000
+      Time: 35
+  - LevelId: 24
+    TutorialId: 0
+    IceId: 0
+    PortId: 2
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 0300000003000000
       Time: 35
     - Customer: 3
       Foods: 03000000
