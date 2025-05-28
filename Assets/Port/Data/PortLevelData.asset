@@ -17,9 +17,3 @@ MonoBehaviour:
     Ports:
     - PortType: 1
       Pos: {x: 0, y: 0}
-    - PortType: 3
-      Pos: {x: 4, y: 0}
-    - PortType: 4
-      Pos: {x: 4, y: 4}
-    - PortType: 2
-      Pos: {x: 1, y: 4}
