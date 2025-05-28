@@ -340,6 +340,63 @@ MonoBehaviour:
     - Customer: 3
       Foods: 01000000
       Time: 35
+  - LevelId: 20
+    TutorialId: 0
+    IceId: 7
+    PortId: 0
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 03000000
+      Time: 35
+    - Customer: 3
+      Foods: 0300000001000000
+      Time: 35
+    - Customer: 3
+      Foods: 0100000002000000
+      Time: 35
+  - LevelId: 21
+    TutorialId: 0
+    IceId: 0
+    PortId: 0
+    isHard: 1
+    Orders:
+    - Customer: 0
+      Foods: 01000000
+      Time: 50
+    - Customer: 3
+      Foods: 03000000
+      Time: 35
+    - Customer: 3
+      Foods: 0100000003000000
+      Time: 35
+    - Customer: 3
+      Foods: 0300000001000000
+      Time: 35
+    - Customer: 3
+      Foods: 01000000
+      Time: 35
+  - LevelId: 22
+    TutorialId: 0
+    IceId: 0
+    PortId: 0
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 03000000
+      Time: 45
+    - Customer: 3
+      Foods: 0200000001000000
+      Time: 35
+    - Customer: 3
+      Foods: 0300000002000000
+      Time: 35
+    - Customer: 3
+      Foods: 0300000002000000
+      Time: 35
+    - Customer: 3
+      Foods: 0100000002000000
+      Time: 35
   - LevelId: 23
     TutorialId: 0
     IceId: 0
