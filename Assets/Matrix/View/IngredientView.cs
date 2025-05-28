@@ -44,6 +44,8 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         if (/*CustomerManager.Instance.isSwitching ||*/ isAnim) return;
 
+        if (DOTween.IsTweening(null)) return;
+
         firstPosition = this.transform.position;
         Touch touch = Input.GetTouch(0); 
         MatrixController.Instance.firstPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0f));
