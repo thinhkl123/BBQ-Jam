@@ -189,6 +189,8 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void Shake(float time = 0f)
     {
+        isAnim = true;
+
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
         sequence.AppendInterval(time);
@@ -202,6 +204,11 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
                 fadeOut: true                 // Giảm dần độ rung về sau
             )
         );
+
+        sequence.AppendCallback(() =>
+        {
+            isAnim = false;
+        });
     }
 
     public void SetInitCook()
