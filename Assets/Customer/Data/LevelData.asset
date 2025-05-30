@@ -386,7 +386,7 @@ MonoBehaviour:
       Foods: 03000000
       Time: 35
   - LevelId: 24
-    TutorialId: 0
+    TutorialId: 24
     IceId: 0
     PortId: 2
     isHard: 0
