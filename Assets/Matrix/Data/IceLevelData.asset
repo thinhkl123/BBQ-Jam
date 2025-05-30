@@ -38,3 +38,19 @@ MonoBehaviour:
       Health: 1
     - Pos: {x: 5, y: 5}
       Health: 1
+  - LevelId: 20
+    IceList:
+    - Pos: {x: 1, y: 2}
+      Health: 1
+  - LevelId: 21
+    IceList:
+    - Pos: {x: 4, y: 3}
+      Health: 1
+  - LevelId: 22
+    IceList:
+    - Pos: {x: 3, y: 3}
+      Health: 1
+  - LevelId: 30
+    IceList:
+    - Pos: {x: 5, y: 3}
+      Health: 1

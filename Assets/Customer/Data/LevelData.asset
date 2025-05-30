@@ -295,6 +295,84 @@ MonoBehaviour:
     - Customer: 3
       Foods: 03000000
       Time: 35
+  - LevelId: 17
+    TutorialId: 0
+    IceId: 0
+    PortId: 0
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 0300000003000000
+      Time: 35
+    - Customer: 3
+      Foods: 0300000001000000
+      Time: 35
+  - LevelId: 18
+    TutorialId: 0
+    IceId: 0
+    PortId: 0
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 0300000001000000
+      Time: 35
+    - Customer: 3
+      Foods: 0300000001000000
+      Time: 35
+  - LevelId: 19
+    TutorialId: 0
+    IceId: 0
+    PortId: 0
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 0300000001000000
+      Time: 35
+    - Customer: 3
+      Foods: 0300000001000000
+      Time: 35
+    - Customer: 3
+      Foods: 0200000002000000
+      Time: 35
+  - LevelId: 20
+    TutorialId: 0
+    IceId: 6
+    PortId: 0
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 0300000003000000
+      Time: 35
+  - LevelId: 21
+    TutorialId: 0
+    IceId: 7
+    PortId: 0
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 0200000001000000
+      Time: 35
+    - Customer: 3
+      Foods: 0200000001000000
+      Time: 35
+    - Customer: 3
+      Foods: 0300000003000000
+      Time: 35
+  - LevelId: 22
+    TutorialId: 0
+    IceId: 8
+    PortId: 0
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 0100000002000000
+      Time: 35
+    - Customer: 3
+      Foods: 0100000002000000
+      Time: 35
+    - Customer: 3
+      Foods: 0300000003000000
+      Time: 35
   - LevelId: 23
     TutorialId: 0
     IceId: 0
@@ -307,15 +385,102 @@ MonoBehaviour:
     - Customer: 3
       Foods: 03000000
       Time: 35
-  - LevelId: 23
+  - LevelId: 24
     TutorialId: 0
     IceId: 0
-    PortId: 1
+    PortId: 2
     isHard: 0
     Orders:
     - Customer: 0
-      Foods: 03000000
+      Foods: 0300000003000000
+      Time: 35
+    - Customer: 3
+      Foods: 0300000003000000
+      Time: 35
+  - LevelId: 25
+    TutorialId: 0
+    IceId: 0
+    PortId: 3
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 0200000001000000
+      Time: 35
+    - Customer: 3
+      Foods: 0200000001000000
+      Time: 35
+    - Customer: 3
+      Foods: 0300000003000000
       Time: 35
     - Customer: 3
       Foods: 03000000
+      Time: 35
+  - LevelId: 26
+    TutorialId: 0
+    IceId: 0
+    PortId: 4
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 0300000003000000
+      Time: 35
+    - Customer: 3
+      Foods: 0300000001000000
+      Time: 35
+  - LevelId: 27
+    TutorialId: 0
+    IceId: 0
+    PortId: 5
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 0300000001000000
+      Time: 35
+    - Customer: 3
+      Foods: 0200000001000000
+      Time: 35
+  - LevelId: 28
+    TutorialId: 0
+    IceId: 0
+    PortId: 6
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 0300000001000000
+      Time: 35
+    - Customer: 3
+      Foods: 0200000003000000
+      Time: 35
+    - Customer: 3
+      Foods: 01000000
+      Time: 35
+  - LevelId: 29
+    TutorialId: 0
+    IceId: 0
+    PortId: 7
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 0300000001000000
+      Time: 35
+    - Customer: 3
+      Foods: 0300000002000000
+      Time: 35
+    - Customer: 3
+      Foods: 01000000
+      Time: 35
+  - LevelId: 30
+    TutorialId: 0
+    IceId: 0
+    PortId: 8
+    isHard: 0
+    Orders:
+    - Customer: 0
+      Foods: 0300000003000000
+      Time: 35
+    - Customer: 3
+      Foods: 0200000002000000
+      Time: 35
+    - Customer: 3
+      Foods: 0100000001000000
       Time: 35

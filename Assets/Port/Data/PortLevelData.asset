@@ -13,7 +13,43 @@ MonoBehaviour:
   m_Name: PortLevelData
   m_EditorClassIdentifier: 
   PortLevels:
-  - PortLevel: 1
+  - PortLevel: 23
     Ports:
     - PortType: 1
       Pos: {x: 0, y: 0}
+  - PortLevel: 24
+    Ports:
+    - PortType: 1
+      Pos: {x: 0, y: 0}
+    - PortType: 3
+      Pos: {x: 5, y: 0}
+  - PortLevel: 25
+    Ports:
+    - PortType: 1
+      Pos: {x: 0, y: 0}
+    - PortType: 2
+      Pos: {x: 0, y: 5}
+  - PortLevel: 26
+    Ports:
+    - PortType: 2
+      Pos: {x: 0, y: 5}
+  - PortLevel: 27
+    Ports:
+    - PortType: 3
+      Pos: {x: 4, y: 0}
+  - PortLevel: 28
+    Ports:
+    - PortType: 3
+      Pos: {x: 3, y: 2}
+  - PortLevel: 29
+    Ports:
+    - PortType: 2
+      Pos: {x: 0, y: 5}
+    - PortType: 3
+      Pos: {x: 6, y: 0}
+    - PortType: 4
+      Pos: {x: 6, y: 5}
+  - PortLevel: 30
+    Ports:
+    - PortType: 2
+      Pos: {x: 0, y: 5}
