@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEngine.GraphicsBuffer;
 
 public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -186,6 +187,35 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             );
         }
     }
+
+    public void ShakeWrongChoice()
+    {
+        Vector3 originalPos = this.transform.localPosition;
+        DG.Tweening.Sequence seq = DOTween.Sequence();
+
+        float strength = 0.2f;
+        float duration = 0.05f;
+
+        if (directions.Contains(Direction.Right))
+        {
+            seq.Append(this.transform.DOLocalMoveX(originalPos.x - strength, duration));
+            seq.Append(this.transform.DOLocalMoveX(originalPos.x + strength, duration));
+            seq.Append(this.transform.DOLocalMoveX(originalPos.x - strength * 0.6f, duration));
+            seq.Append(this.transform.DOLocalMoveX(originalPos.x + strength * 0.6f, duration));
+            seq.Append(this.transform.DOLocalMoveX(originalPos.x, duration));
+            seq.SetEase(Ease.OutQuad);
+        }
+        else
+        {
+            seq.Append(this.transform.DOLocalMoveZ(originalPos.z + strength, duration));
+            seq.Append(this.transform.DOLocalMoveZ(originalPos.z - strength, duration));
+            seq.Append(this.transform.DOLocalMoveZ(originalPos.z + strength * 0.6f, duration));
+            seq.Append(this.transform.DOLocalMoveZ(originalPos.z - strength * 0.6f, duration));
+            seq.Append(this.transform.DOLocalMoveZ(originalPos.z, duration));
+            seq.SetEase(Ease.OutQuad);
+        }
+    }
+
 
     public void Shake(float time = 0f)
     {

@@ -305,7 +305,7 @@ public class MatrixController : MonoSingleton<MatrixController>
 
             if (currentView != null )
             {
-                currentView.Shake();
+                currentView.ShakeWrongChoice();
             }
             return;
         }
