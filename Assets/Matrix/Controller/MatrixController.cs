@@ -302,6 +302,11 @@ public class MatrixController : MonoSingleton<MatrixController>
                 currentView.ReturnFirstPosition();
             }
             Debug.Log("Invalid move");
+
+            if (currentView != null )
+            {
+                currentView.Shake();
+            }
             return;
         }
 

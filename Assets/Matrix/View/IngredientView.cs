@@ -44,6 +44,10 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         if (/*CustomerManager.Instance.isSwitching ||*/ isAnim) return;
 
+        //Debug.Log(DOTween.TotalPlayingTweens());
+
+        if (DOTween.TotalPlayingTweens() != 0) return;
+
         firstPosition = this.transform.position;
         Touch touch = Input.GetTouch(0); 
         MatrixController.Instance.firstPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0f));
@@ -185,6 +189,8 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     public void Shake(float time = 0f)
     {
+        isAnim = true;
+
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
         sequence.AppendInterval(time);
@@ -198,6 +204,11 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
                 fadeOut: true                 // Giảm dần độ rung về sau
             )
         );
+
+        sequence.AppendCallback(() =>
+        {
+            isAnim = false;
+        });
     }
 
     public void SetInitCook()
