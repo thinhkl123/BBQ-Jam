@@ -22,7 +22,7 @@ MonoBehaviour:
     - PortType: 1
       Pos: {x: 0, y: 0}
     - PortType: 3
-      Pos: {x: 5, y: 0}
+      Pos: {x: 4, y: 0}
   - PortLevel: 25
     Ports:
     - PortType: 1

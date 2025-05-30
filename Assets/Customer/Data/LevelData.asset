@@ -471,7 +471,7 @@ MonoBehaviour:
       Time: 35
   - LevelId: 30
     TutorialId: 0
-    IceId: 0
+    IceId: 9
     PortId: 8
     isHard: 0
     Orders:
