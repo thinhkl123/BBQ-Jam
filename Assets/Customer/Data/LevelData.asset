@@ -48,13 +48,13 @@ MonoBehaviour:
       Time: 35
     - Customer: 1
       Foods: 0300000003000000
-      Time: 35
+      Time: 60
     - Customer: 1
       Foods: 0300000003000000
-      Time: 35
+      Time: 60
     - Customer: 1
       Foods: 0300000003000000
-      Time: 15
+      Time: 60
   - LevelId: 4
     TutorialId: 4
     IceId: 0
@@ -66,13 +66,13 @@ MonoBehaviour:
       Time: 60
     - Customer: 5
       Foods: 03000000
-      Time: 35
+      Time: 60
     - Customer: 2
       Foods: 01000000
-      Time: 35
+      Time: 60
     - Customer: 4
       Foods: 03000000
-      Time: 35
+      Time: 60
   - LevelId: 5
     TutorialId: 0
     IceId: 0
@@ -87,10 +87,10 @@ MonoBehaviour:
       Time: 35
     - Customer: 4
       Foods: 0300000003000000
-      Time: 35
+      Time: 60
     - Customer: 0
       Foods: 01000000
-      Time: 15
+      Time: 60
   - LevelId: 6
     TutorialId: 0
     IceId: 0
@@ -99,19 +99,19 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0300000001000000
-      Time: 35
+      Time: 50
     - Customer: 1
       Foods: 0300000003000000
-      Time: 35
+      Time: 50
     - Customer: 1
       Foods: 0300000001000000
-      Time: 35
+      Time: 50
     - Customer: 1
       Foods: 0100000001000000
       Time: 35
     - Customer: 1
       Foods: 03000000
-      Time: 15
+      Time: 50
   - LevelId: 7
     TutorialId: 0
     IceId: 0
@@ -120,19 +120,19 @@ MonoBehaviour:
     Orders:
     - Customer: 2
       Foods: 0300000003000000
-      Time: 35
+      Time: 60
     - Customer: 3
       Foods: 0200000001000000
-      Time: 35
+      Time: 60
     - Customer: 4
       Foods: 0300000001000000
-      Time: 15
+      Time: 60
     - Customer: 1
       Foods: 0200000001000000
-      Time: 35
+      Time: 60
     - Customer: 1
       Foods: 02000000
-      Time: 15
+      Time: 60
   - LevelId: 8
     TutorialId: 0
     IceId: 0
@@ -141,19 +141,19 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0100000002000000
-      Time: 35
+      Time: 50
     - Customer: 1
       Foods: 0100000003000000
-      Time: 35
+      Time: 50
     - Customer: 1
       Foods: 0200000003000000
-      Time: 35
+      Time: 50
     - Customer: 1
       Foods: 0300000003000000
-      Time: 35
+      Time: 50
     - Customer: 1
       Foods: 0200000002000000
-      Time: 10
+      Time: 50
   - LevelId: 9
     TutorialId: 0
     IceId: 0
@@ -162,19 +162,19 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0300000001000000
-      Time: 30
+      Time: 60
     - Customer: 3
       Foods: 0200000001000000
-      Time: 30
+      Time: 60
     - Customer: 0
       Foods: 0100000002000000
-      Time: 30
+      Time: 60
     - Customer: 5
       Foods: 0300000001000000
-      Time: 30
+      Time: 60
     - Customer: 2
       Foods: 0100000003000000
-      Time: 15
+      Time: 60
   - LevelId: 10
     TutorialId: 0
     IceId: 0
@@ -183,22 +183,22 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0200000001000000
-      Time: 35
+      Time: 50
     - Customer: 3
       Foods: 0200000002000000
-      Time: 35
+      Time: 50
     - Customer: 5
       Foods: 0300000001000000
-      Time: 35
+      Time: 50
     - Customer: 0
       Foods: 0300000003000000
-      Time: 35
+      Time: 50
     - Customer: 4
       Foods: 0100000001000000
-      Time: 35
+      Time: 50
     - Customer: 1
       Foods: 0300000003000000
-      Time: 15
+      Time: 50
   - LevelId: 11
     TutorialId: 14
     IceId: 1
@@ -210,10 +210,10 @@ MonoBehaviour:
       Time: 60
     - Customer: 3
       Foods: 03000000
-      Time: 30
+      Time: 60
     - Customer: 5
       Foods: 01000000
-      Time: 30
+      Time: 60
   - LevelId: 12
     TutorialId: 0
     IceId: 2
@@ -222,10 +222,10 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0300000003000000
-      Time: 30
+      Time: 60
     - Customer: 1
       Foods: 0100000001000000
-      Time: 15
+      Time: 60
   - LevelId: 13
     TutorialId: 0
     IceId: 3
@@ -233,17 +233,14 @@ MonoBehaviour:
     isHard: 0
     Orders:
     - Customer: 0
-      Foods: 02000000
-      Time: 30
+      Foods: 0300000003000000
+      Time: 50
     - Customer: 3
-      Foods: 03000000
-      Time: 30
+      Foods: 0300000003000000
+      Time: 50
     - Customer: 0
-      Foods: 03000000
-      Time: 30
-    - Customer: 5
-      Foods: 0200000001000000
-      Time: 15
+      Foods: 0300000001000000
+      Time: 50
   - LevelId: 14
     TutorialId: 0
     IceId: 4
@@ -252,16 +249,16 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0300000001000000
-      Time: 35
+      Time: 60
     - Customer: 3
       Foods: 0300000001000000
-      Time: 35
+      Time: 60
     - Customer: 0
       Foods: 0300000003000000
-      Time: 35
+      Time: 60
     - Customer: 0
       Foods: 01000000
-      Time: 35
+      Time: 60
   - LevelId: 15
     TutorialId: 0
     IceId: 5
@@ -269,20 +266,17 @@ MonoBehaviour:
     isHard: 1
     Orders:
     - Customer: 0
-      Foods: 0200000003000000
-      Time: 35
+      Foods: 02000000
+      Time: 45
     - Customer: 3
-      Foods: 0200000003000000
-      Time: 35
+      Foods: 03000000
+      Time: 45
     - Customer: 0
+      Foods: 03000000
+      Time: 45
+    - Customer: 5
       Foods: 0200000001000000
-      Time: 35
-    - Customer: 0
-      Foods: 0100000003000000
-      Time: 35
-    - Customer: 0
-      Foods: 0100000001000000
-      Time: 35
+      Time: 45
   - LevelId: 16
     TutorialId: 16
     IceId: 0
@@ -291,10 +285,10 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 03000000
-      Time: 35
+      Time: 60
     - Customer: 3
       Foods: 03000000
-      Time: 35
+      Time: 60
   - LevelId: 17
     TutorialId: 0
     IceId: 0
@@ -303,13 +297,13 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 03000000
-      Time: 35
+      Time: 60
     - Customer: 3
       Foods: 03000000
-      Time: 35
+      Time: 60
     - Customer: 3
       Foods: 03000000
-      Time: 35
+      Time: 60
   - LevelId: 18
     TutorialId: 0
     IceId: 0
@@ -318,13 +312,13 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0300000003000000
-      Time: 35
+      Time: 50
     - Customer: 3
       Foods: 03000000
-      Time: 35
+      Time: 50
     - Customer: 3
       Foods: 0300000003000000
-      Time: 35
+      Time: 50
   - LevelId: 19
     TutorialId: 0
     IceId: 6
@@ -333,13 +327,13 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0300000002000000
-      Time: 35
+      Time: 60
     - Customer: 3
       Foods: 0300000003000000
-      Time: 35
+      Time: 60
     - Customer: 3
       Foods: 01000000
-      Time: 35
+      Time: 60
   - LevelId: 20
     TutorialId: 0
     IceId: 7
@@ -348,13 +342,13 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 03000000
-      Time: 45
+      Time: 50
     - Customer: 3
       Foods: 0300000001000000
-      Time: 45
+      Time: 50
     - Customer: 3
       Foods: 0100000002000000
-      Time: 35
+      Time: 50
   - LevelId: 21
     TutorialId: 0
     IceId: 0
@@ -363,19 +357,19 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 01000000
-      Time: 50
+      Time: 45
     - Customer: 3
       Foods: 03000000
-      Time: 35
+      Time: 45
     - Customer: 3
       Foods: 0100000003000000
-      Time: 35
+      Time: 45
     - Customer: 3
       Foods: 0300000001000000
-      Time: 35
+      Time: 45
     - Customer: 3
       Foods: 01000000
-      Time: 35
+      Time: 45
   - LevelId: 22
     TutorialId: 0
     IceId: 0
@@ -384,19 +378,19 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 03000000
-      Time: 45
+      Time: 50
     - Customer: 3
       Foods: 0200000001000000
-      Time: 35
+      Time: 50
     - Customer: 3
       Foods: 0300000002000000
-      Time: 35
+      Time: 50
     - Customer: 3
       Foods: 0300000002000000
-      Time: 35
+      Time: 50
     - Customer: 3
       Foods: 0100000002000000
-      Time: 35
+      Time: 50
   - LevelId: 23
     TutorialId: 23
     IceId: 0
@@ -405,10 +399,10 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 03000000
-      Time: 35
+      Time: 60
     - Customer: 3
       Foods: 03000000
-      Time: 35
+      Time: 60
   - LevelId: 24
     TutorialId: 24
     IceId: 0
@@ -417,10 +411,10 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0300000003000000
-      Time: 35
+      Time: 60
     - Customer: 3
       Foods: 03000000
-      Time: 35
+      Time: 60
   - LevelId: 25
     TutorialId: 0
     IceId: 0
@@ -429,10 +423,10 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0300000003000000
-      Time: 35
+      Time: 50
     - Customer: 3
       Foods: 0300000003000000
-      Time: 35
+      Time: 50
   - LevelId: 26
     TutorialId: 0
     IceId: 0
@@ -441,13 +435,13 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 03000000
-      Time: 35.1
+      Time: 60
     - Customer: 3
       Foods: 0300000002000000
-      Time: 35
+      Time: 60
     - Customer: 3
       Foods: 0300000002000000
-      Time: 35
+      Time: 60
   - LevelId: 27
     TutorialId: 0
     IceId: 0
@@ -459,13 +453,13 @@ MonoBehaviour:
       Time: 45
     - Customer: 3
       Foods: 0100000003000000
-      Time: 35
+      Time: 45
     - Customer: 3
       Foods: 0300000003000000
-      Time: 35
+      Time: 45
     - Customer: 3
       Foods: 0100000001000000
-      Time: 35
+      Time: 45
   - LevelId: 28
     TutorialId: 0
     IceId: 8
@@ -474,13 +468,13 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0300000003000000
-      Time: 35.1
+      Time: 60
     - Customer: 3
       Foods: 0300000002000000
-      Time: 35
+      Time: 60
     - Customer: 3
       Foods: 0300000002000000
-      Time: 35
+      Time: 60
   - LevelId: 29
     TutorialId: 0
     IceId: 9
@@ -489,16 +483,16 @@ MonoBehaviour:
     Orders:
     - Customer: 0
       Foods: 0300000001000000
-      Time: 45
+      Time: 50
     - Customer: 3
       Foods: 0300000002000000
-      Time: 45
+      Time: 50
     - Customer: 3
       Foods: 0300000002000000
-      Time: 35
+      Time: 50
     - Customer: 3
       Foods: 0300000001000000
-      Time: 35
+      Time: 50
   - LevelId: 30
     TutorialId: 0
     IceId: 10
@@ -507,7 +501,7 @@ MonoBehaviour:
     Orders:
     - Customer: 3
       Foods: 01000000
-      Time: 35
+      Time: 45
     - Customer: 0
       Foods: 0300000001000000
       Time: 45
@@ -516,7 +510,7 @@ MonoBehaviour:
       Time: 45
     - Customer: 3
       Foods: 0300000002000000
-      Time: 35
+      Time: 45
     - Customer: 3
       Foods: 0300000001000000
-      Time: 35
+      Time: 45
