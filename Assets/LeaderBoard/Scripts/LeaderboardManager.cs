@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +11,7 @@ namespace Atom
     public class LeaderboardManager : MonoSingleton<LeaderboardManager>
     {
         private int curLevelShowed;
+        private string username;
 
         protected LeaderboardUI _royalLeagueLeaderboardUI;
 
@@ -52,34 +53,110 @@ namespace Atom
             }, OnStatisticsUpdated, FailureCallback);
         }
 
+        //private void GetListLeaderboardItem(System.Action<LeaderboardItemData, List<LeaderboardItemData>> action)
+        //{
+        //    List<LeaderboardItemData> leaderboardItemDatas = new List<LeaderboardItemData>();
+        //    LeaderboardItemData user = null;
+        //    PlayFabClientAPI.GetLeaderboardAroundPlayer(new GetLeaderboardAroundPlayerRequest
+        //    {
+        //        StatisticName = "BBQJam",
+        //        MaxResultsCount = 1
+        //    }, (result) => {
+        //        if (result.Leaderboard.Count > 0)
+        //        {
+        //            PlayerLeaderboardEntry playerData = result.Leaderboard[0];
+        //            user = new LeaderboardItemData() { Rank = playerData.Position + 1, StatValue = playerData.StatValue, Name = playerData.DisplayName };
+        //        }
+        //        -----------------------
+        //        PlayFabClientAPI.GetLeaderboard(new GetLeaderboardRequest
+        //        {
+        //            StatisticName = "BBQJam",
+        //            MaxResultsCount = 10,
+        //        }, (result) => {
+        //            for (int i = 0; i < result.Leaderboard.Count; i++)
+        //            {
+        //                PlayerLeaderboardEntry playerData = result.Leaderboard[i];
+        //                leaderboardItemDatas.Add(new LeaderboardItemData() { Rank = playerData.Position + 1, StatValue = playerData.StatValue, Name = playerData.DisplayName });
+        //            }
+        //            action.Invoke(user, leaderboardItemDatas);
+        //        }, FailureCallback);
+        //    }, FailureCallback);
+        //}
+
         private void GetListLeaderboardItem(System.Action<LeaderboardItemData, List<LeaderboardItemData>> action)
         {
             List<LeaderboardItemData> leaderboardItemDatas = new List<LeaderboardItemData>();
             LeaderboardItemData user = null;
+
             PlayFabClientAPI.GetLeaderboardAroundPlayer(new GetLeaderboardAroundPlayerRequest
             {
                 StatisticName = "BBQJam",
                 MaxResultsCount = 1
-            }, (result) => {
-                if (result.Leaderboard.Count > 0)
+            }, (aroundResult) => {
+                if (aroundResult.Leaderboard.Count > 0)
                 {
-                    PlayerLeaderboardEntry playerData = result.Leaderboard[0];
-                    user = new LeaderboardItemData() { Rank = playerData.Position, StatValue = playerData.StatValue, Name = playerData.DisplayName };
-                }
-                //-----------------------
-                PlayFabClientAPI.GetLeaderboard(new GetLeaderboardRequest
-                {
-                    StatisticName = "BBQJam",
-                    MaxResultsCount = 10,
-                }, (result) => {
-                    for (int i = 0; i < result.Leaderboard.Count; i++)
+                    var playerEntry = aroundResult.Leaderboard[0];
+                    GetUsernameFromPlayFabId(playerEntry.PlayFabId, (username) =>
                     {
-                        PlayerLeaderboardEntry playerData = result.Leaderboard[i];
-                        leaderboardItemDatas.Add(new LeaderboardItemData() { Rank = playerData.Position, StatValue = playerData.StatValue, Name = playerData.DisplayName });
-                    }
-                    action.Invoke(user, leaderboardItemDatas);
-                }, FailureCallback);
+                        user = new LeaderboardItemData()
+                        {
+                            Rank = playerEntry.Position + 1,
+                            StatValue = playerEntry.StatValue,
+                            Name = username // dùng Username thay vì DisplayName
+                        };
+
+                        // Sau khi lấy xong user, tiếp tục lấy top leaderboard
+                        PlayFabClientAPI.GetLeaderboard(new GetLeaderboardRequest
+                        {
+                            StatisticName = "BBQJam",
+                            MaxResultsCount = 10
+                        }, (topResult) => {
+                            int count = topResult.Leaderboard.Count;
+                            int processed = 0;
+
+                            for (int i = 0; i < count; i++)
+                            {
+                                var entry = topResult.Leaderboard[i];
+                                GetUsernameFromPlayFabId(entry.PlayFabId, (usernameTop) =>
+                                {
+                                    leaderboardItemDatas.Add(new LeaderboardItemData()
+                                    {
+                                        Rank = entry.Position + 1,
+                                        StatValue = entry.StatValue,
+                                        Name = usernameTop
+                                    });
+
+                                    processed++;
+                                    if (processed == count)
+                                    {
+                                        // Chỉ invoke khi đã lấy đủ username
+                                        action.Invoke(user, leaderboardItemDatas);
+                                    }
+                                });
+                            }
+
+                        }, FailureCallback);
+                    });
+                }
+                else
+                {
+                    action.Invoke(null, new List<LeaderboardItemData>());
+                }
             }, FailureCallback);
+        }
+
+        private void GetUsernameFromPlayFabId(string playFabId, System.Action<string> callback)
+        {
+            PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest
+            {
+                PlayFabId = playFabId
+            }, (accountResult) => {
+                var username = accountResult.AccountInfo?.Username ?? "Unknown";
+                callback.Invoke(username);
+            }, (error) => {
+                Debug.LogError("Failed to get account info: " + error.ErrorMessage);
+                callback.Invoke("Unknown");
+            });
         }
 
         private void OnStatisticsUpdated(UpdatePlayerStatisticsResult updateResult)

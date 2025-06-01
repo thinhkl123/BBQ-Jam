@@ -137,7 +137,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             //Debug.Log(newPos);
 
             //this.transform.position = new Vector3(newPos.x, this.transform.position.y, newPos.z);
-            this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.InQuint);
+            this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.OutQuint);
         }
         else
         {
@@ -168,7 +168,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
             //this.transform.position = new Vector3(newPos.x, this.transform.position.y, newPos.z);
             sequence.Append(
-                this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.InQuint)
+                this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.Linear)
             );
         }
         else
