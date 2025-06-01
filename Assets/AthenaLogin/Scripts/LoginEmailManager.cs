@@ -182,10 +182,10 @@ namespace OneID
             {
                 ShowRegisterNoticePopupUI("Password contain at least 1 upper case letter and 1 special letter", false);
             }
-            //else if (string.IsNullOrEmpty(_userEmail))
-            //{
-            //    ShowRegisterNoticePopupUI("Please fill in your information", false);
-            //}
+            else if (string.IsNullOrEmpty(_userEmail))
+            {
+                ShowRegisterNoticePopupUI("Please fill in your information", false);
+            }
             else
             {
                 if (Application.internetReachability == NetworkReachability.NotReachable)
@@ -198,7 +198,8 @@ namespace OneID
                     PlayFabClientAPI.AddUsernamePassword(new AddUsernamePasswordRequest
                     { Email = _userEmail, Password = _userPassword, Username = _username },
                     OnRegisterSuccess,
-                    OnRegisterFailure);
+                    OnRegisterFailure
+                    );
                 }
             }
 
