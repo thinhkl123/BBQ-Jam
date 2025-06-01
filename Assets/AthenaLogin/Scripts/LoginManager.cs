@@ -173,6 +173,8 @@ namespace OneID
                 _mainOneSDKUI = LoginAppManager.Instance.ShowUI<MainOneSDKUI>("MainOneSDKUI", false, 0);
                 _mainOneSDKUI.OnShowGuestAccountUI = ShowGuestAccountUI;
             }
+
+            HomeManager.Instance.SetupLevelInit();
         }
 
         public void ShowSDK()

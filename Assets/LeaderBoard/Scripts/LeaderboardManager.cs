@@ -95,8 +95,6 @@ namespace Atom
 
         public void ShowUI()
         {
-            curLevelShowed = DataManager.Instance.GetCurMaxLevel();
-
             _royalLeagueLeaderboardUI.ClearLeaderBoard();
             GetLeaderboard();
             //_royalLeagueLeaderboardUI.gameObject.SetActive(true);
