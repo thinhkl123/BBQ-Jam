@@ -6,7 +6,6 @@ using PlayFab.ClientModels;
 using PlayFab;
 using System.Collections.Generic;
 using System;
-using UnityEditor.PackageManager;
 using System.Collections;
 
 public class DataManager : MonoSingleton<DataManager>

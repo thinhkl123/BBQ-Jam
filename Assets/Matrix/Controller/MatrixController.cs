@@ -260,13 +260,13 @@ public class MatrixController : MonoSingleton<MatrixController>
             {
                 if (!TutorialManager.Instance.isDone)
                 {
-                    if (TutorialManager.Instance.GetCurrentObjectStep() == currentView?.name)
-                    {
-                        if (currentView != null && TouchTime >= 0.5f)
-                        {
-                            currentView.Nudge(firstPos, secondPos);
-                        }
-                    }
+                    //if (TutorialManager.Instance.GetCurrentObjectStep() == currentView?.name)
+                    //{
+                    //    if (currentView != null && TouchTime >= 0.5f)
+                    //    {
+                    //        currentView.Nudge(firstPos, secondPos);
+                    //    }
+                    //}
                 }
                 else
                 {
@@ -276,7 +276,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                     }
                 }
             }
-            else if (currentView != null && TouchTime >= 0.5f)
+            else if (currentView != null && TouchTime >= 0.25f)
             {
                 currentView.Nudge(firstPos, secondPos);
             }
