@@ -6,6 +6,8 @@ using PlayFab.ClientModels;
 using PlayFab;
 using System.Collections.Generic;
 using System;
+using UnityEditor.PackageManager;
+using System.Collections;
 
 public class DataManager : MonoSingleton<DataManager>
 {
@@ -28,11 +30,28 @@ public class DataManager : MonoSingleton<DataManager>
     public int GetCurMaxLevel()
     {
         GetUserData();
-        int curMaxLevel = PlayerPrefs.GetInt("MaxLevel", 1);
-        //Debug.Log(curMaxLevel);
+        int curMaxLevel = PlayerPrefs.GetInt("MaxLevel");
+        Debug.Log(curMaxLevel);
 
         return curMaxLevel;
     }
+
+    public void GetCurMaxLevel(Action<int> callback)
+    {
+        StartCoroutine(WaitAndGetMaxLevel(callback));
+    }
+
+    private IEnumerator WaitAndGetMaxLevel(Action<int> callback)
+    {
+        GetUserData();
+        yield return new WaitForSeconds(2f);
+
+        int curMaxLevel = PlayerPrefs.GetInt("MaxLevel");
+        Debug.Log(curMaxLevel);
+
+        callback?.Invoke(curMaxLevel);
+    }
+
 
     public void UpdateUserData(int level)
     {
@@ -62,9 +81,15 @@ public class DataManager : MonoSingleton<DataManager>
                 string level = result.Data["Level"].Value;
                 PlayerPrefs.SetInt("MaxLevel", Int32.Parse(level));
             }
+            else
+            {
+                Debug.Log("New Player Data: Level 1");
+                PlayerPrefs.SetInt("MaxLevel", 1);
+            }
         }, error =>
         {
             Debug.LogError("Failed to load user data: " + error.GenerateErrorReport());
+            PlayerPrefs.SetInt("MaxLevel", 1);
         });
     }
 }

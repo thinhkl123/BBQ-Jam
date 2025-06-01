@@ -7,11 +7,18 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HomeManager : MonoSingleton<HomeManager> 
+public class HomeManager : MonoBehaviour
 {
+    public static HomeManager Instance { get; private set; }
+
     protected HomeUI _homeUI;
 
     private static bool hasLoaded = false;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -91,16 +98,25 @@ public class HomeManager : MonoSingleton<HomeManager>
         _homeUI.OnRankingBtn = LeaderboardManager.Instance.ShowUI;
 
         //_homeUI.SetupLevel();
-        StartCoroutine(SetupLevelCoroutine());
+        //StartCoroutine(SetupLevelCoroutine());
     }
 
     private IEnumerator SetupLevelCoroutine()
     {
         yield return new WaitForSeconds(2f);
 
-        Debug.Log("Setup Level");
-
         _homeUI.SetupLevel(DataManager.Instance.GetCurMaxLevel());
+    }
+
+    public void SetupLevelInit()
+    {
+        Debug.Log("Setup Level Init");
+        _homeUI.HideObject();
+        //_homeUI.SetupLevel(DataManager.Instance.GetCurMaxLevel());
+        DataManager.Instance.GetCurMaxLevel((level) => {
+            _homeUI.SetupLevel(level);
+        });
+        //StartCoroutine(SetupLevelCoroutine());
     }
 
     private void SetupLevel()

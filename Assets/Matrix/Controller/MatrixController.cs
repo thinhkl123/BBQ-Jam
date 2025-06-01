@@ -208,7 +208,6 @@ public class MatrixController : MonoSingleton<MatrixController>
 
             if (!isCancel)
             {
-
                 if (currentView != null)
                 {
                     //currentView.ReturnFirstPosition();
@@ -219,8 +218,14 @@ public class MatrixController : MonoSingleton<MatrixController>
                         {
                             if (TutorialManager.Instance.CheckStep(currentView?.name, Dir))
                             {
+                                Debug.Log("Right Step");
                                 currentView.HideHightLight();
                                 Move(Dir, currentView.poses);
+                            }
+                            else
+                            {
+                                Debug.Log("Wrong Step");
+                                currentView.HideHightLight();
                             }
                         }
                         else
@@ -245,13 +250,33 @@ public class MatrixController : MonoSingleton<MatrixController>
                     currentView.ReturnFirstPosition();
                 }
             }
-            
+
 
             currentView = null;
         }
         else
         {
-            if (currentView != null && TouchTime >= 0.5f)
+            if (TutorialManager.Instance != null)
+            {
+                if (!TutorialManager.Instance.isDone)
+                {
+                    if (TutorialManager.Instance.GetCurrentObjectStep() == currentView?.name)
+                    {
+                        if (currentView != null && TouchTime >= 0.5f)
+                        {
+                            currentView.Nudge(firstPos, secondPos);
+                        }
+                    }
+                }
+                else
+                {
+                    if (currentView != null && TouchTime >= 0.5f)
+                    {
+                        currentView.Nudge(firstPos, secondPos);
+                    }
+                }
+            }
+            else if (currentView != null && TouchTime >= 0.5f)
             {
                 currentView.Nudge(firstPos, secondPos);
             }
