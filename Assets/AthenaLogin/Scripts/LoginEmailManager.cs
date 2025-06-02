@@ -198,7 +198,8 @@ namespace OneID
                     PlayFabClientAPI.AddUsernamePassword(new AddUsernamePasswordRequest
                     { Email = _userEmail, Password = _userPassword, Username = _username },
                     OnRegisterSuccess,
-                    OnRegisterFailure);
+                    OnRegisterFailure
+                    );
                 }
             }
 

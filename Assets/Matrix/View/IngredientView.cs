@@ -47,7 +47,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         //Debug.Log(DOTween.TotalPlayingTweens());
 
-        //if (DOTween.TotalPlayingTweens() != 0) return;
+        if (DOTween.IsTweening(this, true)) return;
 
         firstPosition = this.transform.position;
         Touch touch = Input.GetTouch(0); 
@@ -95,6 +95,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             Destroy(this.gameObject);
         });
+        sequence.SetTarget(this);
     }
 
     public void Spawn(float time = 0f)
@@ -107,6 +108,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             isAnim = false;
         });
+        sequence.SetTarget(this);
     }
 
     public void ReturnFirstPosition()
@@ -135,7 +137,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             //Debug.Log(newPos);
 
             //this.transform.position = new Vector3(newPos.x, this.transform.position.y, newPos.z);
-            this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.InQuint);
+            this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.OutQuint);
         }
         else
         {
@@ -166,7 +168,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
             //this.transform.position = new Vector3(newPos.x, this.transform.position.y, newPos.z);
             sequence.Append(
-                this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.InQuint)
+                this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.Linear)
             );
         }
         else
@@ -186,6 +188,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
                 )
             );
         }
+        sequence.SetTarget(this);
     }
 
     public void ShakeWrongChoice()
@@ -214,6 +217,8 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             seq.Append(this.transform.DOLocalMoveZ(originalPos.z, duration));
             seq.SetEase(Ease.OutQuad);
         }
+
+        seq.SetTarget(this);
     }
 
 
@@ -239,6 +244,8 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             isAnim = false;
         });
+
+        sequence.SetTarget(this);
     }
 
     public void SetInitCook()
@@ -317,6 +324,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             isAnim = false;
         });
+        sequence.SetTarget(this);
     }
 
     public void SetUnCook(float time = 0f)
@@ -358,6 +366,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             isAnim = false;
         });
+        sequence.SetTarget(this);
     }
 
     public void MoveOut(Vector3 t1, Vector3 t2, float time = 0f)
@@ -381,6 +390,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             Destroy(this.gameObject);
         });
+        sequence.SetTarget(this);
     }
 
     public void Nudge(Vector3 fpos, Vector3 scPos)

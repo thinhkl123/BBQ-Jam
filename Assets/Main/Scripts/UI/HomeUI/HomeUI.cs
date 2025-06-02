@@ -99,9 +99,9 @@ public class HomeUI : UIController
         levelSelect.gameObject.SetActive(true);
         rankBtn.gameObject.SetActive(true);
 
-        if (maxLevelActive > 2)
+        //if (maxLevelActive)
         {
-            SnapTo(levelDetails[maxLevelActive - 2].GetComponent<RectTransform>());
+            SnapTo(levelDetails[maxLevelActive-1].GetComponent<RectTransform>());
         }
     }
 
@@ -124,6 +124,6 @@ public class HomeUI : UIController
 
         levelContainer.anchoredPosition =
                 (Vector2)scrollRect.transform.InverseTransformPoint(levelContainer.position)
-                - (Vector2)scrollRect.transform.InverseTransformPoint(target.position);
+                - (Vector2)scrollRect.transform.InverseTransformPoint(target.position - new Vector3(700f, 0f, 0f));
     }
 }
