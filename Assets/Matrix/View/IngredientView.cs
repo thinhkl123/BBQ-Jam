@@ -153,7 +153,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         }
     }
 
-    public void SetPosesAndMove(List<Vector2Int> poses, float time)
+    public void SetPosesAndMove(List<Vector2Int> poses, float time, float timeMove = 0.5f)
     {
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
@@ -168,7 +168,7 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
             //this.transform.position = new Vector3(newPos.x, this.transform.position.y, newPos.z);
             sequence.Append(
-                this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), 0.5f).SetEase(Ease.Linear)
+                this.transform.DOMove(new Vector3(newPos.x, this.transform.position.y, newPos.z), timeMove).SetEase(Ease.Linear)
             );
         }
         else
@@ -259,16 +259,17 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         }
     }
 
-    public void SetCook(float time = 0f)
+    public void SetCook(float time = 0f, float timeMove = 0.5f)
     {
         isAnim = true;
 
         isCooked = true;
 
-        float delay = 0.5f;          // thời gian chờ trước khi bắt đầu
-        float shrinkDuration = 0.2f;
-        float growDuration = 0.2f;
-        Vector3 spawnScale = Vector3.one * 0.4f; // scale khi xuất hiện lại
+        //float delay = 0.5f;
+        float delay = timeMove;
+        //float shrinkDuration = 0.2f;
+        //float growDuration = 0.2f;
+        Vector3 spawnScale = Vector3.one * 0.4f; 
 
         Vector3 originalScale = this.transform.localScale;
 
@@ -327,16 +328,17 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         sequence.SetTarget(this);
     }
 
-    public void SetUnCook(float time = 0f)
+    public void SetUnCook(float time = 0f, float timeMove = 0.5f)
     {
         isAnim = true;
 
         isCooked = false;
 
-        float delay = 0.5f;          // thời gian chờ trước khi bắt đầu
+        //float delay = 0.5f;
+        float delay = timeMove;
         float shrinkDuration = 0.2f;
         float growDuration = 0.2f;
-        Vector3 spawnScale = Vector3.one * 0.4f; // scale khi xuất hiện lại
+        Vector3 spawnScale = Vector3.one * 0.4f; 
 
         //Vector3 originalScale = this.transform.localScale;
 
@@ -375,17 +377,32 @@ public class IngredientView : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
+        t1 = new Vector3(t1.x, this.transform.position.y, t1.z);
+        t2 = new Vector3(t2.x, this.transform.position.y, t2.z);
+
+        if (Vector3.Distance(t1, this.transform.position) >= 0.1f)
+        {
+            MatrixController.Instance.timeOut1 = Vector3.Distance(t1, this.transform.position) / 8f;
+        }
+        else
+        {
+            MatrixController.Instance.timeOut1 = 0f;
+        }
+        MatrixController.Instance.timeOut2 = Vector3.Distance(t1, t2) / 8f;
+
         sequence.AppendInterval(time);
 
         if (Vector3.Distance(t1, this.transform.position) >= 0.1f)
         {
-            sequence.Append(this.transform.DOMove(new Vector3(t1.x, this.transform.position.y, t1.z), 0.3f).SetEase(Ease.Linear));
+            //sequence.Append(this.transform.DOMove(t1, 0.3f).SetEase(Ease.OutQuint));
+            sequence.Append(this.transform.DOMove(t1, MatrixController.Instance.timeOut1).SetEase(Ease.OutQuint));
         }
         sequence.AppendCallback(() =>
         {
             SoundsManager.Instance.PlaySFX(SoundType.Woosh);
         });
-        sequence.Append(this.transform.DOMove(new Vector3(t2.x, this.transform.position.y, t2.z), 0.5f).SetEase(Ease.Linear));
+        //sequence.Append(this.transform.DOMove(t2, 0.5f).SetEase(Ease.OutQuint));
+        sequence.Append(this.transform.DOMove(t2, MatrixController.Instance.timeOut2).SetEase(Ease.OutQuint));
         sequence.AppendCallback(() =>
         {
             Destroy(this.gameObject);
