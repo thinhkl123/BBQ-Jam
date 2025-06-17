@@ -32,6 +32,12 @@ public class MatrixController : MonoSingleton<MatrixController>
     public float TimeWait = 0f;
     public float TouchTime = 0f;
 
+    //Move
+    public float timeMove = 0f;
+    private Vector3 posInit;
+    public float timeOut1 = 0.5f;
+    public float timeOut2 = 0.3f;
+
     public Vector3 firstPos;
 
 
@@ -335,6 +341,8 @@ public class MatrixController : MonoSingleton<MatrixController>
             return;
         }
 
+        timeMove = 0f;
+        posInit = GetPosition(poses);
         isPressing = true;
 
         int id = ingredientGrid[poses[0].x, poses[0].y].index;
@@ -448,7 +456,7 @@ public class MatrixController : MonoSingleton<MatrixController>
             return;
         }
 
-        currentView.SetPosesAndMove(poses, TimeWait);
+        currentView.SetPosesAndMove(poses, TimeWait, timeMove);
 
         for (int i = 0; i < poses.Count; i++)
         {
@@ -465,6 +473,16 @@ public class MatrixController : MonoSingleton<MatrixController>
         isSetCookedSuccess = false;
         isSetCookedFailure = false;
         isPort = false;
+
+        float distance = Vector3.Distance(posInit, GetPosition(poses));
+        if (distance > 0.1f)
+        {
+            timeMove = distance / 8f;
+        }
+        else
+        {
+            timeMove = 0.5f;
+        }
 
         if (!IsInMatrix(p))
         {
@@ -567,7 +585,7 @@ public class MatrixController : MonoSingleton<MatrixController>
                     //    Debug.Log(vector2Int);
                     //}
 
-                    currentView.SetPosesAndMove(poses, TimeWait);
+                    currentView.SetPosesAndMove(poses, TimeWait, timeMove);
 
                     IngredientView foodPrefab;
 
@@ -609,14 +627,14 @@ public class MatrixController : MonoSingleton<MatrixController>
         else if (ingredientGrid[p.x, p.y].index > 0 && ingredientGrid[p.x, p.y].index < 500)
         {
             //Debug.Log("Touch");
-            if (!currentView.isCooked && currentView.FoodType != FoodType.Rock) currentView.SetCook(TimeWait);
+            if (!currentView.isCooked && currentView.FoodType != FoodType.Rock) currentView.SetCook(TimeWait, timeMove);
         }
         else if (ingredientGrid[p.x, p.y].index < 0)
         {
             //Debug.Log("Ice Touch");
             if (currentView.isCooked)
             {
-                currentView.SetUnCook(TimeWait);
+                currentView.SetUnCook(TimeWait, timeMove);
                 this.ingredientGrid[p.x, p.y].index += 1;
                 //this.ingredientGrid[p.x, p.y].IceView.SetHealth(-this.ingredientGrid[p.x, p.y].index);
                 this.ingredientGrid[p.x, p.y].IceView.DecreaseHealth(-this.ingredientGrid[p.x, p.y].index, TimeWait);

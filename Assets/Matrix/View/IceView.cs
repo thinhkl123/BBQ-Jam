@@ -14,23 +14,23 @@ public class IceView : MonoBehaviour
         healthText.text = health.ToString();
     }
 
-    public void DecreaseHealth(int health, float time = 0f)
+    public void DecreaseHealth(int health, float time = 0f, float timeMove = 0.5f)
     {
-        StartCoroutine(SetHealthCoroutine(health, time));
+        StartCoroutine(SetHealthCoroutine(health, time, timeMove));
     }
 
-    IEnumerator SetHealthCoroutine(int health, float time = 0f)
+    IEnumerator SetHealthCoroutine(int health, float time = 0f, float timeMove = 0.5f)
     {
-        yield return new WaitForSeconds(0.5f + time);
+        yield return new WaitForSeconds(timeMove + time);
 
         healthText.text = health.ToString();
     }
 
-    public void Melt(float time = 0f)
+    public void Melt(float time = 0f, float timeMove = 0.5f)
     {
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
-        sequence.AppendInterval(0.8f + time);
+        sequence.AppendInterval(/*0.8f*/ timeMove + 0.3f + time);
         sequence.AppendCallback(() =>
         {
             SoundsManager.Instance.PlaySFX(SoundType.IceMelt);

@@ -41,7 +41,8 @@ public class QueueElementView : MonoBehaviour
 
         DG.Tweening.Sequence sequence = DOTween.Sequence();
 
-        sequence.AppendInterval(0.8f + time); 
+        //sequence.AppendInterval(0.8f + time); 
+        sequence.AppendInterval(MatrixController.Instance.timeOut1 + MatrixController.Instance.timeOut2 + time);
         sequence.AppendCallback(() =>
         {
             SoundsManager.Instance.PlaySFX(SoundType.Pop);
